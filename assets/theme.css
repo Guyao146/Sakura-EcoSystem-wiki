@@ -29,7 +29,7 @@ body { font-size: 16px; line-height: 1.75; transition: background .2s ease, colo
 .sidebar-nav a { color: var(--muted) !important; font-size: 14px; transition: color .15s ease; }
 .sidebar-nav a:hover, .sidebar-nav li.active > a { color: var(--accent-strong) !important; font-weight: 600; }
 .content { left: 280px; }
-.markdown-section { max-width: 1280px; margin-left: 360px; padding: 64px 32px 100px; }
+.markdown-section { max-width: 1280px; margin-left: 480px; padding: 64px 32px 100px; }
 .markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4 { color: var(--heading) !important; font-weight: 700; line-height: 1.35; }
 :root[data-wiki-theme="night"] .markdown-section h1,
 :root[data-wiki-theme="night"] .markdown-section h2,
@@ -40,7 +40,19 @@ body { font-size: 16px; line-height: 1.75; transition: background .2s ease, colo
 :root[data-wiki-theme="night"] .markdown-section h1 .anchor,
 :root[data-wiki-theme="night"] .markdown-section h2 .anchor,
 :root[data-wiki-theme="night"] .markdown-section h1 .anchor span,
-:root[data-wiki-theme="night"] .markdown-section h2 .anchor span { color: #ffffff !important; text-decoration: none !important; }
+:root[data-wiki-theme="night"] .markdown-section h2 .anchor span,
+:root[data-wiki-theme="night"] .markdown-section h3 > a,
+:root[data-wiki-theme="night"] .markdown-section h4 > a,
+:root[data-wiki-theme="night"] .markdown-section h5 > a,
+:root[data-wiki-theme="night"] .markdown-section h6 > a,
+:root[data-wiki-theme="night"] .markdown-section h3 .anchor,
+:root[data-wiki-theme="night"] .markdown-section h4 .anchor,
+:root[data-wiki-theme="night"] .markdown-section h5 .anchor,
+:root[data-wiki-theme="night"] .markdown-section h6 .anchor,
+:root[data-wiki-theme="night"] .markdown-section h3 .anchor span,
+:root[data-wiki-theme="night"] .markdown-section h4 .anchor span,
+:root[data-wiki-theme="night"] .markdown-section h5 .anchor span,
+:root[data-wiki-theme="night"] .markdown-section h6 .anchor span { color: #ffffff !important; text-decoration: none !important; }
 .markdown-section h1 { margin: 0 0 18px; font-size: 2.25rem; }
 .markdown-section h2 { margin: 3.4rem 0 1.1rem; padding-bottom: .65rem; border-bottom: 1px solid var(--border); font-size: 1.55rem; }
 .markdown-section h3 { margin-top: 2.1rem; font-size: 1.22rem; }
