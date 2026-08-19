@@ -19,19 +19,20 @@ body { letter-spacing: 0; }
 .app-nav { background: rgba(7,9,13,.82); border-bottom: 1px solid var(--line); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 .app-nav a, .app-nav p { color: #b9c4d6; }
 .markdown-section { max-width: 960px; padding-top: 50px; }
-.markdown-section h1, .markdown-section h2, .markdown-section h3 { color: #f4f7ff; letter-spacing: 0; }
+.markdown-section h1, .markdown-section h2, .markdown-section h3 { color: #f4f7ff !important; letter-spacing: 0; }
 .markdown-section h1 { font-size: 2.15rem; font-weight: 750; }
 .markdown-section h2 { margin-top: 3rem; border-bottom: 1px solid var(--line); padding-bottom: .55rem; color: var(--cyan); font-size: 1.35rem; }
 .markdown-section h3 { color: #d7b3ff; }
-.markdown-section p, .markdown-section li { color: #aab6c9; }
+.markdown-section p, .markdown-section li { color: #c2ccdb; }
 .markdown-section strong { color: #f2f6ff; }
 .markdown-section blockquote { border-left-color: var(--violet); background: linear-gradient(90deg, rgba(189,99,255,.11), transparent); color: #c2ccdc; padding: .8rem 1rem; }
 .markdown-section code { border: 1px solid rgba(0,229,255,.14); color: #7cecff; background: rgba(0,229,255,.07); }
 .markdown-section pre { border: 1px solid var(--line); background: #0b0f17; box-shadow: 0 12px 35px rgba(0,0,0,.22); }
 .markdown-section pre > code { color: #d9e6f5; background: transparent; }
 .markdown-section table { display: table; width: 100%; border: 1px solid var(--line); }
-.markdown-section th { background: rgba(0,229,255,.08); color: var(--cyan); }
-.markdown-section td, .markdown-section th { border-bottom: 1px solid var(--line); }
+.markdown-section th { background: rgba(0,229,255,.08); color: var(--cyan) !important; }
+.markdown-section td { color: #cbd5e4; background: #0b0f17; border-bottom: 1px solid var(--line); }
+.markdown-section tr:nth-child(2n) td { background: #0e141e; }
 .markdown-section a { color: var(--cyan); }
 .markdown-section a:hover { color: #fff; }
 .markdown-section hr { border-color: var(--line); }
