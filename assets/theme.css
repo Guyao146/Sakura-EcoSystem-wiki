@@ -29,7 +29,7 @@ body { font-size: 16px; line-height: 1.75; transition: background .2s ease, colo
 .sidebar-nav a { color: var(--muted) !important; font-size: 14px; transition: color .15s ease; }
 .sidebar-nav a:hover, .sidebar-nav li.active > a { color: var(--accent-strong) !important; font-weight: 600; }
 .content { left: 280px; }
-.markdown-section { max-width: 860px; padding: 64px 32px 100px; }
+.markdown-section { max-width: 1120px; margin-left: 220px; padding: 64px 32px 100px; }
 .markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4 { color: var(--heading) !important; font-weight: 700; line-height: 1.35; }
 :root[data-wiki-theme="night"] .markdown-section h1,
 :root[data-wiki-theme="night"] .markdown-section h2,
@@ -59,7 +59,7 @@ body { font-size: 16px; line-height: 1.75; transition: background .2s ease, colo
 .markdown-section td { color: var(--text-soft) !important; background: var(--page) !important; }
 .markdown-section th, .markdown-section td { padding: 11px 14px; border: 0; border-bottom: 1px solid var(--border); }
 .markdown-section tr:last-child td { border-bottom: 0; }
-.app-sub-sidebar { position: fixed; top: 110px; right: 28px; width: 180px; max-height: calc(100vh - 150px); overflow: auto; padding-left: 18px !important; border-left: 1px solid var(--border); }
+.app-sub-sidebar { position: fixed; top: 110px; left: 322px; right: auto; width: 180px; max-height: calc(100vh - 150px); overflow: auto; padding-left: 18px !important; border-left: 1px solid var(--border); }
 .app-sub-sidebar::before { content: "本页目录"; display: block; margin-bottom: 10px; color: var(--text); font-size: 13px; font-weight: 700; }
 .app-sub-sidebar li { margin: 7px 0; }
 .app-sub-sidebar a { color: var(--muted) !important; font-size: 13px; }
@@ -67,9 +67,12 @@ body { font-size: 16px; line-height: 1.75; transition: background .2s ease, colo
 :root[data-wiki-theme="night"] .app-sub-sidebar::before,
 :root[data-wiki-theme="night"] .app-sub-sidebar a { color: #d7d7df !important; }
 .pagination-item a { color: var(--accent) !important; }
-.sidebar-toggle { position: fixed; left: 16px; bottom: 16px; z-index: 20; width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-soft) !important; }
+.sidebar-toggle { display: none; position: fixed; left: 16px; bottom: 16px; z-index: 20; width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-soft) !important; }
 .sidebar-toggle span, .sidebar-toggle span::before, .sidebar-toggle span::after { background: var(--text-soft) !important; }
-[data-wiki-theme-toggle] { position: fixed; top: 18px; right: 24px; z-index: 50; border: 1px solid var(--border); border-radius: 999px; padding: 7px 12px; color: var(--text-soft); background: var(--surface); cursor: pointer; font: 600 12px/1 "Microsoft YaHei", sans-serif; }
+[data-wiki-theme-toggle], [data-wiki-github] { position: fixed; bottom: 18px; z-index: 50; border: 1px solid var(--border); border-radius: 999px; padding: 7px 12px; color: var(--text-soft); background: var(--surface); cursor: pointer; font: 600 12px/1 "Microsoft YaHei", sans-serif; text-decoration: none; }
+[data-wiki-theme-toggle] { left: 84px; }
+[data-wiki-github] { left: 16px; }
 [data-wiki-theme-toggle]:hover { color: var(--heading); border-color: var(--accent); }
-@media (max-width: 1280px) { .app-sub-sidebar { display: none; } }
-@media (max-width: 768px) { .content { left: 0; } .markdown-section { padding: 48px 20px 90px; } .markdown-section h1 { font-size: 1.85rem; } [data-wiki-theme-toggle] { top: 12px; right: 12px; } }
+[data-wiki-github]:hover { color: var(--heading); border-color: var(--accent); }
+@media (max-width: 1500px) { .app-sub-sidebar { display: none; } .markdown-section { margin-left: 0; max-width: 1000px; } }
+@media (max-width: 768px) { .content { left: 0; } .markdown-section { margin-left: 0; padding: 48px 20px 90px; } .markdown-section h1 { font-size: 1.85rem; } .sidebar-toggle { display: block; bottom: 62px; } }

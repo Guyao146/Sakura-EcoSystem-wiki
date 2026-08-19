@@ -24,6 +24,14 @@
     button.dataset.wikiThemeToggle = 'true'
     button.addEventListener('click', function () { apply(mode() === 'night' ? 'day' : 'night') })
     document.body.appendChild(button)
+    var github = document.createElement('a')
+    github.href = 'https://github.com/Guyao146/Sakura-EcoSystem-wiki'
+    github.target = '_blank'
+    github.rel = 'noopener noreferrer'
+    github.dataset.wikiGithub = 'true'
+    github.textContent = 'GitHub'
+    github.title = '打开樱落生态 Wiki GitHub 仓库'
+    document.body.appendChild(github)
     apply(mode())
   }
 

@@ -1,4 +1,4 @@
-# 樱落生态Wiki
+# 樱落生态Wiki · 连接云，人，家
 
 > 🌸 Sakura EcoSystem · Connect Cloud, People and Home.
 
