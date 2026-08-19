@@ -23,7 +23,7 @@ body { font-size: 16px; line-height: 1.75; transition: background .2s ease, colo
 .sidebar .search input { height: 38px; padding: 0 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-soft); color: var(--text); }
 .sidebar .search input::placeholder { color: var(--muted); }
 .sidebar .sidebar-nav { padding: 0 22px 40px; }
-.sidebar .sidebar-nav::before { content: "樱落生态"; display: block; margin: 0 0 20px; padding: 24px 0 18px; border-bottom: 1px solid var(--border); color: var(--heading); font-size: 20px; font-weight: 700; }
+.sidebar .sidebar-nav::before { content: ""; display: block; width: 100px; height: 54px; margin: 18px 0 20px; border: 0; background: url("https://api.mcylyr.cn/photo/logo/EcoSystem.png") center / contain no-repeat; }
 .sidebar-nav > ul > li > strong { display: block; margin: 22px 0 8px; color: var(--text); font-size: 14px; }
 .sidebar-nav li { margin: 3px 0; }
 .sidebar-nav a { color: var(--muted) !important; font-size: 14px; transition: color .15s ease; }
