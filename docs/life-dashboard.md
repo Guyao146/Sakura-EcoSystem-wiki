@@ -1,6 +1,6 @@
 # Life Dashboard
 
-仓库：[Guyao146/Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) · 当前版本 `0.10.1` · 许可证 `MIT`
+仓库：[Guyao146/Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) · 许可证 `MIT`
 
 ## 项目定位
 
