@@ -13,6 +13,13 @@
 | [DSH Activity Tracker](docs/dsh-activity-tracker.md) | DeepSeek Harness Web 的本地活动统计插件 | 扫描本地 DSH 会话，可向 Life Dashboard 推送快照 | v1.6.2 |
 | [Life Dashboard](docs/life-dashboard.md) | 个人生活中枢与可视化看板 | Authentik、Home Assistant、天气、To Do、AI 与 DSH | v0.10.1 |
 
+## 工作室网站群
+
+樱落生态不仅包含开发项目，也连接一组面向不同场景的站点。官网将它们组织成“十站一章”的旅程，分为相遇、游乐、创作与流转四个篇章。
+
+- [查看十站一章](docs/studio-sites.md)
+- [访问樱落站群首页](https://www.mcylyr.cn/)
+
 ## 生态主线
 
 ```text
@@ -37,5 +44,6 @@ DSH 本地会话
 
 - 想统计 DSH 使用情况：阅读 [DSH Activity Tracker](docs/dsh-activity-tracker.md)。
 - 想搭建个人生活看板：阅读 [Life Dashboard](docs/life-dashboard.md)。
+- 想了解樱落工作室的全部站点：阅读 [十站一章](docs/studio-sites.md)。
 
 > 文档基于 2026-08-19 拉取的两个项目源码整理。实现变更后，以对应项目仓库和 CHANGELOG 为最终依据。
