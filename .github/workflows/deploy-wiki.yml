@@ -1,0 +1,26 @@
+name: Deploy Wiki
+
+"on":
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wiki-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.WIKI_SSH_HOST }}
+          username: ${{ secrets.WIKI_SSH_USER }}
+          key: ${{ secrets.WIKI_SSH_PRIVATE_KEY }}
+          fingerprint: ${{ secrets.WIKI_SSH_FINGERPRINT }}
+          script: /usr/local/bin/update-sakura-wiki

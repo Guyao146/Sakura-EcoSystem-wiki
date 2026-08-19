@@ -1,0 +1,21 @@
+:root { --ink: #202124; --muted: #6d6668; --rose: #b84d66; --rose-dark: #8d304b; --paper: #fffaf8; --line: #eadcdf; }
+body { background: var(--paper); color: var(--ink); font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; }
+.cover.show { background: linear-gradient(135deg, #fff8f5 0%, #f8e8ec 52%, #f4d7df 100%); color: var(--ink); }
+.cover-main > h1 { color: var(--rose-dark); font-weight: 700; letter-spacing: 0; }
+.cover-main > p { color: var(--muted); }
+.cover-main .anchor span { color: var(--rose); }
+.sidebar { border-right: 1px solid var(--line); background: #fffdfc; }
+.sidebar-nav > ul > li > strong { color: var(--rose-dark); }
+.sidebar-nav a { color: #4d4547; }
+.sidebar-nav a:hover, .sidebar-nav li.active > a { color: var(--rose); }
+.markdown-section { max-width: 920px; }
+.markdown-section h1, .markdown-section h2, .markdown-section h3 { color: var(--rose-dark); letter-spacing: 0; }
+.markdown-section h1 { font-size: 2rem; }
+.markdown-section h2 { border-bottom: 1px solid var(--line); padding-bottom: .4rem; }
+.markdown-section blockquote { border-left-color: var(--rose); background: #fff1f3; padding: .6rem 1rem; }
+.markdown-section code { color: var(--rose-dark); background: #f8e8ec; }
+.markdown-section pre > code { color: #f8edf0; background: #292529; }
+.markdown-section table { display: table; width: 100%; }
+.markdown-section th { background: #f8e8ec; color: var(--rose-dark); }
+.search .search-keyword, .search input { border-color: var(--line); }
+@media (max-width: 768px) { .markdown-section { padding: 1.2rem; } .markdown-section h1 { font-size: 1.7rem; } }
