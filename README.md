@@ -1,6 +1,6 @@
-# 樱落生态Wiki
+<img src="//api.mcylyr.cn/photo/logo/EcoSystem.png" alt="Logo" weight='200px' height="100px">
 
-<img src="//api.mcylyr.cn/photo/logo/EcoSystem.png" alt="Logo" weight='100px' height="54px">
+# 樱落生态Wiki
 
 > 🌸 Sakura EcoSystem · Connect Cloud, People and Home.
 
