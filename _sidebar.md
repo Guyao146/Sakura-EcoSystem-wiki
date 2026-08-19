@@ -1,7 +1,6 @@
 - **樱落生态**
   - [生态总览](README.md)
   - [项目关系](docs/ecosystem.md)
-  - [更新与发布](docs/operations.md)
 - **项目文档**
   - [DSH Activity Tracker](docs/dsh-activity-tracker.md)
   - [Life Dashboard](docs/life-dashboard.md)

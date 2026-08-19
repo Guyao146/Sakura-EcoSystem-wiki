@@ -33,6 +33,5 @@ DSH 本地会话
 
 - 想统计 DSH 使用情况：阅读 [DSH Activity Tracker](docs/dsh-activity-tracker.md)。
 - 想搭建个人生活看板：阅读 [Life Dashboard](docs/life-dashboard.md)。
-- 想让 `wiki.mcylyr.cn` 自动跟随 GitHub：阅读 [更新与发布](docs/operations.md)。
 
 > 文档基于 2026-08-19 拉取的两个项目源码整理。实现变更后，以对应项目仓库和 CHANGELOG 为最终依据。
