@@ -1,4 +1,4 @@
-# 樱落工作室网站群
+# 顾瑶工作室网站群
 
 官网：[www.mcylyr.cn](https://www.mcylyr.cn/)
 
@@ -6,20 +6,18 @@
 
 ## 站群概览
 
-樱落工作室官网将当前站点组织为 **“十站一章”** 的旅程。这里的站点并不是彼此孤立的链接，而是围绕身份、游戏、创作和基础服务组成的一套个人数字空间。
-
-| 篇章 | 站点 | 入口 | 作用 |
-| --- | --- | --- | --- |
-| **ACT 01 · 相遇** | 樱落怡然 LHYY | [lhyy.mcylyr.cn](https://lhyy.mcylyr.cn) | 工作室品牌与内容展示入口 |
-| **ACT 01 · 相遇** | OA 控制台 / 统一认证 | [login.mcylyr.cn](https://login.mcylyr.cn) | 统一登录、身份认证和后台入口 |
-| **ACT 02 · 游乐** | 樱落怡然 · 我的世界 | [mc.mcylyr.cn](https://mc.mcylyr.cn) | Minecraft 相关的游戏与社区空间 |
-| **ACT 02 · 游乐** | 皮肤站 / 共享登录 | [pfz.mcylyr.cn](https://pfz.mcylyr.cn) | 皮肤、角色和游戏登录服务 |
-| **ACT 03 · 创作** | AI 控制台 | [chat.mcylyr.cn](https://chat.mcylyr.cn) | AI 对话、模型和创作工作台 |
-| **ACT 03 · 创作** | OpenClaw 小满 | [openclaw.mcylyr.cn](https://openclaw.mcylyr.cn) | 面向智能助手与自动化实验的空间 |
-| **ACT 03 · 创作** | BigBanana AI 绘图 | [aicut.mcylyr.cn](https://aicut.mcylyr.cn) | AI 图像生成与视觉创作工具 |
-| **ACT 04 · 流转** | 樱落怡然云盘 | [pan.mcylyr.cn](https://pan.mcylyr.cn) | 文件存储、分享和跨设备流转 |
-| **ACT 04 · 流转** | API 统一接口 | [api.mcylyr.cn](https://api.mcylyr.cn) | 站群公共 API 与后端能力入口 |
-| **ACT 04 · 流转** | 生活看板 | [life.mcylyr.cn](https://life.mcylyr.cn) | 将家庭、日程、AI 和工作状态汇入一个看板 |
+| 站点 | 入口 | 作用 |
+| --- | --- | --- |
+| 樱落怡然 LHYY | [lhyy.mcylyr.cn](https://lhyy.mcylyr.cn) | 工作室品牌与内容展示入口 |
+| OA 控制台 / 统一认证 | [login.mcylyr.cn](https://login.mcylyr.cn) | 统一登录、身份认证和后台入口 |
+| 樱落怡然 · 我的世界 | [mc.mcylyr.cn](https://mc.mcylyr.cn) | Minecraft 相关的游戏与社区空间 |
+| 皮肤站 / 共享登录 | [pfz.mcylyr.cn](https://pfz.mcylyr.cn) | 皮肤、角色和游戏登录服务 |
+| AI 控制台 | [chat.mcylyr.cn](https://chat.mcylyr.cn) | AI 对话、模型和创作工作台 |
+| OpenClaw 小助手 | [openclaw.mcylyr.cn](https://openclaw.mcylyr.cn) | 面向智能助手与自动化实验的空间 |
+| BigBanana AI 绘图 | [aicut.mcylyr.cn](https://aicut.mcylyr.cn) | AI 图像生成与视觉创作工具 |
+| 樱落怡然云盘 | [pan.mcylyr.cn](https://pan.mcylyr.cn) | 文件存储、分享和跨设备流转 |
+| API 统一接口 | [api.mcylyr.cn](https://api.mcylyr.cn) | 站群公共 API 与后端能力入口 |
+| 生活看板 | [life.mcylyr.cn](https://life.mcylyr.cn) | 将家庭、日程、AI 和工作状态汇入一个看板 |
 
 ## ACT 01 · 相遇
 
@@ -27,7 +25,7 @@
 
 [打开 LHYY](https://lhyy.mcylyr.cn)
 
-LHYY 是站群中面向外部访问者的品牌与内容入口，承载工作室的视觉表达、作品展示和品牌叙事。它更像一张“名片”，负责让访问者先认识樱落工作室。
+LHYY 是站群中面向外部访问者的品牌与内容入口，承载工作室的视觉表达、作品展示和品牌叙事。它更像一张“名片”，负责让访问者先认识工作室。
 
 ### OA 控制台 / 统一认证
 
@@ -41,13 +39,13 @@ LHYY 是站群中面向外部访问者的品牌与内容入口，承载工作室
 
 [打开 Minecraft 站点](https://mc.mcylyr.cn)
 
-这是站群中面向 Minecraft 的游戏空间，把服务器、游戏内容和社区体验放在同一条“游乐”篇章中。
+这是站群中面向 Minecraft 的游戏空间。
 
 ### 皮肤站 / 共享登录
 
 [打开皮肤站](https://pfz.mcylyr.cn)
 
-皮肤站负责游戏角色外观、皮肤管理和共享登录体验。它与 Minecraft 站点属于同一个游乐场景，但承担的是身份外观和登录服务。
+皮肤站负责游戏角色外观、皮肤管理和共享登录体验，承担身份、外观和登录服务。
 
 ## ACT 03 · 创作
 
@@ -57,11 +55,11 @@ LHYY 是站群中面向外部访问者的品牌与内容入口，承载工作室
 
 AI 控制台是面向对话和模型能力的创作入口。它与 Wiki 中记录的 Life Dashboard AI 助手属于相邻能力：前者是独立的 AI 工作台，后者把 AI 嵌入个人生活数据和看板上下文。
 
-### OpenClaw 小满
+### OpenClaw 小助手
 
 [打开 OpenClaw](https://openclaw.mcylyr.cn)
 
-OpenClaw 小满是站群中的智能助手与自动化实验空间，承载更偏向 Agent、工具和自动化流程的探索。
+OpenClaw 小助手是站群中的智能助手与自动化实验空间，承载更偏向 Agent、工具和自动化流程的探索。
 
 ### BigBanana AI 绘图
 
@@ -103,19 +101,14 @@ API 统一接口是站群的公共连接层。它把多个站点需要复用的�
                     └─ DSH Activity Tracker
 ```
 
-- `dsh-activity-tracker` 是本地 DSH Web 的活动统计插件。
-- `Life Dashboard` 是站群中承载个人生活和工作状态的核心看板。
-- `Sakura-EcoSystem-wiki` 负责把各个站点、项目和它们之间的关系记录下来。
-- `www.mcylyr.cn` 是对外展示整个站群旅程的入口。
 
-## 入口导航
+## 其他导航
 
 | 类型 | 地址 |
 | --- | --- |
 | 站群首页 | [www.mcylyr.cn](https://www.mcylyr.cn/) |
-| Wiki | [wiki.mcylyr.cn](https://wiki.mcylyr.cn/) |
-| GitHub 组织 | [github.com/Guyao146](https://github.com/Guyao146) |
-| DSH 活动统计仓库 | [dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker) |
-| 生活看板仓库 | [Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) |
+| GitHub - 主页 | [github.com/Guyao146](https://github.com/Guyao146) |
+| Github - DSH 活动统计 | [dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker) |
+| Github - 生活看板 | [Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) |
 
 > 官网的站点数量、文案和入口可能会随站群演进变化；本文根据 `www.mcylyr.cn` 当前页面整理，具体服务状态以各站点实际访问结果为准。
