@@ -1,50 +1,63 @@
-:root { --ink: #edf4ff; --muted: #8995a8; --cyan: #00e5ff; --violet: #bd63ff; --paper: #07090d; --panel: #0d1119; --line: rgba(126,151,190,.24); }
+:root {
+  --page: #1b1b1f;
+  --surface: #171719;
+  --surface-soft: #202024;
+  --text: #f1f1f3;
+  --text-soft: #c7c7ce;
+  --muted: #92929d;
+  --heading: #ffffff;
+  --accent: #aeb6ff;
+  --accent-strong: #c4caff;
+  --border: #303036;
+  --code-bg: #141416;
+  --code-text: #e6e6eb;
+  --shadow: rgba(0, 0, 0, .18);
+}
+:root[data-wiki-theme="day"] { --page: #fff; --surface: #f7f7f8; --surface-soft: #f0f0f2; --text: #23232a; --text-soft: #3f3f49; --muted: #6f6f7b; --heading: #17171d; --accent: #4d5fc4; --accent-strong: #35479f; --border: #dedee3; --code-bg: #f4f4f6; --code-text: #292934; --shadow: rgba(30,30,45,.08); }
 * { box-sizing: border-box; }
-html, body { background: var(--paper); color: var(--ink); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
-body { letter-spacing: 0; }
-.cover.show { position: relative; overflow: hidden; background: radial-gradient(circle at 50% 38%, #1b1032 0, #0a0d16 38%, #07090d 76%); color: var(--ink); }
-.cover.show::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .22; background-image: linear-gradient(rgba(0,229,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(189,99,255,.08) 1px, transparent 1px); background-size: 54px 54px; -webkit-mask-image: linear-gradient(to bottom, #000, transparent 78%); mask-image: linear-gradient(to bottom, #000, transparent 78%); }
-.cover-main { position: relative; z-index: 1; }
-.cover-main > h1 { margin-bottom: 20px; color: transparent; background: linear-gradient(100deg, var(--cyan), #fff 45%, var(--violet)); -webkit-background-clip: text; background-clip: text; font-weight: 800; letter-spacing: 0; text-shadow: 0 0 34px rgba(0,229,255,.18); }
-.cover-main > p { color: var(--muted); }
-.cover-main .anchor span { border-color: var(--cyan); color: var(--cyan); background: rgba(0,229,255,.06); transition: .3s ease; }
-.cover-main .anchor span:hover { color: #05070a; background: var(--cyan); box-shadow: 0 0 28px rgba(0,229,255,.35); transform: translateY(-3px); }
-.cover-main small { display: block; margin-top: 32px; color: #667187; letter-spacing: 2px; }
-.cover-kicker { display: block; margin-bottom: 22px; color: var(--violet); font: 600 11px/1.4 Consolas, monospace; letter-spacing: 3px; }
-.sidebar { border-right: 1px solid var(--line); background: rgba(8,11,17,.96); }
-.sidebar-nav > ul > li > strong { color: var(--cyan); font: 600 11px/1.4 Consolas, monospace; letter-spacing: 1px; }
-.sidebar-nav a { color: #d5deed !important; transition: color .2s ease, padding .2s ease; }
-.sidebar-nav a:hover, .sidebar-nav li.active > a { color: var(--cyan) !important; }
-.sidebar-nav li.active > a { border-right: 2px solid var(--cyan); }
-.sidebar .app-sub-sidebar, .sidebar .sidebar-nav > ul:first-child { padding-top: 18px; }
-.sidebar .sidebar-nav::before { content: "SAKURA / WIKI"; display: block; padding: 18px 15px 14px; color: var(--violet); font: 600 11px/1 Consolas, monospace; letter-spacing: 2px; }
-.app-nav { background: rgba(7,9,13,.82); border-bottom: 1px solid var(--line); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
-.app-nav a, .app-nav p { color: #b9c4d6; }
-.markdown-section { max-width: 960px; padding-top: 50px; }
-.markdown-section h1, .markdown-section h2, .markdown-section h3 { color: #f4f7ff !important; letter-spacing: 0; }
-.markdown-section h1 { color: #f4f7ff !important; font-size: 2.15rem; font-weight: 750; }
-.markdown-section h2 { margin-top: 3rem; border-bottom: 1px solid var(--line); padding-bottom: .55rem; color: var(--cyan) !important; font-size: 1.35rem; }
-.markdown-section h3 { color: #d7b3ff !important; }
-.markdown-section p, .markdown-section li { color: #c2ccdb !important; }
-.markdown-section strong { color: #f2f6ff !important; }
-.markdown-section blockquote { border-left-color: var(--violet); background: linear-gradient(90deg, rgba(189,99,255,.11), transparent); color: #c2ccdc; padding: .8rem 1rem; }
-.markdown-section code { border: 1px solid rgba(0,229,255,.14); color: #7cecff; background: rgba(0,229,255,.07); }
-.markdown-section pre { border: 1px solid var(--line); background: #0b0f17; box-shadow: 0 12px 35px rgba(0,0,0,.22); }
-.markdown-section pre > code { color: #d9e6f5; background: transparent; }
-.markdown-section pre .docsify-copy-code-button { top: 0; right: 0; border: 0; border-radius: 0 0 0 6px; color: #061016; background: var(--cyan); font-size: 12px; }
-.markdown-section pre .docsify-copy-code-button:hover { background: #fff; }
-.markdown-section table { display: table; width: 100%; border: 1px solid var(--line); }
-.markdown-section th { background: rgba(0,229,255,.08) !important; color: var(--cyan) !important; }
-.markdown-section td { color: #cbd5e4 !important; background: #0b0f17 !important; border-bottom: 1px solid var(--line); }
-.markdown-section tr:nth-child(2n) td { background: #0e141e !important; }
-.markdown-section a { color: var(--cyan); }
-.markdown-section a:hover { color: #fff; }
-.markdown-section hr { border-color: var(--line); }
-.search .search-keyword, .search input { border-color: var(--line); background: #0d1119; color: var(--ink); }
-.search .search-keyword { color: var(--cyan); }
-.pagination-item a { color: var(--cyan); }
+html, body { background: var(--page) !important; color: var(--text-soft) !important; font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif; }
+body { font-size: 16px; line-height: 1.75; transition: background .2s ease, color .2s ease; }
 .github-corner { display: none !important; }
-.sidebar-toggle { position: fixed; left: 14px; bottom: 14px; z-index: 20; width: 42px; height: 42px; border: 1px solid rgba(0,229,255,.5); border-radius: 50%; background: #0d141d !important; box-shadow: 0 0 18px rgba(0,229,255,.18); }
-.sidebar-toggle span { background: var(--cyan) !important; }
-.sidebar-toggle span::before, .sidebar-toggle span::after { background: var(--cyan) !important; }
-@media (max-width: 768px) { .markdown-section { padding: 28px 20px; } .markdown-section h1 { font-size: 1.75rem; } .cover-main small { letter-spacing: 1px; } .cover-kicker { letter-spacing: 1.5px; } }
+.sidebar { width: 280px; border-right: 1px solid var(--border); background: var(--surface) !important; }
+.sidebar .search { margin: 0; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.sidebar .search input { height: 38px; padding: 0 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-soft); color: var(--text); }
+.sidebar .search input::placeholder { color: var(--muted); }
+.sidebar .sidebar-nav { padding: 0 22px 40px; }
+.sidebar .sidebar-nav::before { content: "樱落生态"; display: block; margin: 0 0 20px; padding: 24px 0 18px; border-bottom: 1px solid var(--border); color: var(--heading); font-size: 20px; font-weight: 700; }
+.sidebar-nav > ul > li > strong { display: block; margin: 22px 0 8px; color: var(--text); font-size: 14px; }
+.sidebar-nav li { margin: 3px 0; }
+.sidebar-nav a { color: var(--muted) !important; font-size: 14px; transition: color .15s ease; }
+.sidebar-nav a:hover, .sidebar-nav li.active > a { color: var(--accent-strong) !important; font-weight: 600; }
+.content { left: 280px; }
+.markdown-section { max-width: 860px; padding: 64px 32px 100px; }
+.markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4 { color: var(--heading) !important; font-weight: 700; line-height: 1.35; }
+.markdown-section h1 { margin: 0 0 18px; font-size: 2.25rem; }
+.markdown-section h2 { margin: 3.4rem 0 1.1rem; padding-bottom: .65rem; border-bottom: 1px solid var(--border); font-size: 1.55rem; }
+.markdown-section h3 { margin-top: 2.1rem; font-size: 1.22rem; }
+.markdown-section p, .markdown-section li { color: var(--text-soft) !important; }
+.markdown-section strong { color: var(--text) !important; }
+.markdown-section a { color: var(--accent) !important; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; }
+.markdown-section a:hover { color: var(--accent-strong) !important; text-decoration-color: currentColor; }
+.markdown-section hr { border-color: var(--border); }
+.markdown-section blockquote { margin: 1.3rem 0; padding: .65rem 1rem; border-left: 3px solid var(--accent); color: var(--text-soft); }
+.markdown-section code { border: 1px solid var(--border); border-radius: 5px; padding: .12em .38em; color: var(--code-text); background: var(--surface-soft); }
+.markdown-section pre { border: 1px solid var(--border); border-radius: 8px; background: var(--code-bg); }
+.markdown-section pre > code { border: 0; color: var(--code-text); background: transparent; }
+.markdown-section pre .docsify-copy-code-button { top: 8px; right: 8px; border: 1px solid var(--border); border-radius: 6px; padding: 6px 9px; color: var(--muted); background: var(--surface-soft); font-size: 12px; }
+.markdown-section table { display: table; width: 100%; border: 1px solid var(--border); border-collapse: separate; border-spacing: 0; border-radius: 8px; overflow: hidden; }
+.markdown-section th { color: var(--heading) !important; background: var(--surface-soft) !important; }
+.markdown-section td { color: var(--text-soft) !important; background: var(--page) !important; }
+.markdown-section th, .markdown-section td { padding: 11px 14px; border: 0; border-bottom: 1px solid var(--border); }
+.markdown-section tr:last-child td { border-bottom: 0; }
+.app-sub-sidebar { position: fixed; top: 110px; right: 28px; width: 180px; max-height: calc(100vh - 150px); overflow: auto; padding-left: 18px !important; border-left: 1px solid var(--border); }
+.app-sub-sidebar::before { content: "本页目录"; display: block; margin-bottom: 10px; color: var(--text); font-size: 13px; font-weight: 700; }
+.app-sub-sidebar li { margin: 7px 0; }
+.app-sub-sidebar a { color: var(--muted) !important; font-size: 13px; }
+.app-sub-sidebar a:hover { color: var(--accent-strong) !important; }
+.pagination-item a { color: var(--accent) !important; }
+.sidebar-toggle { position: fixed; left: 16px; bottom: 16px; z-index: 20; width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-soft) !important; }
+.sidebar-toggle span, .sidebar-toggle span::before, .sidebar-toggle span::after { background: var(--text-soft) !important; }
+[data-wiki-theme-toggle] { position: fixed; top: 18px; right: 24px; z-index: 50; border: 1px solid var(--border); border-radius: 999px; padding: 7px 12px; color: var(--text-soft); background: var(--surface); cursor: pointer; font: 600 12px/1 "Microsoft YaHei", sans-serif; }
+[data-wiki-theme-toggle]:hover { color: var(--heading); border-color: var(--accent); }
+@media (max-width: 1280px) { .app-sub-sidebar { display: none; } }
+@media (max-width: 768px) { .content { left: 0; } .markdown-section { padding: 48px 20px 90px; } .markdown-section h1 { font-size: 1.85rem; } [data-wiki-theme-toggle] { top: 12px; right: 12px; } }
