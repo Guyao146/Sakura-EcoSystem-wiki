@@ -31,6 +31,10 @@ body { font-size: 16px; line-height: 1.75; transition: background .2s ease, colo
 .content { left: 280px; }
 .markdown-section { max-width: 860px; padding: 64px 32px 100px; }
 .markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4 { color: var(--heading) !important; font-weight: 700; line-height: 1.35; }
+:root[data-wiki-theme="night"] .markdown-section h1,
+:root[data-wiki-theme="night"] .markdown-section h2,
+:root[data-wiki-theme="night"] .markdown-section h3,
+:root[data-wiki-theme="night"] .markdown-section h4 { color: #ffffff !important; text-shadow: none; }
 .markdown-section h1 { margin: 0 0 18px; font-size: 2.25rem; }
 .markdown-section h2 { margin: 3.4rem 0 1.1rem; padding-bottom: .65rem; border-bottom: 1px solid var(--border); font-size: 1.55rem; }
 .markdown-section h3 { margin-top: 2.1rem; font-size: 1.22rem; }
@@ -54,6 +58,8 @@ body { font-size: 16px; line-height: 1.75; transition: background .2s ease, colo
 .app-sub-sidebar li { margin: 7px 0; }
 .app-sub-sidebar a { color: var(--muted) !important; font-size: 13px; }
 .app-sub-sidebar a:hover { color: var(--accent-strong) !important; }
+:root[data-wiki-theme="night"] .app-sub-sidebar::before,
+:root[data-wiki-theme="night"] .app-sub-sidebar a { color: #d7d7df !important; }
 .pagination-item a { color: var(--accent) !important; }
 .sidebar-toggle { position: fixed; left: 16px; bottom: 16px; z-index: 20; width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-soft) !important; }
 .sidebar-toggle span, .sidebar-toggle span::before, .sidebar-toggle span::after { background: var(--text-soft) !important; }
