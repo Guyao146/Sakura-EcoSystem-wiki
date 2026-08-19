@@ -1,4 +1,7 @@
-# 樱落生态
+# 樱落生态Wiki
+
+<img src="//api.mcylyr.cn/photo/logo/EcoSystem.png" alt="Logo" weight='100px' height="54px">
+
 > 🌸 Sakura EcoSystem · Connect Cloud, People and Home.
 
 这里记录项目定位、安装方式、架构边界、部署流程与维护决策，让每个项目既能独立使用，也能组合成完整的个人数字系统。
