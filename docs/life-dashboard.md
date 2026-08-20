@@ -2,6 +2,8 @@
 
 仓库：[Guyao146/Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) · 许可证 `MIT`
 
+![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)
+
 ## 项目定位
 
 Life Dashboard（生活看板）是一个 PHP 8.2 + 原生 JavaScript/CSS 的个人生活中枢。它把 Home Assistant 家庭设备、天气、Microsoft To Do、日历、纪念日、习惯、能耗、配送、AI 助手和 DSH 工作区动态放进同一个响应式 Dashboard。
