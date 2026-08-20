@@ -1,6 +1,6 @@
 # Life Dashboard
 
-仓库：[Guyao146/Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) · 许可证 `MIT`
+仓库：[Guyao146/Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) · 许可证 `LGPL-v2.0`
 
 ![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)
 
