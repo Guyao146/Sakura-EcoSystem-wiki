@@ -1,6 +1,8 @@
 # DSH Activity Tracker
 
-仓库：[Guyao146/dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker)  · [最新 Release](https://github.com/Guyao146/dsh-activity-tracker/releases/latest) · 许可证 `AGPL-3.0-only`
+仓库：[Guyao146/dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker) · 许可证 `AGPL-3.0-only`
+
+
 
 ## 项目定位
 

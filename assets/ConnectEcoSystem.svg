@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="126"
+     height="20"
+     viewBox="0 0 126 20"
+     role="img"
+     aria-label="樱落生态成员">
+
+  <defs>
+    <linearGradient id="left" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#454545"/>
+      <stop offset="100%" stop-color="#292929"/>
+    </linearGradient>
+
+    <linearGradient id="sakura" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E978A2"/>
+      <stop offset="100%" stop-color="#C94F7B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 樱花图标区域 -->
+  <path
+    d="M4 0H25V20H4C1.8 20 0 18.2 0 16V4C0 1.8 1.8 0 4 0Z"
+    fill="url(#left)"/>
+
+  <!-- 成员区域 -->
+  <path
+    d="M23 0H122C124.2 0 126 1.8 126 4V16C126 18.2 124.2 20 122 20H23Z"
+    fill="url(#sakura)"/>
+
+  <!-- 樱花 -->
+  <text
+    x="12.5"
+    y="14.5"
+    text-anchor="middle"
+    font-family="Segoe UI Emoji, Apple Color Emoji, Noto Color Emoji, sans-serif"
+    font-size="12"
+    fill="#ffffff">🌸</text>
+
+  <!-- 中文 -->
+  <text
+    x="74.5"
+    y="14"
+    text-anchor="middle"
+    font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif"
+    font-size="10.5"
+    font-weight="500"
+    fill="#ffffff">樱落生态成员</text>
+</svg>
+
+<!--MD ![樱落生态成员](https://api.mcylyr.cn/photo/logo/ConnectEcoSystem.svg)-->
