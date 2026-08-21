@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="116"
+     height="20"
+     viewBox="0 0 116 20"
+     role="img"
+     aria-label="已编写Wiki">
+
+  <defs>
+    <linearGradient id="left" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#454545"/>
+      <stop offset="100%" stop-color="#292929"/>
+    </linearGradient>
+
+    <linearGradient id="blue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4C8BF5"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+
+  <path
+    d="M4 0H25V20H4C1.8 20 0 18.2 0 16V4C0 1.8 1.8 0 4 0Z"
+    fill="url(#left)"/>
+
+  <path
+    d="M23 0H112C114.2 0 116 1.8 116 4V16C116 18.2 114.2 20 112 20H23Z"
+    fill="url(#blue)"/>
+
+  <g transform="translate(12.5 10)">
+    <circle cx="0" cy="-3.4" r="2.6" fill="#F7A8C3"/>
+    <circle cx="3.2" cy="-1.05" r="2.6" fill="#F7A8C3"/>
+    <circle cx="2" cy="2.9" r="2.6" fill="#F7A8C3"/>
+    <circle cx="-2" cy="2.9" r="2.6" fill="#F7A8C3"/>
+    <circle cx="-3.2" cy="-1.05" r="2.6" fill="#F7A8C3"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFFFFF"/>
+    <circle cx="0" cy="-2.1" r="0.55" fill="#FFFFFF"/>
+    <circle cx="2" cy="-0.65" r="0.55" fill="#FFFFFF"/>
+    <circle cx="1.25" cy="1.7" r="0.55" fill="#FFFFFF"/>
+    <circle cx="-1.25" cy="1.7" r="0.55" fill="#FFFFFF"/>
+    <circle cx="-2" cy="-0.65" r="0.55" fill="#FFFFFF"/>
+  </g>
+
+  <text
+    x="69.5"
+    y="14"
+    text-anchor="middle"
+    font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif"
+    font-size="10.5"
+    font-weight="500"
+    fill="#FFFFFF">已编写Wiki</text>
+</svg>

@@ -1,10 +1,12 @@
 # DSH Better Model Thinking Control
 
-`dsh-better-model-thinking-control` 是樱落生态中的 DSH Web 插件，用于按中转站和模型配置思考强度（Reasoning Effort）。它读取 OpenAI 兼容中转站公开的模型能力，并把结果写入 DSH 原生 `llm-pi-ai` 设置，让 DSH 自己的模型选择器和思考档位机制继续负责实际请求。
+仓库：[Guyao146/dsh-better-model-thinking-control](https://github.com/Guyao146/dsh-better-model-thinking-control) · 许可证 `LGPL-v2.0`
 
-> 当前项目版本：`0.2.0`  
-> 项目仓库：[Guyao146/dsh-better-model-thinking-control](https://github.com/Guyao146/dsh-better-model-thinking-control)  
-> 许可证：MIT
+[![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
+[![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-4c7dff)](https://github.com/deepseek-ai/deepseek-harness)
+[![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
+
+`dsh-better-model-thinking-control` 是樱落生态中的 DSH Web 插件，用于按中转站和模型配置思考强度（Reasoning Effort）。它读取 OpenAI 兼容中转站公开的模型能力，并把结果写入 DSH 原生 `llm-pi-ai` 设置，让 DSH 自己的模型选择器和思考档位机制继续负责实际请求。
 
 ## 项目定位
 
