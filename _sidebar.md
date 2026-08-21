@@ -3,6 +3,7 @@
   - [项目关系](docs/ecosystem.md)
 - **项目文档**
   - [DSH Activity Tracker](docs/dsh-activity-tracker.md)
+  - [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md)
   - [Life Dashboard](docs/life-dashboard.md)
 - **开发与安全**
   - [配置与密钥规范](docs/security.md)

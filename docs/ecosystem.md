@@ -1,10 +1,12 @@
 # 项目关系
 
-## 两个项目分别解决什么问题
+## 各项目分别解决什么问题
 
 `dsh-activity-tracker` 关注“开发工作发生了什么”：从 DSH 压缩 JSONL 会话文件中提取用户输入、工具调用、Token 使用、项目、日期和小时等摘要，并在 DSH Web 中展示。
 
 `Life Dashboard` 关注“生活与工作状态如何汇总”：它以 Dashboard 连接 Home Assistant、天气、日程、纪念日、AI 助手，并通过工作区动态展示 DSH 的近期活动。
+
+`dsh-better-model-thinking-control` 关注“模型如何思考”：它读取 OpenAI 兼容中转站的模型能力，把思考档位映射到 DSH 原生 `llm-pi-ai` 设置。它不参与 Activity Tracker 的会话解析，也不改变 Life Dashboard 的推送链路。
 
 ## 集成链路
 
@@ -24,3 +26,4 @@ NAT 后无需向本地开发机开放端口，因为连接方向是本地插件�
 | 工作区在线和活动状态 | Life Dashboard | 字段白名单摘要 |
 | 会话详情 | Life Dashboard | 仅限已授权工作区和管理员 |
 | 向当前会话发送消息 | Life Dashboard → DSH | 管理员、已授权且运行中的会话 |
+| 模型思考档位 | DSH Better Model Thinking Control | DSH 原生 `llm-pi-ai` 与中转站 `/models` 能力元数据 |
