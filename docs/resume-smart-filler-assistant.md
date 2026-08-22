@@ -1,6 +1,6 @@
 # AI 简历自动填充助手
 
-仓库：[Guyao146/Resume-Smart-Filler-Assistant](https://github.com/Guyao146/Resume-Smart-Filler-Assistant) · 版本 `1.0.0` · 许可证 `MIT`
+仓库：[Guyao146/Resume-Smart-Filler-Assistant](https://github.com/Guyao146/Resume-Smart-Filler-Assistant) · 许可证 `GNU AGPL v3`
 
 [![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
 [![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-1677ff)](https://github.com/Guyao146/Resume-Smart-Filler-Assistant)
@@ -215,7 +215,11 @@ lib/pdf.worker.js      # PDF.js Worker
 icons/                 # 16/32/48/128 像素扩展图标
 ```
 
-项目使用 MIT License。修改扩展并重新加载时，打开 `chrome://extensions/` 或 `edge://extensions/`，点击扩展卡片上的“重新加载”；网页中的 Content Script 通常需要刷新后才会获得新版本。
+项目根目录 `LICENSE` 使用 **GNU Affero General Public License v3（GNU AGPL v3 / AGPL-3.0）**。这意味着修改并再分发扩展时，需要遵守 AGPL v3 的署名、许可证保留和对应源代码提供等条件；若修改后的程序支持用户通过网络远程交互，还需按 AGPL 第 13 条向远程用户提供获取对应源代码的方式。完整法律文本以仓库中的 [`LICENSE`](https://github.com/Guyao146/Resume-Smart-Filler-Assistant/blob/main/LICENSE) 为准。
+
+README 当前仍写着 `MIT License`，与根目录 `LICENSE` 文件不一致。本 Wiki 按实际许可证文件记录为 GNU AGPL v3；发布或再分发前应以仓库最新版本的 `LICENSE` 及版权声明为准。
+
+修改扩展并重新加载时，打开 `chrome://extensions/` 或 `edge://extensions/`，点击扩展卡片上的“重新加载”；网页中的 Content Script 通常需要刷新后才会获得新版本。
 
 ## 后续计划
 
