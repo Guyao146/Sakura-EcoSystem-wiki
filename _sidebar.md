@@ -5,6 +5,7 @@
   - [DSH Activity Tracker](docs/dsh-activity-tracker.md)
   - [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md)
   - [Life Dashboard](docs/life-dashboard.md)
+  - [AI 简历自动填充助手](docs/resume-smart-filler-assistant.md)
 - **开发与安全**
   - [配置与密钥规范](docs/security.md)
   - [贡献与维护](docs/contributing.md)
