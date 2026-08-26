@@ -11,7 +11,7 @@
 | 项目 | 定位 | 连接方式 | 当前版本 |
 | --- | --- | --- | --- |
 | [Sakura-MCP-Server](docs/sakura-mcp-server.md) | 面向所有兼容 MCP Agent 的多用户长期记忆平台 | MCP Streamable HTTP、Authentik、PostgreSQL + pgvector、OpenAI-compatible / Ollama | v0.2.0 开发中；公开 Release v0.1.0 |
-| [DSH Activity Tracker](docs/dsh-activity-tracker.md) | DeepSeek Harness Web 的本地活动统计插件 | 扫描本地 DSH 会话，可向 Life Dashboard 推送快照 | v1.6.2 |
+| [DSH Activity Tracker](docs/dsh-activity-tracker.md) | DeepSeek Harness 的本地活动统计与归档恢复插件 | 扫描本地 DSH 会话、查看/恢复归档，并可向 Life Dashboard 推送快照 | v1.7.0 |
 | [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md) | DSH 中转站模型思考强度配置与能力识别 | 读取 OpenAI 兼容 `/models`，写入 DSH 原生 `llm-pi-ai` 设置 | v0.2.0 |
 | [Life Dashboard](docs/life-dashboard.md) | 个人生活中枢与可视化看板 | Authentik、Home Assistant、天气、To Do、AI 与 DSH | v0.10.1 |
 

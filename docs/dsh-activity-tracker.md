@@ -1,6 +1,6 @@
 # DSH Activity Tracker
 
-仓库：[Guyao146/dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker) · 许可证 `LGPL-v2.0`
+仓库：[Guyao146/dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker) · 当前版本 `1.7.0` · 许可证 `LGPL-2.1-only`
 
 [![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
 [![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-4c7dff)](https://github.com/deepseek-ai/deepseek-harness)
@@ -14,7 +14,7 @@
 
 ## 运行要求
 
-- 已安装并能运行 DSH Web，插件必须安装到 `web` profile。
+- 已安装并能运行 DSH Web 或 DSH Desktop，插件必须安装到实际运行的 `web` / `desktop` profile。
 - Node.js `22.15+` 或 `24+`。源码调用 `node:zlib.zstdDecompressSync` 解压会话。
 - 当前用户对 DSH 会话目录有读取权限。
 - 默认会话目录：
@@ -50,7 +50,7 @@ dsh plugin --profile web add "file:./dsh-activity-tracker.tgz"
 git clone https://github.com/Guyao146/dsh-activity-tracker.git
 cd dsh-activity-tracker
 npm pack
-dsh plugin --profile web add "file:./dsh-activity-tracker-1.6.2.tgz"
+dsh plugin --profile web add "file:./dsh-activity-tracker-1.7.0.tgz"
 ```
 
 项目是直接打包的 JavaScript 插件，不需要构建步骤。`cordis.patch.yml` 在 DSH bundle 安装时注册 `activity-tracker`；发布包只包含 `lib/`、`cordis.patch.yml`、`README.md`、`LICENSE` 和 `package.json`。
@@ -106,8 +106,19 @@ X-DSH-Activity: 1
 | `GET` | `/dsh-activity/api/ui/config` | 读取模块布局、尺寸和筛选状态 |
 | `PUT` | `/dsh-activity/api/ui/config` | 保存 UI 状态 |
 | `GET` | `/dsh-activity/api/costs` | 费用汇总 |
+| `GET` | `/dsh-activity/api/archives` | 读取有本地记录的已归档会话摘要 |
+| `GET` | `/dsh-activity/api/archives/detail?session=<id>` | 读取一条归档会话的受限记录详情 |
+| `POST` | `/dsh-activity/api/archives/restore` | 从 DSH 归档集合中恢复会话 |
 
 `project` 和 `session` 为可选筛选项；详情响应会限制单条记录和 Token 数据规模，避免把完整会话内容作为统计接口返回。
+
+### 查看与恢复已归档对话
+
+打开活动统计顶部的“已归档”标签，可以按标题、项目或会话 ID 搜索归档记录。选择会话后，右侧按时间顺序显示用户消息、助手回复、工具调用、工具结果和审批记录；界面默认定位到最新记录。
+
+恢复时插件会显示二次确认。确认后，宿主端通过 DSH `workspaceRegistry.requireState()` / `setState()` 从 `archivedSessionIds` 移除目标 ID，并在写入后再次验证。恢复不会移动、覆盖或删除 `~/.dsh/sessions` 下的压缩会话日志。
+
+为了控制响应和渲染开销，单个归档会话最多返回最近 500 条记录，并应用约 1 MiB 的文本预算；这只限制查看响应，不会截断原始会话。归档 ID 对应的本地日志不存在时会计为记录缺失，不能恢复。
 
 ### Life Dashboard 连接 API
 
@@ -183,4 +194,4 @@ cordis.patch.yml
 .github/workflows/release.yml
 ```
 
-项目使用 GNU AGPL v3.0 only。修改后通过网络提供服务时，需按 AGPL 的远程网络交互条款向用户提供对应源码。
+项目使用 GNU Lesser General Public License v2.1 only（`LGPL-2.1-only`）。
