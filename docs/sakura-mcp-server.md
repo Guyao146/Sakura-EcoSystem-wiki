@@ -28,6 +28,7 @@ Sakura-MCP-Server 是面向所有兼容 Model Context Protocol（MCP）的 AI Ag
 | --- | --- |
 | 仓库版本字段 | `0.2.0` |
 | 最新公开 Release | `v0.1.0` |
+| 当前主线已验证 commit | `858f658` |
 | 开发分支 | 直接使用 `main` |
 | MCP Transport | Streamable HTTP，路径 `/mcp` |
 | 数据库 | PostgreSQL 16 + pgvector |
@@ -329,6 +330,7 @@ src/audit.ts              PostgreSQL/JSONL 安全审计
 src/web/                  PKCE Session 与管理后台
 src/setup/                安装向导
 migrations/               数据库迁移
+scripts/install.sh        Linux 首次部署密钥与 Compose 启动脚本
 tests/                    单元和 pgvector 集成测试
 ```
 
@@ -342,6 +344,6 @@ CI 会执行：
 4. 真实 PostgreSQL + pgvector 集成测试；
 5. Docker 镜像构建；
 6. Docker Compose 配置检查；
-7. Trivy HIGH/CRITICAL 镜像扫描。
+7. Trivy HIGH/CRITICAL 镜像扫描（当前报告模式，不因基础镜像上游临时 CVE 阻塞应用测试；生产依赖审计仍是阻塞检查）。
 
 推送 `v*` 标签后，Release 工作流生成 npm tarball 和 GitHub Release。正式部署前应确认对应 commit 的 CI 为绿色。

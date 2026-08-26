@@ -72,6 +72,29 @@ git pull --ff-only
 
 生产部署建议改为固定正式 tag 或经过验证的 commit，不要长期无审查跟随 `main`。
 
+## 一键首次部署
+
+Linux 服务器可以使用仓库内的安全首次部署脚本：
+
+```bash
+cd /opt/sakura-mcp-server
+chmod +x scripts/install.sh
+./scripts/install.sh https://mcp.example.com
+```
+
+脚本会：
+
+1. 检查 Docker、Docker Compose 和 OpenSSL；
+2. 拒绝覆盖已有 `.env`；
+3. 校验公网地址必须是 `https://域名`；
+4. 生成数据库密码、`SETUP_TOKEN`、`CONFIG_ENCRYPTION_KEY` 和 bootstrap Key；
+5. 创建 `.env` 并设置 `600` 权限；
+6. 创建 `data/` 并设置 `700` 权限；
+7. 执行 `docker compose up -d --build`；
+8. 输出安装向导和健康检查地址。
+
+脚本不会打印生成的密钥，也不会覆盖已有 `.env`。首次启动后仍需配置 Nginx HTTPS，再打开 `/setup` 完成 Authentik 和 Provider 设置。脚本必须从仓库根目录执行。
+
 ## 创建 `.env`
 
 ```bash
@@ -201,6 +224,8 @@ docker compose up -d --build
 docker compose ps
 docker compose logs -f sakura-mcp
 ```
+
+当前 Compose 项目名固定为 `sakura-mcp-server`，应用使用 `node:24-bookworm-slim` 运行镜像，并以非 root 用户 `mcp` 启动。应用容器默认通过 `host.docker.internal:host-gateway` 访问宿主机 Ollama，且 PostgreSQL 没有公网端口映射。
 
 应用启动时按文件名顺序执行 `migrations/*.sql`。不要手工修改 `schema_migrations`。
 

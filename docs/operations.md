@@ -125,6 +125,8 @@ docker compose ps
 
 数据库迁移按文件名执行，是 forward-only。不要手工删除 `schema_migrations` 记录。应用代码回滚不等于数据库回滚；需要回滚数据库时必须恢复升级前备份。
 
+当前 Docker 构建使用 `node:24-bookworm-slim`，运行容器由 Debian `groupadd/useradd` 创建的非 root `mcp` 用户启动。Compose 使用 `pull_policy: build`，代码变更后应执行 `docker compose up -d --build`，不要只执行普通 `restart`。
+
 ## Worker 运维
 
 管理后台“后台任务”页面支持：
@@ -279,7 +281,7 @@ Docker Compose 校验
 Trivy HIGH/CRITICAL 镜像扫描
 ```
 
-部署前确认目标 commit 的 GitHub Actions 为绿色，不要只根据版本字段判断可发布状态。
+部署前确认目标 commit 的 GitHub Actions 为绿色，不要只根据版本字段判断可发布状态。当前 Trivy 以报告模式运行：它会输出基础镜像的 HIGH/CRITICAL 风险，但不会因为上游基础镜像临时 CVE 阻塞应用测试和 Compose 校验；`npm audit --omit=dev --audit-level=high` 仍会阻塞 CI。
 
 ## 其他生态项目
 
