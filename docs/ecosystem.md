@@ -40,6 +40,7 @@ Sakura-MCP-Server 与现有 DSH、Life Dashboard 链路没有强制依赖。它�
 | 工作区在线和活动状态 | Life Dashboard | 字段白名单摘要 |
 | 会话详情 | Life Dashboard | 仅限已授权工作区和管理员 |
 | 向当前会话发送消息 | Life Dashboard → DSH | 管理员、已授权且运行中的会话 |
+| 查看和恢复已归档对话 | DSH Activity Tracker | 本机 `archivedSessionIds` 与仍存在的会话日志 |
 | 模型思考档位 | DSH Better Model Thinking Control | DSH 原生 `llm-pi-ai` 与中转站 `/models` 能力元数据 |
 | 跨 Agent 长期记忆 | Sakura-MCP-Server | 当前用户有权访问的个人或共享空间 |
 | 语义与全文检索 | Sakura-MCP-Server / PostgreSQL + pgvector | 记忆正文、摘要、标签与向量，不包含其他租户数据 |
