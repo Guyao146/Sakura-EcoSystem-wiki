@@ -28,7 +28,8 @@ Sakura-MCP-Server 是面向所有兼容 Model Context Protocol（MCP）的 AI Ag
 | --- | --- |
 | 仓库版本字段 | `0.2.0` |
 | 最新公开 Release | `v0.1.0` |
-| 当前主线已验证 commit | `858f658` |
+| 当前主线已验证 commit | `3e66c65` |
+| Docker 运行镜像 | `node:24-bookworm-slim`，非 root `mcp` 用户 |
 | 开发分支 | 直接使用 `main` |
 | MCP Transport | Streamable HTTP，路径 `/mcp` |
 | 数据库 | PostgreSQL 16 + pgvector |

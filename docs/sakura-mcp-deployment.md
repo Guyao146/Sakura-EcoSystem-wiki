@@ -72,6 +72,41 @@ git pull --ff-only
 
 生产部署建议改为固定正式 tag 或经过验证的 commit，不要长期无审查跟随 `main`。
 
+## 只拉取 Compose 的远程编排
+
+当前项目 Compose 默认使用本地 `build: .`，因此**只下载一个 Compose 文件会缺少 Dockerfile、`src/` 和 `migrations/`，不能直接启动**。仓库已支持通过 `SAKURA_MCP_BUILD_CONTEXT` 指定远程 Git 构建上下文，可以只拉取 Compose 和环境模板：
+
+```bash
+mkdir -p /opt/sakura-mcp-server
+cd /opt/sakura-mcp-server
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/main/docker-compose.yml
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/main/.env.example
+cp .env.example .env
+```
+
+编辑 `.env` 填写真实密钥后，设置远程构建上下文：
+
+```dotenv
+SAKURA_MCP_BUILD_CONTEXT=https://github.com/Guyao146/Sakura-MCP-Server.git#main
+```
+
+准备数据目录并启动：
+
+```bash
+mkdir -p data
+chmod 700 data
+chmod 600 .env
+docker compose up -d --build
+```
+
+Docker BuildKit 会从 GitHub 拉取 Dockerfile、源码和数据库迁移文件，不需要服务器执行 `git clone`。生产环境建议固定已验证 commit，而不是长期追踪 `main`：
+
+```dotenv
+SAKURA_MCP_BUILD_CONTEXT=https://github.com/Guyao146/Sakura-MCP-Server.git#3e66c65
+```
+
+Compose、`.env.example` 和 Git context 必须保持同一版本。当前没有公开 GHCR 预构建镜像，因此不能把 `image: sakura-mcp-server:latest` 当作远程拉取镜像使用；Compose 会按 `pull_policy: build` 从指定 context 构建。
+
 ## 一键首次部署
 
 Linux 服务器可以使用仓库内的安全首次部署脚本：
