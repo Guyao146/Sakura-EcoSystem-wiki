@@ -27,9 +27,10 @@ Sakura-MCP-Server 与现有 DSH、Life Dashboard 链路没有强制依赖。它�
 1. 用户通过 Authentik 进入 Sakura-MCP-Server，获得个人空间或加入共享空间。
 2. 用户为不同 Agent 创建独立凭据，并限制 scope 与空间。
 3. Agent 调用 `memory_remember` 写入带来源的记忆。
-4. 服务执行权限、结构和有效期校验并保存版本；当前进入全文索引，向量索引由开发中的后台任务补充。
-5. 后续 Agent 使用 `memory_search` 或 `memory_recall` 召回有权限访问的内容。
-6. 用户可以修正、归档、软删除、永久清除或解决冲突。
+4. 服务执行权限、结构和有效期校验，保存来源与版本，并按空间 Provider 生成向量。
+5. 后续 Agent 使用全文 + pgvector 混合检索召回有权限访问的内容。
+6. 重复、语义相似和潜在冲突进入治理流程，由用户确认替代、合并或忽略。
+7. 导入导出、后台向量重建、审计与 Web 管理都复用相同空间权限。
 
 ## 能力边界
 
@@ -42,7 +43,10 @@ Sakura-MCP-Server 与现有 DSH、Life Dashboard 链路没有强制依赖。它�
 | 模型思考档位 | DSH Better Model Thinking Control | DSH 原生 `llm-pi-ai` 与中转站 `/models` 能力元数据 |
 | 跨 Agent 长期记忆 | Sakura-MCP-Server | 当前用户有权访问的个人或共享空间 |
 | 语义与全文检索 | Sakura-MCP-Server / PostgreSQL + pgvector | 记忆正文、摘要、标签与向量，不包含其他租户数据 |
-| 自动记忆整理（开发中） | Sakura-MCP-Server / OpenAI-compatible 或 Ollama | 目标为按空间策略启用，模型结果必须通过结构校验 |
+| 自动记忆提取 | Sakura-MCP-Server / OpenAI-compatible 或 Ollama | 按空间策略启用，模型结果必须通过结构校验 |
+| 冲突治理 | Sakura-MCP-Server | 重复、关系、反馈、潜在冲突与人工确认 |
+| 数据迁移 | Sakura-MCP-Server | JSON/Markdown 导入导出，不包含密钥和会话 |
+| 后台任务 | Sakura-MCP-Server / PostgreSQL | 向量重建、取消、重试与崩溃恢复 |
 
 ## 边界原则
 

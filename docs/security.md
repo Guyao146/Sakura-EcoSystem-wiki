@@ -17,3 +17,17 @@ Life Dashboard 的私密配置通过服务器权限网关下发。普通用户�
 - 首次安装接口由 `SETUP_TOKEN` 保护；安装完成后写接口必须锁定，不能提供远程恢复出厂设置。
 - 高敏感空间应优先使用本地 Ollama，或关闭自动提取；发送到外部模型前必须得到空间策略授权。
 - 删除分为软删除和永久删除；永久删除需要管理员权限，并应进入审计记录。
+- Web 登录使用 Authorization Code + PKCE；Session Token 只保存哈希，写请求还必须验证 Session 绑定的 CSRF Token。
+- MCP、Web、登录和安装接口使用独立速率限制；只有应用确实只能由受信任反向代理访问时才启用 `TRUST_PROXY`。
+- 审计 Metadata 必须递归脱敏正文、Token、Cookie、Authorization、Password 和 API Key；普通用户不能读取其他租户审计。
+- PostgreSQL 不映射公网端口，MCP 应用端口只绑定 `127.0.0.1`，公网只开放 HTTPS。
+- 备份必须同时包含数据库、`.env`、Nginx 配置和 `CONFIG_ENCRYPTION_KEY` 的离线副本。
+
+## 生产发布检查
+
+- TypeScript、单元测试和真实 pgvector 集成测试通过；
+- `npm audit --omit=dev` 无 High/Critical；
+- Docker Compose 配置检查通过；
+- Trivy 镜像扫描无可修复 High/Critical；
+- 完成恢复演练，而不只是生成备份文件；
+- 目标 commit 的 GitHub Actions 为绿色。

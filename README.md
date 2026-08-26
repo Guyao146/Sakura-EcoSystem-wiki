@@ -10,7 +10,7 @@
 
 | 项目 | 定位 | 连接方式 | 当前版本 |
 | --- | --- | --- | --- |
-| [Sakura-MCP-Server](docs/sakura-mcp-server.md) | 面向所有兼容 MCP Agent 的多用户长期记忆平台 | MCP Streamable HTTP、Authentik、PostgreSQL + pgvector、OpenAI-compatible / Ollama | v0.2.0 开发中；公开 Release v0.1.0 |
+| [Sakura-MCP-Server](docs/sakura-mcp-server.md) | 面向所有兼容 MCP Agent 的多用户长期记忆平台 | MCP、Authentik、pgvector、Provider、Worker、审计和 Web 管理 | v0.2.0 开发中；公开 Release v0.1.0 |
 | [DSH Activity Tracker](docs/dsh-activity-tracker.md) | DeepSeek Harness Web 的本地活动统计插件 | 扫描本地 DSH 会话，可向 Life Dashboard 推送快照 | v1.6.2 |
 | [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md) | DSH 中转站模型思考强度配置与能力识别 | 读取 OpenAI 兼容 `/models`，写入 DSH 原生 `llm-pi-ai` 设置 | v0.2.0 |
 | [Life Dashboard](docs/life-dashboard.md) | 个人生活中枢与可视化看板 | Authentik、Home Assistant、天气、To Do、AI 与 DSH | v0.10.1 |
@@ -51,6 +51,8 @@ DSH 本地会话 ── Activity Tracker ── Life Dashboard
 
 - 想统计 DSH 使用情况：阅读 [DSH Activity Tracker](docs/dsh-activity-tracker.md)。
 - 想让多个 AI Agent 共用长期记忆：阅读 [Sakura-MCP-Server](docs/sakura-mcp-server.md)。
+- 准备在服务器部署记忆平台：阅读 [Sakura-MCP-Server 生产部署](docs/sakura-mcp-deployment.md)。
+- 需要备份、升级、恢复或排障：阅读 [运维手册](docs/operations.md)。
 - 想配置中转站模型思考强度：阅读 [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md)。
 - 想搭建个人生活看板：阅读 [Life Dashboard](docs/life-dashboard.md)。
 - 想了解樱落工作室的全部站点：阅读 [十站一章](docs/studio-sites.md)。
