@@ -30,4 +30,4 @@ Life Dashboard 的私密配置通过服务器权限网关下发。普通用户�
 - Docker Compose 配置检查通过；
 - Trivy 镜像扫描已执行并审阅报告；当前属于报告模式，不应把基础镜像临时 CVE 与应用依赖漏洞混为一谈；
 - 完成恢复演练，而不只是生成备份文件；
-- 目标 commit 的 GitHub Actions 为绿色。
+- 目标 commit 的 GitHub Actions 为绿色；当前发布版本为 `v0.2.0`，对应主线 commit 为 `b00c2a5`。

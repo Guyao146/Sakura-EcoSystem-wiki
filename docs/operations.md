@@ -127,7 +127,7 @@ docker compose ps
 
 当前 Docker 构建使用 `node:24-bookworm-slim`，运行容器由 Debian `groupadd/useradd` 创建的非 root `mcp` 用户启动。Compose 使用 `pull_policy: build`，代码变更后应执行 `docker compose up -d --build`，不要只执行普通 `restart`。
 
-远程 Compose 部署时，检查 `.env` 中的 `SAKURA_MCP_BUILD_CONTEXT` 与 Compose、环境模板版本一致。若值是 `#main`，升级前先备份，再重新下载 Compose/模板并执行 `docker compose up -d --build`；生产更推荐改成已验证 commit。当前项目没有公开 GHCR 镜像，`image: sakura-mcp-server:latest` 是本机构建结果，不是可直接从 GitHub Container Registry 拉取的镜像。
+远程 Compose 部署时，检查 `.env` 中的 `SAKURA_MCP_BUILD_CONTEXT` 与 Compose、环境模板版本一致。生产环境当前推荐使用 `https://github.com/Guyao146/Sakura-MCP-Server.git#v0.2.0`；升级前先备份，再下载新版本 Compose/模板并执行 `docker compose up -d --build`。当前项目没有公开 GHCR 镜像，`image: sakura-mcp-server:latest` 是本机构建结果，不是可直接从 GitHub Container Registry 拉取的镜像。
 
 ## Worker 运维
 

@@ -1,7 +1,7 @@
 # Sakura-MCP-Server 生产部署
 
 > [!WARNING]
-> 当前 `v0.2.0` 尚未创建正式 Release。生产部署前请固定已验证 commit，先在测试环境完成安装、备份恢复、权限和模型 Provider 演练。
+> `v0.2.0` 已创建正式 Release。生产部署建议固定 `v0.2.0` tag，先在测试环境完成安装、备份恢复、权限和模型 Provider 演练。
 
 ## 推荐拓扑
 
@@ -66,11 +66,10 @@ sudo mkdir -p /opt/sakura-mcp-server
 sudo chown "$USER":"$USER" /opt/sakura-mcp-server
 git clone https://github.com/Guyao146/Sakura-MCP-Server.git /opt/sakura-mcp-server
 cd /opt/sakura-mcp-server
-git checkout main
-git pull --ff-only
+git checkout v0.2.0
 ```
 
-生产部署建议改为固定正式 tag 或经过验证的 commit，不要长期无审查跟随 `main`。
+生产环境使用 `v0.2.0` 或经过 CI 验证的 commit，不要长期无审查跟随 `main`。
 
 ## 只拉取 Compose 的远程编排
 
@@ -79,15 +78,15 @@ git pull --ff-only
 ```bash
 mkdir -p /opt/sakura-mcp-server
 cd /opt/sakura-mcp-server
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/main/docker-compose.yml
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/main/.env.example
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.0/docker-compose.yml
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.0/.env.example
 cp .env.example .env
 ```
 
 编辑 `.env` 填写真实密钥后，设置远程构建上下文：
 
 ```dotenv
-SAKURA_MCP_BUILD_CONTEXT=https://github.com/Guyao146/Sakura-MCP-Server.git#main
+SAKURA_MCP_BUILD_CONTEXT=https://github.com/Guyao146/Sakura-MCP-Server.git#v0.2.0
 ```
 
 准备数据目录并启动：
@@ -102,7 +101,7 @@ docker compose up -d --build
 Docker BuildKit 会从 GitHub 拉取 Dockerfile、源码和数据库迁移文件，不需要服务器执行 `git clone`。生产环境建议固定已验证 commit，而不是长期追踪 `main`：
 
 ```dotenv
-SAKURA_MCP_BUILD_CONTEXT=https://github.com/Guyao146/Sakura-MCP-Server.git#3e66c65
+SAKURA_MCP_BUILD_CONTEXT=https://github.com/Guyao146/Sakura-MCP-Server.git#v0.2.0
 ```
 
 Compose、`.env.example` 和 Git context 必须保持同一版本。当前没有公开 GHCR 预构建镜像，因此不能把 `image: sakura-mcp-server:latest` 当作远程拉取镜像使用；Compose 会按 `pull_policy: build` 从指定 context 构建。
