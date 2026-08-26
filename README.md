@@ -10,7 +10,7 @@
 
 | 项目 | 定位 | 连接方式 | 当前版本 |
 | --- | --- | --- | --- |
-| [Sakura-MCP-Server](docs/sakura-mcp-server.md) | 面向所有兼容 MCP Agent 的多用户长期记忆平台 | MCP、Authentik、pgvector、Provider、Worker、审计和 Web 管理 | `v0.2.0` 已发布；当前 commit `b00c2a5` |
+| [Sakura-MCP-Server](docs/sakura-mcp-server.md) | 面向所有兼容 MCP Agent 的多用户长期记忆平台 | MCP、Authentik、pgvector、Provider、Worker、审计和 Web 管理 | `v0.2.1` 已发布；当前 commit `dca214b` |
 | [DSH Activity Tracker](docs/dsh-activity-tracker.md) | DeepSeek Harness 的本地活动统计与归档恢复插件 | 扫描本地 DSH 会话、查看/恢复归档，并可向 Life Dashboard 推送快照 | v1.7.0 |
 | [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md) | DSH 中转站模型思考强度配置与能力识别 | 读取 OpenAI 兼容 `/models`，写入 DSH 原生 `llm-pi-ai` 设置 | v0.2.0 |
 | [Life Dashboard](docs/life-dashboard.md) | 个人生活中枢与可视化看板 | Authentik、Home Assistant、天气、To Do、AI 与 DSH | v0.10.1 |
@@ -54,9 +54,9 @@ DSH 本地会话 ── Activity Tracker ── Life Dashboard
 - 准备在服务器部署记忆平台：阅读 [Sakura-MCP-Server 生产部署](docs/sakura-mcp-deployment.md)。
 - 需要备份、升级、恢复或排障：阅读 [运维手册](docs/operations.md)。
 
-> Sakura-MCP-Server 当前 `v0.2.0` 已发布。生产部署建议固定 `v0.2.0` tag，并确认对应 GitHub Actions 为绿色。Linux 首次部署可以执行项目内的 `scripts/install.sh`，但仍需配置 Nginx HTTPS 和 `/setup` 安装向导。
+> Sakura-MCP-Server 当前 `v0.2.1` 已发布。生产部署建议固定 `v0.2.1` tag，并确认对应 GitHub Actions 为绿色。Linux 首次部署可以执行项目内的 `scripts/install.sh`，但仍需配置 Nginx HTTPS 和 `/setup` 安装向导。
 
-如果不想克隆完整仓库，可以只下载 `docker-compose.yml` 和 `.env.example`，通过 `SAKURA_MCP_BUILD_CONTEXT` 让 Docker BuildKit 从 GitHub 构建完整服务；详见 [生产部署](docs/sakura-mcp-deployment.md)。当前没有公开 GHCR 预构建镜像。
+生产部署现在可以只下载 `docker-compose.yml` 和 `.env.example`，直接从 GHCR 拉取 `v0.2.1` 多架构生产镜像；本地源码构建使用 `docker-compose.dev.yml`，详见 [生产部署](docs/sakura-mcp-deployment.md)。
 - 想配置中转站模型思考强度：阅读 [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md)。
 - 想搭建个人生活看板：阅读 [Life Dashboard](docs/life-dashboard.md)。
 - 想了解樱落工作室的全部站点：阅读 [十站一章](docs/studio-sites.md)。

@@ -1,7 +1,7 @@
 # Sakura-MCP-Server 生产部署
 
 > [!WARNING]
-> `v0.2.0` 已创建正式 Release。生产部署建议固定 `v0.2.0` tag，先在测试环境完成安装、备份恢复、权限和模型 Provider 演练。
+> `v0.2.1` 已创建正式 Release。生产部署建议固定 `v0.2.1` tag，先在测试环境完成安装、备份恢复、权限和模型 Provider 演练。
 
 ## 推荐拓扑
 
@@ -66,27 +66,27 @@ sudo mkdir -p /opt/sakura-mcp-server
 sudo chown "$USER":"$USER" /opt/sakura-mcp-server
 git clone https://github.com/Guyao146/Sakura-MCP-Server.git /opt/sakura-mcp-server
 cd /opt/sakura-mcp-server
-git checkout v0.2.0
+git checkout v0.2.1
 ```
 
-生产环境使用 `v0.2.0` 或经过 CI 验证的 commit，不要长期无审查跟随 `main`。
+生产环境使用 `v0.2.1` 或经过 CI 验证的 commit，不要长期无审查跟随 `main`。
 
-## 只拉取 Compose 的远程编排
+## 只拉取 Compose 的生产编排
 
-当前项目 Compose 默认使用本地 `build: .`，因此**只下载一个 Compose 文件会缺少 Dockerfile、`src/` 和 `migrations/`，不能直接启动**。仓库已支持通过 `SAKURA_MCP_BUILD_CONTEXT` 指定远程 Git 构建上下文，可以只拉取 Compose 和环境模板：
+当前生产 Compose 默认使用 GHCR 预构建镜像，可以只下载 Compose 和环境模板，不需要克隆源码，也不需要服务器安装 Node.js：
 
 ```bash
 mkdir -p /opt/sakura-mcp-server
 cd /opt/sakura-mcp-server
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.0/docker-compose.yml
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.0/.env.example
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.1/docker-compose.yml
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.1/.env.example
 cp .env.example .env
 ```
 
-编辑 `.env` 填写真实密钥后，设置远程构建上下文：
+编辑 `.env` 填写真实密钥。生产镜像默认是：
 
 ```dotenv
-SAKURA_MCP_BUILD_CONTEXT=https://github.com/Guyao146/Sakura-MCP-Server.git#v0.2.0
+SAKURA_MCP_IMAGE=ghcr.io/guyao146/sakura-mcp-server:0.2.1
 ```
 
 准备数据目录并启动：
@@ -95,16 +95,33 @@ SAKURA_MCP_BUILD_CONTEXT=https://github.com/Guyao146/Sakura-MCP-Server.git#v0.2.
 mkdir -p data
 chmod 700 data
 chmod 600 .env
-docker compose up -d --build
+docker compose pull
+docker compose up -d
 ```
 
-Docker BuildKit 会从 GitHub 拉取 Dockerfile、源码和数据库迁移文件，不需要服务器执行 `git clone`。生产环境建议固定已验证 commit，而不是长期追踪 `main`：
+Compose 会先拉取 PostgreSQL 和 Sakura-MCP-Server 生产镜像，然后启动服务。生产镜像支持：
+
+```text
+linux/amd64
+linux/arm64
+```
+
+如需升级版本，只修改镜像 tag，并确保 Compose、`.env.example` 和镜像版本一致：
 
 ```dotenv
-SAKURA_MCP_BUILD_CONTEXT=https://github.com/Guyao146/Sakura-MCP-Server.git#v0.2.0
+SAKURA_MCP_IMAGE=ghcr.io/guyao146/sakura-mcp-server:0.2.1
 ```
 
-Compose、`.env.example` 和 Git context 必须保持同一版本。当前没有公开 GHCR 预构建镜像，因此不能把 `image: sakura-mcp-server:latest` 当作远程拉取镜像使用；Compose 会按 `pull_policy: build` 从指定 context 构建。
+本地源码构建使用仓库中的开发 Compose 文件：
+
+```bash
+git clone https://github.com/Guyao146/Sakura-MCP-Server.git
+cd Sakura-MCP-Server
+cp .env.example .env
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+```
+
+不要在生产环境把 `SAKURA_MCP_IMAGE` 改成 `latest`；固定正式版本便于回滚和审计。
 
 ## 一键首次部署
 
@@ -124,10 +141,18 @@ chmod +x scripts/install.sh
 4. 生成数据库密码、`SETUP_TOKEN`、`CONFIG_ENCRYPTION_KEY` 和 bootstrap Key；
 5. 创建 `.env` 并设置 `600` 权限；
 6. 创建 `data/` 并设置 `700` 权限；
-7. 执行 `docker compose up -d --build`；
+7. 默认拉取 GHCR 生产镜像并执行 `docker compose up -d`；
 8. 输出安装向导和健康检查地址。
 
 脚本不会打印生成的密钥，也不会覆盖已有 `.env`。首次启动后仍需配置 Nginx HTTPS，再打开 `/setup` 完成 Authentik 和 Provider 设置。脚本必须从仓库根目录执行。
+
+如果要在本地源码构建而不拉取 GHCR，明确传入：
+
+```bash
+./scripts/install.sh https://mcp.example.com --local-build
+```
+
+`--local-build` 使用 `docker-compose.dev.yml`，只适合开发或需要自行构建镜像的环境。
 
 ## 创建 `.env`
 

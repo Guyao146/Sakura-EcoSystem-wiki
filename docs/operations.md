@@ -125,9 +125,9 @@ docker compose ps
 
 数据库迁移按文件名执行，是 forward-only。不要手工删除 `schema_migrations` 记录。应用代码回滚不等于数据库回滚；需要回滚数据库时必须恢复升级前备份。
 
-当前 Docker 构建使用 `node:24-bookworm-slim`，运行容器由 Debian `groupadd/useradd` 创建的非 root `mcp` 用户启动。Compose 使用 `pull_policy: build`，代码变更后应执行 `docker compose up -d --build`，不要只执行普通 `restart`。
+当前生产容器来自 GHCR 版本镜像，内部使用 `node:24-bookworm-slim`，运行容器由 Debian `groupadd/useradd` 创建的非 root `mcp` 用户启动。Compose 使用 `pull_policy: always`，版本升级应执行 `docker compose pull && docker compose up -d`；本地源码构建才使用 `docker-compose.dev.yml`。
 
-远程 Compose 部署时，检查 `.env` 中的 `SAKURA_MCP_BUILD_CONTEXT` 与 Compose、环境模板版本一致。生产环境当前推荐使用 `https://github.com/Guyao146/Sakura-MCP-Server.git#v0.2.0`；升级前先备份，再下载新版本 Compose/模板并执行 `docker compose up -d --build`。当前项目没有公开 GHCR 镜像，`image: sakura-mcp-server:latest` 是本机构建结果，不是可直接从 GitHub Container Registry 拉取的镜像。
+生产 Compose 当前默认使用 `ghcr.io/guyao146/sakura-mcp-server:0.2.1` 多架构镜像。升级前先备份，再下载对应版本的 Compose/模板并执行 `docker compose pull && docker compose up -d`。本地源码构建应使用 `docker-compose.dev.yml`，不要用开发构建覆盖生产镜像。
 
 ## Worker 运维
 

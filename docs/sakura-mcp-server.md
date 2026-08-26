@@ -7,7 +7,7 @@
 [![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 > [!WARNING]
-> `v0.2.0` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
+> `v0.2.1` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
 
 ## 项目定位
 
@@ -26,10 +26,11 @@ Sakura-MCP-Server 是面向所有兼容 Model Context Protocol（MCP）的 AI Ag
 
 | 项目 | 状态 |
 | --- | --- |
-| 仓库版本字段 | `0.2.0` |
-| 最新公开 Release | `v0.2.0` |
-| 当前主线已验证 commit | `b00c2a5` |
-| Docker 运行镜像 | `node:24-bookworm-slim`，非 root `mcp` 用户 |
+| 仓库版本字段 | `0.2.1` |
+| 最新公开 Release | `v0.2.1` |
+| 当前主线已验证 commit | `dca214b` |
+| 生产容器镜像 | `ghcr.io/guyao146/sakura-mcp-server:0.2.1` |
+| Docker 运行镜像 | GHCR 多架构镜像，内部使用 `node:24-bookworm-slim` 和非 root `mcp` 用户 |
 | 开发分支 | 直接使用 `main` |
 | MCP Transport | Streamable HTTP，路径 `/mcp` |
 | 数据库 | PostgreSQL 16 + pgvector |
@@ -347,4 +348,4 @@ CI 会执行：
 6. Docker Compose 配置检查；
 7. Trivy HIGH/CRITICAL 镜像扫描（当前报告模式，不因基础镜像上游临时 CVE 阻塞应用测试；生产依赖审计仍是阻塞检查）。
 
-最新 Release：[`v0.2.0`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.2.0)，包含 `sakura-mcp-server-0.2.0.tgz`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball 和 GitHub Release。正式部署前应确认对应 commit 的 CI 为绿色。
+最新 Release：[`v0.2.1`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.2.1)，包含 `sakura-mcp-server-0.2.1.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.2.1`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
