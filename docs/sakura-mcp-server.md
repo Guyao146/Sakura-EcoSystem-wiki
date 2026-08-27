@@ -7,7 +7,7 @@
 [![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 > [!WARNING]
-> `v0.2.1` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
+> `v0.2.21` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
 
 ## 项目定位
 
@@ -26,18 +26,18 @@ Sakura-MCP-Server 是面向所有兼容 Model Context Protocol（MCP）的 AI Ag
 
 | 项目 | 状态 |
 | --- | --- |
-| 仓库版本字段 | `0.2.1` |
-| 最新公开 Release | `v0.2.1` |
-| 当前主线已验证 commit | `dca214b` |
-| 生产容器镜像 | `ghcr.io/guyao146/sakura-mcp-server:0.2.1` |
+| 仓库版本字段 | `0.2.21` |
+| 最新公开 Release | `v0.2.21` |
+| 当前主线已验证 commit | `04cc0b8` |
+| 生产容器镜像 | `ghcr.io/guyao146/sakura-mcp-server:0.2.21` |
 | Docker 运行镜像 | GHCR 多架构镜像，内部使用 `node:24-bookworm-slim` 和非 root `mcp` 用户 |
 | 开发分支 | 直接使用 `main` |
-| MCP Transport | Streamable HTTP，路径 `/mcp` |
+| MCP Transport | Streamable HTTP，推荐根域名 `/`，兼容 `/mcp` |
 | 数据库 | PostgreSQL 16 + pgvector |
-| 登录 | Authentik Authorization Code + PKCE |
+| 登录 | 默认 Authentik Authorization Code + PKCE；可选私有网络 `AUTH=false` |
 | Agent 认证 | 数据库 API Key 或 Authentik JWT |
 | 管理后台 | `/admin` |
-| 安装向导 | `/setup` |
+| 安装向导 | `/setup`，自动诊断、OpenID Discovery 和 Public Client 预检 |
 
 实现变化以后，以项目仓库的 `README.md`、`CHANGELOG.md`、迁移文件和 GitHub Actions 为最终依据。
 
@@ -287,6 +287,37 @@ memory://memories/{memoryId}
 
 登录使用 Authentik Authorization Code + PKCE。Session Cookie 使用 HttpOnly、SameSite=Lax，HTTPS 下同时使用 Secure；数据库只保存 Session Token 哈希。所有写请求还需要与 Session 绑定的 HMAC-SHA256 CSRF Token。
 
+### Authentik 自动发现与修复
+
+安装向导可以只填写 Authentik HTTPS 根地址和应用 Slug，然后从：
+
+```text
+/application/o/<slug>/.well-known/openid-configuration
+```
+
+自动回填 Issuer、JWKS、Authorization、Token 和 UserInfo 端点。Audience 与 Client ID 仍需手工填写。
+
+完成安装前，服务会使用无效授权码和 PKCE verifier 对 Token Endpoint 做安全预检：
+
+- `invalid_grant`：Public Client 身份验证方式正确；
+- `invalid_client`：Client 类型、Client ID 或认证方法错误，阻止完成安装。
+
+如果错误配置导致管理员无法登录，可以先在网络层只允许管理员来源，临时设置 `AUTH=false`，进入管理后台“身份认证”页面测试并保存正确配置，再恢复 `AUTH=true`。恢复模式会暂时让所有访问者拥有系统管理员权限，禁止在未限制访问的公网使用。
+
+### 可选无认证模式
+
+私有单用户环境可以设置：
+
+```dotenv
+AUTH=false
+```
+
+服务会跳过 Authentik 步骤，创建稳定的本地管理员身份，根域名和 `/mcp` 不要求 Authorization Header。此模式等同于把完整管理员权限授予所有网络访问者，只允许用于已经由防火墙、VPN 或反向代理白名单隔离的网络。
+
+### 版本检查
+
+管理后台显示当前运行版本。系统管理员可以检查 GitHub 最新 Release；结果缓存 15 分钟，也可以强制刷新。检查只读取公开 Release API，不执行自动升级。
+
 ## 安装、部署与运维
 
 - [生产部署指南](sakura-mcp-deployment.md)
@@ -297,12 +328,14 @@ memory://memories/{memoryId}
 
 | 路径 | 作用 |
 | --- | --- |
-| `/mcp` | MCP Streamable HTTP |
+| `/` | 推荐 MCP Streamable HTTP；浏览器 GET 自动跳转安装/管理页 |
+| `/mcp` | 旧客户端兼容 MCP 地址 |
 | `/setup` | 首次安装向导 |
 | `/admin` | Web 管理后台 |
 | `/auth/login` | Authentik 登录 |
 | `/health` | PostgreSQL、pgvector、安装和 Worker 健康 |
-| `/.well-known/oauth-protected-resource/mcp` | RFC 9728 发现 |
+| `/.well-known/oauth-protected-resource` | 根域名 RFC 9728 发现 |
+| `/.well-known/oauth-protected-resource/mcp` | 兼容 `/mcp` 的发现地址 |
 
 ## 安全边界
 
@@ -348,4 +381,4 @@ CI 会执行：
 6. Docker Compose 配置检查；
 7. Trivy HIGH/CRITICAL 镜像扫描（当前报告模式，不因基础镜像上游临时 CVE 阻塞应用测试；生产依赖审计仍是阻塞检查）。
 
-最新 Release：[`v0.2.1`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.2.1)，包含 `sakura-mcp-server-0.2.1.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.2.1`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
+最新 Release：[`v0.2.21`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.2.21)，包含 `sakura-mcp-server-0.2.21.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.2.21`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。

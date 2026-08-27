@@ -14,7 +14,7 @@ Life Dashboard 的私密配置通过服务器权限网关下发。普通用户�
 - Authentik Access Token 必须验证 issuer、audience、过期时间和 JWKS 签名，不能透传给模型 Provider。
 - OpenAI-compatible API Key 使用服务器 `CONFIG_ENCRYPTION_KEY` 进行 AES-256-GCM 加密；浏览器和 Agent 不应读取密钥明文。
 - `CONFIG_ENCRYPTION_KEY` 必须离线备份并限制文件权限。丢失后应轮换 Provider Key，而不是尝试绕过加密。
-- 首次安装接口由 `SETUP_TOKEN` 保护；安装完成后写接口必须锁定，不能提供远程恢复出厂设置。
+- 首次安装不再要求 `SETUP_TOKEN`；未安装阶段任何能访问 `/setup` 的人都可发起安装，因此公网部署必须临时限制 `/setup` 和 `/api/setup/` 的来源，安装完成后写接口永久锁定。
 - 高敏感空间应优先使用本地 Ollama，或关闭自动提取；发送到外部模型前必须得到空间策略授权。
 - 删除分为软删除和永久删除；永久删除需要管理员权限，并应进入审计记录。
 - Web 登录使用 Authorization Code + PKCE；Session Token 只保存哈希，写请求还必须验证 Session 绑定的 CSRF Token。
@@ -30,4 +30,5 @@ Life Dashboard 的私密配置通过服务器权限网关下发。普通用户�
 - Docker Compose 配置检查通过；
 - Trivy 镜像扫描已执行并审阅报告；当前属于报告模式，不应把基础镜像临时 CVE 与应用依赖漏洞混为一谈；
 - 完成恢复演练，而不只是生成备份文件；
-- 目标 commit 的 GitHub Actions 为绿色；当前发布版本为 `v0.2.1`，对应主线 commit 为 `dca214b`，生产镜像来自 GHCR 版本 tag。
+- `AUTH=false` 只允许用于受防火墙、VPN 或反向代理白名单保护的私有网络；该模式会让所有网络访问者获得本地系统管理员权限。
+- 目标 commit 的 GitHub Actions 为绿色；当前发布版本为 `v0.2.21`，对应主线 commit 为 `04cc0b8`，生产镜像来自 GHCR 版本 tag。

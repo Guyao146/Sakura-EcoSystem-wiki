@@ -20,7 +20,7 @@
 
 NAT 后无需向本地开发机开放端口，因为连接方向是本地插件主动访问远端服务器。
 
-Sakura-MCP-Server 与现有 DSH、Life Dashboard 链路没有强制依赖。它是可独立部署的通用记忆服务：Agent 直接连接 `/mcp`；未来 DSH、Life Dashboard 或其他项目可以作为 Connector，把经过用户授权的摘要转换为统一记忆，而不是让记忆核心反向持有各业务系统的全部权限。
+Sakura-MCP-Server 与现有 DSH、Life Dashboard 链路没有强制依赖。它是可独立部署的通用记忆服务：Agent 推荐直接连接公网根域名，旧客户端仍可使用 `/mcp`；未来 DSH、Life Dashboard 或其他项目可以作为 Connector，把经过用户授权的摘要转换为统一记忆，而不是让记忆核心反向持有各业务系统的全部权限。
 
 ## 通用记忆链路
 

@@ -54,9 +54,20 @@ chmod 600 backups/*.dump
 .env
 /etc/nginx/sites-available/sakura-mcp
 CONFIG_ENCRYPTION_KEY 的离线副本
+Compose 命名卷 `sakura-mcp-server_runtime-secrets`（无 `.env` 部署）
 ```
 
 只有数据库备份而没有 `CONFIG_ENCRYPTION_KEY`，无法解密 Provider Key。
+
+无 `.env` Compose 部署的密钥位于 `runtime-secrets` 卷。升级时不要执行 `docker compose down -v`，否则会同时删除运行密钥和 PostgreSQL 数据卷。
+
+可以检查命名卷：
+
+```bash
+docker volume ls | grep sakura-mcp-server
+```
+
+至少应保留 `sakura-mcp-server_postgres-data` 和 `sakura-mcp-server_runtime-secrets`。迁移到新服务器时，除数据库备份外，还必须安全迁移 `runtime-secrets` 中的 `CONFIG_ENCRYPTION_KEY`，或使用原 `.env` 中的同一密钥重新配置。
 
 ### 建议保留策略
 
@@ -110,9 +121,9 @@ cp .env "backups/env-$(date +%F-%H%M)"
 升级：
 
 ```bash
-git fetch --tags
-git pull --ff-only
-docker compose up -d --build
+# 下载目标版本的 docker-compose.yml；仓库部署则切换对应 tag
+docker compose pull
+docker compose up -d
 docker compose logs -f --tail=100 sakura-mcp
 ```
 
@@ -125,9 +136,30 @@ docker compose ps
 
 数据库迁移按文件名执行，是 forward-only。不要手工删除 `schema_migrations` 记录。应用代码回滚不等于数据库回滚；需要回滚数据库时必须恢复升级前备份。
 
+### 从 `v0.2.1` 升级到 `v0.2.21`
+
+这是一次结构性升级，不能只替换版本号：
+
+- 宿主端口默认从 `3000` 改为 `3001`（`MCP_HOST_PORT`）。更新反向代理 `proxy_pass` 目标和防火墙规则，容器内部仍监听 3000。
+- 推荐 MCP 地址从 `/mcp` 改为公网根域名；`/mcp` 保留兼容。更新 Agent 配置时优先使用根域名。
+- Compose 可以无 `.env` 启动，一次性 `bootstrap-secrets` 生成并持久化 `runtime-secrets` 卷。升级已有 `.env` 部署时保留原 `.env`，不要执行 `docker compose down -v`。
+- 首次安装不再需要 `SETUP_TOKEN`；旧 `.env` 中的 `SETUP_TOKEN` 会被忽略，可以保留或删除。
+- GHCR 镜像固定为 `ghcr.io/guyao146/sakura-mcp-server:0.2.21`，不要使用 `latest`。
+- 确认认证模式：公网必须保持 `AUTH=true`；`AUTH=false` 仅限已隔离的私有网络。
+
+升级步骤：
+
+```bash
+# 备份数据库和 .env，见上文
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.21/docker-compose.yml
+docker compose pull
+docker compose up -d
+curl -fsS https://mcp.example.com/health
+```
+
 当前生产容器来自 GHCR 版本镜像，内部使用 `node:24-bookworm-slim`，运行容器由 Debian `groupadd/useradd` 创建的非 root `mcp` 用户启动。Compose 使用 `pull_policy: always`，版本升级应执行 `docker compose pull && docker compose up -d`；本地源码构建才使用 `docker-compose.dev.yml`。
 
-生产 Compose 当前默认使用 `ghcr.io/guyao146/sakura-mcp-server:0.2.1` 多架构镜像。升级前先备份，再下载对应版本的 Compose/模板并执行 `docker compose pull && docker compose up -d`。本地源码构建应使用 `docker-compose.dev.yml`，不要用开发构建覆盖生产镜像。
+生产 Compose 当前默认使用 `ghcr.io/guyao146/sakura-mcp-server:0.2.21` 多架构镜像。升级前先备份，再下载对应版本的 Compose/模板并执行 `docker compose pull && docker compose up -d`。管理后台会显示当前版本，并允许系统管理员检查 GitHub 最新 Release，但不会自动执行升级。本地源码构建应使用 `docker-compose.dev.yml`，不要用开发构建覆盖生产镜像。
 
 ## Worker 运维
 
@@ -176,9 +208,9 @@ chmod 700 data
 
 在管理后台更新 Provider Key。新值会使用 AES-256-GCM 加密保存，旧值不返回浏览器。
 
-### Setup Token
+### 首次安装入口
 
-安装完成以后 Setup 写接口已经锁定。仍可轮换 `.env` 中的 `SETUP_TOKEN`，但它不能重新打开向导。
+当前版本不再使用 `SETUP_TOKEN`。安装完成后 Setup 写接口永久锁定；未安装阶段应在 Nginx、VPN 或防火墙中限制 `/setup` 和 `/api/setup/`，并尽快完成安装。
 
 ### CONFIG_ENCRYPTION_KEY
 
@@ -202,14 +234,13 @@ docker compose logs sakura-mcp
 - 数据卷权限或空间不足；
 - 数据库迁移失败。
 
-### 安装 Token 无效
+### 安装页面无法检查环境
+
+检查 `/assets/setup.js` 和 `/api/setup/status` 是否被 Nginx 正确代理到 `127.0.0.1:3001`。修改 Compose 环境变量后需要执行：
 
 ```bash
-grep '^SETUP_TOKEN=' .env
 docker compose up -d --force-recreate sakura-mcp
 ```
-
-修改 `.env` 后必须重新创建容器。
 
 ### Authentik callback 失败
 
@@ -221,6 +252,15 @@ docker compose up -d --force-recreate sakura-mcp
 - Issuer 和 Client ID；
 - JWKS URI 是否来自 Discovery；
 - 服务器时间。
+
+错误信息会显示经过限制和清理的 OAuth `error` / `error_description`：
+
+- `invalid_client`：检查 Provider 是否为 Public、Client ID 和客户端认证方法；
+- `invalid_grant`：检查回调地址，并从 `/auth/login` 重新发起登录，不能刷新旧 callback URL。
+
+如果完全无法登录，先限制管理端来源，再临时设置 `AUTH=false`，进入 `/admin` 的“身份认证”页测试并保存，随后恢复 `AUTH=true`。
+
+安装向导和身份认证页会执行 Public Client + PKCE 预检：只有预期的 `invalid_grant` 代表客户端身份方式正确；`invalid_client` 表示 Provider 不是 Public Client、Client ID 错误或认证方法不兼容。
 
 ```bash
 timedatectl status
