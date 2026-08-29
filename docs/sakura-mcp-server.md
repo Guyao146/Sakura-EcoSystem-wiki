@@ -7,7 +7,7 @@
 [![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 > [!WARNING]
-> `v0.2.21` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
+> `v0.2.28` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
 
 ## 项目定位
 
@@ -26,16 +26,18 @@ Sakura-MCP-Server 是面向所有兼容 Model Context Protocol（MCP）的 AI Ag
 
 | 项目 | 状态 |
 | --- | --- |
-| 仓库版本字段 | `0.2.21` |
-| 最新公开 Release | `v0.2.21` |
-| 当前主线已验证 commit | `04cc0b8` |
-| 生产容器镜像 | `ghcr.io/guyao146/sakura-mcp-server:0.2.21` |
+| 仓库版本字段 | `0.2.28` |
+| 最新公开 Release | `v0.2.28` |
+| 当前主线已验证 commit | 以 GitHub `main` 最新绿色 CI 为准 |
+| 生产容器镜像 | `ghcr.io/guyao146/sakura-mcp-server:0.2.28` |
 | Docker 运行镜像 | GHCR 多架构镜像，内部使用 `node:24-bookworm-slim` 和非 root `mcp` 用户 |
 | 开发分支 | 直接使用 `main` |
 | MCP Transport | Streamable HTTP，推荐根域名 `/`，兼容 `/mcp` |
 | 数据库 | PostgreSQL 16 + pgvector |
-| 登录 | 默认 Authentik Authorization Code + PKCE；可选私有网络 `AUTH=false` |
-| Agent 认证 | 数据库 API Key 或 Authentik JWT |
+| 登录 | 默认 Authentik Authorization Code + PKCE，含独立登录页与 RP-Initiated Logout；可选私有网络 `AUTH=false` |
+| Agent 认证 | 数据库 API Key 或 Authentik JWT；Key 可随时查看（AES-256-GCM 加密副本） |
+| 管理员判定 | Authentik 超级用户（内置 `authentik Admins` 组）自动为系统管理员；可自定义管理员用户组 |
+| 模型 Provider | 对话与向量（Embedding）可分别指向不同的 OpenAI-compatible 端点 |
 | 管理后台 | `/admin` |
 | 安装向导 | `/setup`，自动诊断、OpenID Discovery 和 Public Client 预检 |
 
@@ -381,4 +383,24 @@ CI 会执行：
 6. Docker Compose 配置检查；
 7. Trivy HIGH/CRITICAL 镜像扫描（当前报告模式，不因基础镜像上游临时 CVE 阻塞应用测试；生产依赖审计仍是阻塞检查）。
 
-最新 Release：[`v0.2.21`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.2.21)，包含 `sakura-mcp-server-0.2.21.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.2.21`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
+最新 Release：[`v0.2.28`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.2.28)，包含 `sakura-mcp-server-0.2.28.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.2.28`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
+
+## 0.2.22 – 0.2.28 变更要点
+
+这一段的迭代集中在 Authentik 认证体验和向量 Provider：
+
+| 版本 | 要点 |
+| --- | --- |
+| 0.2.22 | 新增独立的向量（Embedding）Provider，可指向与对话不同的 OpenAI-compatible 端点，支持 `EMBEDDING_BASE_URL`/`EMBEDDING_API_KEY`/`EMBEDDING_MODEL`；向量与抽取失败时附带上游错误正文 |
+| 0.2.23 | 安装向导拆分对话与向量模型配置，新增「同站配置」勾选框 |
+| 0.2.24 | 支持 OIDC RP-Initiated Logout，退出时跳转 Authentik `end_session_endpoint`，避免被 SSO 静默续登 |
+| 0.2.25 | 新增独立登录页 `/auth/login`，退出后停在自己的登录页而非直接静默回后台 |
+| 0.2.26 | 支持通过 Authentik 用户组授予系统管理员（`groups` 声明），可用 `groupsClaim` 自定义声明字段 |
+| 0.2.27 | Authentik 超级用户（内置 `authentik Admins` 组）默认即系统管理员，无需额外配置；修正 0.2.26 误请求的 `groups` scope |
+| 0.2.28 | Agent 密钥改为可随时查看：创建时用 `CONFIG_ENCRYPTION_KEY` 以 AES-256-GCM 加密保存 token 副本，认证仍只比对 SHA-256 哈希，每次查看写审计日志 |
+
+升级注意：
+
+- 使用用户组授权管理员时，需在 Authentik 的 OAuth2/OIDC Provider Scopes 中加入 `groups` 属性映射（`authentik default OAuth Mapping: OpenID 'groups'`）。
+- 使用 RP-Initiated Logout 时，需把 `https://<MCP 域名>/auth/login` 加入 Authentik 的 post-logout redirect URI。
+- `0.2.28` 之前创建的 Agent Key 没有加密副本，无法再次查看，需撤销后重新创建。

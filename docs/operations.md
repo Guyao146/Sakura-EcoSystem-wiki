@@ -136,22 +136,24 @@ docker compose ps
 
 数据库迁移按文件名执行，是 forward-only。不要手工删除 `schema_migrations` 记录。应用代码回滚不等于数据库回滚；需要回滚数据库时必须恢复升级前备份。
 
-### 从 `v0.2.1` 升级到 `v0.2.21`
+### 从旧版本升级到 `v0.2.28`
 
-这是一次结构性升级，不能只替换版本号：
+从 `v0.2.1` 起这是一次结构性升级，不能只替换版本号：
 
 - 宿主端口默认从 `3000` 改为 `3001`（`MCP_HOST_PORT`）。更新反向代理 `proxy_pass` 目标和防火墙规则，容器内部仍监听 3000。
 - 推荐 MCP 地址从 `/mcp` 改为公网根域名；`/mcp` 保留兼容。更新 Agent 配置时优先使用根域名。
 - Compose 可以无 `.env` 启动，一次性 `bootstrap-secrets` 生成并持久化 `runtime-secrets` 卷。升级已有 `.env` 部署时保留原 `.env`，不要执行 `docker compose down -v`。
 - 首次安装不再需要 `SETUP_TOKEN`；旧 `.env` 中的 `SETUP_TOKEN` 会被忽略，可以保留或删除。
-- GHCR 镜像固定为 `ghcr.io/guyao146/sakura-mcp-server:0.2.21`，不要使用 `latest`。
+- `0.2.28` 起数据库迁移到 `008_agent_secret_reveal.sql`，为 Agent Key 增加加密副本列。迁移是 forward-only，升级前务必备份。
+- GHCR 镜像固定为 `ghcr.io/guyao146/sakura-mcp-server:0.2.28`，不要使用 `latest`。
 - 确认认证模式：公网必须保持 `AUTH=true`；`AUTH=false` 仅限已隔离的私有网络。
+- 若使用 Authentik 用户组授权管理员，需在 Provider Scopes 中加入 `groups` 属性映射；使用 RP-Initiated Logout 需把 `/auth/login` 加入 post-logout redirect URI。
 
 升级步骤：
 
 ```bash
 # 备份数据库和 .env，见上文
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.21/docker-compose.yml
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.28/docker-compose.yml
 docker compose pull
 docker compose up -d
 curl -fsS https://mcp.example.com/health
@@ -159,7 +161,7 @@ curl -fsS https://mcp.example.com/health
 
 当前生产容器来自 GHCR 版本镜像，内部使用 `node:24-bookworm-slim`，运行容器由 Debian `groupadd/useradd` 创建的非 root `mcp` 用户启动。Compose 使用 `pull_policy: always`，版本升级应执行 `docker compose pull && docker compose up -d`；本地源码构建才使用 `docker-compose.dev.yml`。
 
-生产 Compose 当前默认使用 `ghcr.io/guyao146/sakura-mcp-server:0.2.21` 多架构镜像。升级前先备份，再下载对应版本的 Compose/模板并执行 `docker compose pull && docker compose up -d`。管理后台会显示当前版本，并允许系统管理员检查 GitHub 最新 Release，但不会自动执行升级。本地源码构建应使用 `docker-compose.dev.yml`，不要用开发构建覆盖生产镜像。
+生产 Compose 当前默认使用 `ghcr.io/guyao146/sakura-mcp-server:0.2.28` 多架构镜像。升级前先备份，再下载对应版本的 Compose/模板并执行 `docker compose pull && docker compose up -d`。管理后台会显示当前版本，并允许系统管理员检查 GitHub 最新 Release，但不会自动执行升级。本地源码构建应使用 `docker-compose.dev.yml`，不要用开发构建覆盖生产镜像。
 
 ## Worker 运维
 

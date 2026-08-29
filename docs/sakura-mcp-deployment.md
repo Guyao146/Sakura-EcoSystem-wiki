@@ -1,7 +1,7 @@
 # Sakura-MCP-Server 生产部署
 
 > [!WARNING]
-> `v0.2.21` 已创建正式 Release。生产部署建议固定 `v0.2.21` tag，先在测试环境完成安装、备份恢复、权限和模型 Provider 演练。
+> `v0.2.28` 已创建正式 Release。生产部署建议固定 `v0.2.28` tag，先在测试环境完成安装、备份恢复、权限和模型 Provider 演练。
 
 ## 推荐拓扑
 
@@ -66,10 +66,10 @@ sudo mkdir -p /opt/sakura-mcp-server
 sudo chown "$USER":"$USER" /opt/sakura-mcp-server
 git clone https://github.com/Guyao146/Sakura-MCP-Server.git /opt/sakura-mcp-server
 cd /opt/sakura-mcp-server
-git checkout v0.2.21
+git checkout v0.2.28
 ```
 
-生产环境使用 `v0.2.21` 或经过 CI 验证的 commit，不要长期无审查跟随 `main`。
+生产环境使用 `v0.2.28` 或经过 CI 验证的 commit，不要长期无审查跟随 `main`。
 
 ## 只拉取 Compose 的生产编排
 
@@ -78,15 +78,15 @@ git checkout v0.2.21
 ```bash
 mkdir -p /opt/sakura-mcp-server
 cd /opt/sakura-mcp-server
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.21/docker-compose.yml
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.21/.env.example
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.28/docker-compose.yml
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.28/.env.example
 cp .env.example .env
 ```
 
 编辑 `.env` 填写真实密钥。生产镜像默认是：
 
 ```dotenv
-SAKURA_MCP_IMAGE=ghcr.io/guyao146/sakura-mcp-server:0.2.21
+SAKURA_MCP_IMAGE=ghcr.io/guyao146/sakura-mcp-server:0.2.28
 ```
 
 准备数据目录并启动：
@@ -109,7 +109,7 @@ linux/arm64
 如需升级版本，只修改镜像 tag，并确保 Compose、`.env.example` 和镜像版本一致：
 
 ```dotenv
-SAKURA_MCP_IMAGE=ghcr.io/guyao146/sakura-mcp-server:0.2.21
+SAKURA_MCP_IMAGE=ghcr.io/guyao146/sakura-mcp-server:0.2.28
 ```
 
 本地源码构建使用仓库中的开发 Compose 文件：
@@ -125,12 +125,12 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
 
 ## 无 `.env` 直接启动
 
-`v0.2.21` 的生产 Compose 可以在空目录中只放一个 `docker-compose.yml`，然后直接启动：
+`v0.2.28` 的生产 Compose 可以在空目录中只放一个 `docker-compose.yml`，然后直接启动：
 
 ```bash
 mkdir -p /opt/sakura-mcp-server
 cd /opt/sakura-mcp-server
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.21/docker-compose.yml
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.28/docker-compose.yml
 mkdir -p data && chmod 700 data
 docker compose up -d
 ```

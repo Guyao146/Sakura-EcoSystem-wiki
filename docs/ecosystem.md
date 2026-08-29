@@ -10,6 +10,8 @@
 
 `dsh-better-model-thinking-control` 关注“模型如何思考”：它读取 OpenAI 兼容中转站的模型能力，把思考档位映射到 DSH 原生 `llm-pi-ai` 设置。它不参与 Activity Tracker 的会话解析，也不改变 Life Dashboard 的推送链路。
 
+`dsh-windows-tool-fix` 关注“命令如何在 Windows 上执行”：它通过 DSH profile patch 把 `minimal-gitbash` 设为默认 Agent preset，绕开 Windows 不支持的持久 PTY 检查。它是三个 DSH 插件中唯一处理执行层的，不解析会话也不读取模型能力。
+
 `Local Model Gateway` 关注“请求发往哪个上游”：它在本机聚合多个中转站，为所有本地 AI 客户端提供统一的 OpenAI/Anthropic/Responses 入口，并负责协议转换、路由轮询、熔断降级、限流和用量统计。上游只配置一次，客户端不再各自维护一份中转站清单。
 
 ## 集成链路
@@ -44,6 +46,7 @@ Sakura-MCP-Server 与现有 DSH、Life Dashboard 链路没有强制依赖。它�
 | 向当前会话发送消息 | Life Dashboard → DSH | 管理员、已授权且运行中的会话 |
 | 查看和恢复已归档对话 | DSH Activity Tracker | 本机 `archivedSessionIds` 与仍存在的会话日志 |
 | 模型思考档位 | DSH Better Model Thinking Control | DSH 原生 `llm-pi-ai` 与中转站 `/models` 能力元数据 |
+| Windows 默认 Agent preset | DSH Windows Tool Fix | DSH profile 的 `agent-presets` 默认值 |
 | 本地多上游转发与轮询 | Local Model Gateway | 经过网关的模型请求与上游站点配置 |
 | 网关级用量与请求日志 | Local Model Gateway | 脱敏元数据与 Token 计数，不含请求正文 |
 | 跨 Agent 长期记忆 | Sakura-MCP-Server | 当前用户有权访问的个人或共享空间 |

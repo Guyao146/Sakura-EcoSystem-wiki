@@ -1,6 +1,6 @@
 # DSH Better Model Thinking Control
 
-仓库：[Guyao146/dsh-better-model-thinking-control](https://github.com/Guyao146/dsh-better-model-thinking-control) · 许可证 `LGPL-v2.0`
+仓库：[Guyao146/dsh-better-model-thinking-control](https://github.com/Guyao146/dsh-better-model-thinking-control) · 当前版本 `0.2.9` · 许可证见下方说明
 
 [![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
 [![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-4c7dff)](https://github.com/deepseek-ai/deepseek-harness)
@@ -25,10 +25,12 @@ reasoningEfforts:
 ## 功能概览
 
 - 在 DSH 设置侧栏增加独立的 **模型思考强度** 页面。
-- 按中转站展开和收起配置。
-- 通过下拉多选为每个模型配置 `Off`、`Minimal`、`Low`、`Medium`、`High`、`XHigh`、`Max`。
-- 支持将模型标记为**非推理模型**。
-- 模型 ID、思考强度下拉框和删除按钮使用同一行对齐布局，中转站各自使用独立分组框。
+- 按中转站展开和收起配置，中转站默认全部收起。
+- 通过下拉多选为每个模型配置 `Off`、`Minimal`、`Low`、`Medium`、`High`、`XHigh`、`Max`、`Ultra`。
+- 支持将模型标记为**非推理模型**（已收进思考档位菜单）。
+- 每个模型可选择文字、图片、视频、语音输入模态；未配置时默认文字。
+- 支持设置页模型搜索，以及主页面模型菜单搜索。
+- 模型 ID、思考档位下拉框、输入模态和删除按钮使用网格对齐布局，中转站各自使用独立分组框。
 - 自动请求中转站的 OpenAI 兼容 `GET /models` 接口。
 - 识别 `reasoning_efforts`、`supported_reasoning_efforts`、`thinking_levels`、`reasoning.efforts`、`thinking.levels` 等常见字段。
 - 保留中转站自定义请求值，例如把 DSH 的 `high` 映射为网关实际接受的 `default`。
@@ -36,6 +38,8 @@ reasoningEfforts:
 - 支持临时填写一次性 API Key；该 Key 不会写入插件配置或 DSH credentials。
 - 支持通过 DSH credentials 引用读取已经保存的凭据。
 - 支持手动添加、编辑、删除模型，以及撤销未保存修改。
+
+输入模态是插件侧的能力标记，实际附件输入仍取决于 DSH 和模型适配器的支持；模态选择保存在插件的浏览器本地配置中，不写入 `llm-pi-ai`。
 
 ## 适用范围与限制
 
@@ -62,7 +66,7 @@ reasoningEfforts:
 
 ```bash
 npm pack
-dsh plugin --profile web add "file:./dsh-better-model-thinking-control-0.2.0.tgz"
+dsh plugin --profile web add "file:./dsh-better-model-thinking-control-0.2.9.tgz"
 ```
 
 安装后重启 DSH Web，入口位于：
@@ -239,7 +243,7 @@ Content-Type: application/json
 - 安装后完整重启 DSH；
 - 确认 DSH 已启用 `llm-pi-ai`；
 - 确认当前环境会加载 Web 客户端插件；
-- 检查插件版本是否为 `0.2.0` 或更高。
+- 检查插件版本是否为 `0.2.9` 或更高。
 
 ### 页面提示未检测到 `llm-pi-ai`
 
@@ -333,7 +337,16 @@ GitHub Actions 在推送 `main` 后会使用 Node.js 22 执行测试、`npm pack
 - `0.1.7`：自动识别说明移到总标题下方；
 - `0.1.8`：档位复选区域改为下拉多选；
 - `0.1.9`：模型 ID、强度下拉和删除按钮改为同一行，非推理模型移入下拉菜单；
-- `0.2.0`：移除最外层卡片边框，只保留中转站分组框，并固定三项控件的对齐布局。
+- `0.2.0`：移除最外层卡片边框，只保留中转站分组框，并固定三项控件的对齐布局；
+- `0.2.1`：新增每模型输入模态选择（文字默认勾选，可选图片/视频/语音），保存在插件本地；
+- `0.2.2`：新增设置页与主页面模型搜索；模型行改为两行布局（模型名/删除、思考档位/输入模态）；
+- `0.2.3`：修正主页面模型搜索菜单样式，保持对 DSH 原生选择逻辑的兼容；
+- `0.2.4`：用统一三列网格对齐模型名、删除、思考档位与输入模态；
+- `0.2.5`：新增 `Ultra` 档位，自动拉取保留网关返回的档位和模态，中转站默认全部收起；
+- `0.2.6`：修正新增模型的 Ultra 默认档位；
+- `0.2.7`：自动拉取同时补全网关和 DSH 本地目录提供的档位与输入模态；
+- `0.2.8`：改用严格两列网格对齐；
+- `0.2.9`：恢复紧凑的模型名/删除布局，将非推理模型纳入思考档位菜单，两个下拉菜单互斥避免重叠（当前版本）。
 
 ## 维护建议
 
