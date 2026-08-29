@@ -13,6 +13,7 @@
 | [Sakura-MCP-Server](docs/sakura-mcp-server.md) | 面向所有兼容 MCP Agent 的多用户长期记忆平台 | MCP、Authentik、pgvector、Provider、Worker、审计和 Web 管理 | `v0.2.21` 已发布；当前 commit `04cc0b8` |
 | [DSH Activity Tracker](docs/dsh-activity-tracker.md) | DeepSeek Harness 的本地活动统计与归档恢复插件 | 扫描本地 DSH 会话、查看/恢复归档，并可向 Life Dashboard 推送快照 | v1.7.0 |
 | [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md) | DSH 中转站模型思考强度配置与能力识别 | 读取 OpenAI 兼容 `/models`，写入 DSH 原生 `llm-pi-ai` 设置 | v0.2.0 |
+| [Local Model Gateway](docs/local-model-gateway.md) | 本机多上游模型聚合网关 | OpenAI/Anthropic/Responses 协议互转、路由轮询、熔断限流与用量统计 | v0.1.0 |
 | [Life Dashboard](docs/life-dashboard.md) | 个人生活中枢与可视化看板 | Authentik、Home Assistant、天气、To Do、AI 与 DSH | v0.10.1 |
 
 ## 工作室网站群
@@ -58,6 +59,7 @@ DSH 本地会话 ── Activity Tracker ── Life Dashboard
 
 生产部署可以只下载 `docker-compose.yml`，直接从 GHCR 拉取 `v0.2.21` 多架构镜像；一次性 `bootstrap-secrets` 容器会生成持久化密钥。本地源码构建使用 `docker-compose.dev.yml`，详见 [生产部署](docs/sakura-mcp-deployment.md)。
 - 想配置中转站模型思考强度：阅读 [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md)。
+- 想让多个本地 AI 客户端共用一套中转站配置：阅读 [Local Model Gateway](docs/local-model-gateway.md)。
 - 想搭建个人生活看板：阅读 [Life Dashboard](docs/life-dashboard.md)。
 - 想了解樱落工作室的全部站点：阅读 [十站一章](docs/studio-sites.md)。
 

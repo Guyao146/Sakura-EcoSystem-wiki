@@ -7,6 +7,7 @@
     - [运维与排障](docs/operations.md)
   - [DSH Activity Tracker](docs/dsh-activity-tracker.md)
   - [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md)
+  - [Local Model Gateway](docs/local-model-gateway.md)
   - [Life Dashboard](docs/life-dashboard.md)
   - [AI 简历自动填充助手](docs/resume-smart-filler-assistant.md)
 - **开发与安全**
