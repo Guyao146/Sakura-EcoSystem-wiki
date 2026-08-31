@@ -383,9 +383,9 @@ CI 会执行：
 6. Docker Compose 配置检查；
 7. Trivy HIGH/CRITICAL 镜像扫描（当前报告模式，不因基础镜像上游临时 CVE 阻塞应用测试；生产依赖审计仍是阻塞检查）。
 
-最新 Release：[`v0.2.28`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.2.28)，包含 `sakura-mcp-server-0.2.28.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.2.28`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
+最新 Release：[`v0.3.1`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.3.1)，包含 `sakura-mcp-server-0.3.1.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.3.1`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
 
-## 0.2.22 – 0.2.28 变更要点
+## 0.2.22 – 0.3.1 变更要点
 
 这一段的迭代集中在 Authentik 认证体验和向量 Provider：
 
@@ -398,9 +398,13 @@ CI 会执行：
 | 0.2.26 | 支持通过 Authentik 用户组授予系统管理员（`groups` 声明），可用 `groupsClaim` 自定义声明字段 |
 | 0.2.27 | Authentik 超级用户（内置 `authentik Admins` 组）默认即系统管理员，无需额外配置；修正 0.2.26 误请求的 `groups` scope |
 | 0.2.28 | Agent 密钥改为可随时查看：创建时用 `CONFIG_ENCRYPTION_KEY` 以 AES-256-GCM 加密保存 token 副本，认证仍只比对 SHA-256 哈希，每次查看写审计日志 |
+| 0.2.29 | Agent 密钥的「撤销」改为「删除」，直接移除凭据而非保留 `revoked_at` 标记；MCP 工具 `agent_revoke` 相应改名为 `agent_delete` |
+| 0.3.0 | 修复 MCP 客户端无法连接的严重缺陷：SSE 响应体尚在写出时 transport 就被关闭，客户端表现为 `Connection closed` 或 60 秒超时。反向代理需为 `/mcp` 关闭 `proxy_buffering` |
+| 0.3.1 | 登录页支持「以 *** 的身份登录」：首访 `/auth/login` 用 `prompt=none` 静默探测 Authentik 会话，命中则显示确认按钮并提供「使用其他账号登录」。同时改为与生活看板一致的双栏布局与自托管字体，支持日间/夜间/跟随系统 |
 
 升级注意：
 
 - 使用用户组授权管理员时，需在 Authentik 的 OAuth2/OIDC Provider Scopes 中加入 `groups` 属性映射（`authentik default OAuth Mapping: OpenID 'groups'`）。
 - 使用 RP-Initiated Logout 时，需把 `https://<MCP 域名>/auth/login` 加入 Authentik 的 post-logout redirect URI。
 - `0.2.28` 之前创建的 Agent Key 没有加密副本，无法再次查看，需撤销后重新创建。
+- 升级到 `0.3.1` 需执行迁移 `009_login_probe.sql`（`AUTO_MIGRATE=true` 时自动执行）。「以 *** 的身份登录」还要求该 Provider 的同意模式为隐式（implicit consent）；若配置为每次登录都需确认，探测会得到 `consent_required`，页面静默回退到普通登录流程，不报错但功能不生效。
