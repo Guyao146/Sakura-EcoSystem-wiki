@@ -8,7 +8,8 @@
 | --- | --- | --- | --- |
 | 生态总览 | `v1.0.0` | 2026-09-08 | [README](README.md) |
 | 项目关系 | `v1.0.0` | 2026-09-08 | [项目关系](docs/ecosystem.md) |
-| Sakura-MCP-Server | `v1.0.0` | 2026-09-08 | [项目页](docs/sakura-mcp-server.md) |
+| Sakura-MCP-Server | `v1.0.1` | 2026-09-08 | [项目页](docs/sakura-mcp-server.md) |
+| Cline Sync 本地客户端 | `v1.0.0` | 2026-09-08 | [客户端页](docs/cline-sync.md) |
 | Sakura-MCP-Server 生产部署 | `v1.0.0` | 2026-09-08 | [部署页](docs/sakura-mcp-deployment.md) |
 | Sakura-MCP-Server 运维与排障 | `v1.0.0` | 2026-09-08 | [运维页](docs/operations.md) |
 | DSH Activity Tracker | `v1.0.0` | 2026-09-08 | [项目页](docs/dsh-activity-tracker.md) |

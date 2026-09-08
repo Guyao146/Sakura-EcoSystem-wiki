@@ -4,6 +4,7 @@
   - [项目关系](docs/ecosystem.md)
 - **项目文档**
   - [Sakura-MCP-Server](docs/sakura-mcp-server.md)
+    - [Cline Sync 本地客户端](docs/cline-sync.md)
     - [生产部署](docs/sakura-mcp-deployment.md)
     - [运维与排障](docs/operations.md)
   - [DSH Activity Tracker](docs/dsh-activity-tracker.md)

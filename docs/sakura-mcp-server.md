@@ -1,6 +1,6 @@
 # Sakura-MCP-Server
 
-> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（Sakura-MCP-Server独立版本）
+> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-08`（Sakura-MCP-Server独立版本）
 
 仓库：[Guyao146/Sakura-MCP-Server](https://github.com/Guyao146/Sakura-MCP-Server) · 许可证 `LGPL-v2.1`
 
@@ -323,6 +323,7 @@ AUTH=false
 
 ## 安装、部署与运维
 
+- [Cline Sync 本地客户端](cline-sync.md)
 - [生产部署指南](sakura-mcp-deployment.md)
 - [运维、备份、升级与排障](operations.md)
 - [配置与密钥规范](security.md)
