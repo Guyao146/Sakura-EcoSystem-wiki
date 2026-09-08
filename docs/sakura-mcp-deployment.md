@@ -1,4 +1,6 @@
-﻿# Sakura-MCP-Server 生产部署
+# Sakura-MCP-Server 生产部署
+
+> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（Sakura-MCP-Server 生产部署独立版本）
 
 > [!WARNING]
 > `v0.3.3` 已创建正式 Release。生产部署建议固定 `v0.3.3` tag，先在测试环境完成安装、备份恢复、权限和模型 Provider 演练。

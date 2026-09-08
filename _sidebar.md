@@ -1,5 +1,6 @@
 - **樱落生态Wiki**
   - [生态总览](README.md)
+  - [Wiki 版本记录](CHANGELOG.md)
   - [项目关系](docs/ecosystem.md)
 - **项目文档**
   - [Sakura-MCP-Server](docs/sakura-mcp-server.md)

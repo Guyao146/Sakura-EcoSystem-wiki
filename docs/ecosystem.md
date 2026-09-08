@@ -1,5 +1,7 @@
 # 项目关系
 
+> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（项目关系独立版本）
+
 ## 各项目分别解决什么问题
 
 `Sakura-MCP-Server` 关注“不同 AI 如何记住同一批长期信息”：它通过标准 MCP Streamable HTTP 为 Claude、Cline、Cursor 等 Agent 提供多用户记忆、个人/共享空间、版本、来源、权限和检索；PostgreSQL + pgvector 保存结构化记忆与语义向量，Authentik 负责用户身份。

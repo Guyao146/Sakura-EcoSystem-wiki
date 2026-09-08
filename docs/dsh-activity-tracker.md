@@ -1,6 +1,8 @@
 # DSH Activity Tracker
 
-仓库：[Guyao146/dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker) · 当前版本 `1.7.0` · 许可证 `LGPL-2.1-only`
+> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（DSH Activity Tracker独立版本）
+
+仓库：[Guyao146/dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker) · 许可证 `LGPL-2.1-only`
 
 [![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
 [![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-4c7dff)](https://github.com/deepseek-ai/deepseek-harness)

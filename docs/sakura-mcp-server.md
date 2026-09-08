@@ -1,5 +1,7 @@
 # Sakura-MCP-Server
 
+> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（Sakura-MCP-Server独立版本）
+
 仓库：[Guyao146/Sakura-MCP-Server](https://github.com/Guyao146/Sakura-MCP-Server) · 许可证 `LGPL-v2.1`
 
 [![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
@@ -26,7 +28,6 @@ Sakura-MCP-Server 是面向所有兼容 Model Context Protocol（MCP）的 AI Ag
 
 | 项目 | 状态 |
 | --- | --- |
-| 仓库版本字段 | `0.3.3` |
 | 最新公开 Release | `v0.3.3` |
 | 当前主线已验证 commit | 以 GitHub `main` 最新绿色 CI 为准 |
 | 生产容器镜像 | `ghcr.io/guyao146/sakura-mcp-server:0.3.3` |

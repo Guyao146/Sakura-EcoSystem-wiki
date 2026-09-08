@@ -1,6 +1,8 @@
 # Local Model Gateway
 
-仓库：[Guyao146/Local-Model-Gateway](https://github.com/Guyao146/Local-Model-Gateway) · 当前版本 `1.1.0` · 许可证 `LGPL-v2.1`
+> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（Local Model Gateway独立版本）
+
+仓库：[Guyao146/Local-Model-Gateway](https://github.com/Guyao146/Local-Model-Gateway) · 许可证 `LGPL-v2.1`
 
 [![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
 [![Local Gateway](https://img.shields.io/badge/Local-Gateway-3f9d6d)](https://github.com/Guyao146/Local-Model-Gateway)
@@ -18,7 +20,6 @@ Local Model Gateway 是运行在本机的轻量模型聚合网关。它把本地
 
 | 项目 | 状态 |
 | --- | --- |
-| 仓库版本字段 | `1.1.0` |
 | 运行要求 | Node.js `18+`（使用内置 `fetch`） |
 | 第三方依赖 | 无，仅使用 Node 内置模块 |
 | 默认监听 | `127.0.0.1:8787` |

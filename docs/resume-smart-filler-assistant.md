@@ -1,6 +1,8 @@
 # AI 简历自动填充助手
 
-仓库：[Guyao146/Resume-Smart-Filler-Assistant](https://github.com/Guyao146/Resume-Smart-Filler-Assistant) · `manifest.json` 版本 `1.0.0` · 许可证见下方说明
+> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（AI 简历自动填充助手独立版本）
+
+仓库：[Guyao146/Resume-Smart-Filler-Assistant](https://github.com/Guyao146/Resume-Smart-Filler-Assistant) · 许可证见下方说明
 
 [![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
 [![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-1677ff)](https://github.com/Guyao146/Resume-Smart-Filler-Assistant)

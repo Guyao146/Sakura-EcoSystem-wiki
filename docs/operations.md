@@ -1,5 +1,7 @@
 # 运维、备份、升级与排障
 
+> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（Sakura-MCP-Server 运维与排障独立版本）
+
 本页以 Sakura-MCP-Server 的 Docker Compose 部署为主，同时列出樱落生态通用运维原则。
 
 ## 日常检查
