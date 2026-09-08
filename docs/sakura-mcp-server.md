@@ -7,7 +7,7 @@
 [![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 > [!WARNING]
-> `v0.2.28` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
+> `v0.3.3` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
 
 ## 项目定位
 
@@ -26,10 +26,10 @@ Sakura-MCP-Server 是面向所有兼容 Model Context Protocol（MCP）的 AI Ag
 
 | 项目 | 状态 |
 | --- | --- |
-| 仓库版本字段 | `0.2.28` |
-| 最新公开 Release | `v0.2.28` |
+| 仓库版本字段 | `0.3.3` |
+| 最新公开 Release | `v0.3.3` |
 | 当前主线已验证 commit | 以 GitHub `main` 最新绿色 CI 为准 |
-| 生产容器镜像 | `ghcr.io/guyao146/sakura-mcp-server:0.2.28` |
+| 生产容器镜像 | `ghcr.io/guyao146/sakura-mcp-server:0.3.3` |
 | Docker 运行镜像 | GHCR 多架构镜像，内部使用 `node:24-bookworm-slim` 和非 root `mcp` 用户 |
 | 开发分支 | 直接使用 `main` |
 | MCP Transport | Streamable HTTP，推荐根域名 `/`，兼容 `/mcp` |
@@ -383,9 +383,9 @@ CI 会执行：
 6. Docker Compose 配置检查；
 7. Trivy HIGH/CRITICAL 镜像扫描（当前报告模式，不因基础镜像上游临时 CVE 阻塞应用测试；生产依赖审计仍是阻塞检查）。
 
-最新 Release：[`v0.3.1`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.3.1)，包含 `sakura-mcp-server-0.3.1.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.3.1`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
+最新 Release：[`v0.3.3`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.3.3)，包含 `sakura-mcp-server-0.3.3.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.3.3`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
 
-## 0.2.22 – 0.3.1 变更要点
+## 0.2.22 – 0.3.3 变更要点
 
 这一段的迭代集中在 Authentik 认证体验和向量 Provider：
 
@@ -401,6 +401,8 @@ CI 会执行：
 | 0.2.29 | Agent 密钥的「撤销」改为「删除」，直接移除凭据而非保留 `revoked_at` 标记；MCP 工具 `agent_revoke` 相应改名为 `agent_delete` |
 | 0.3.0 | 修复 MCP 客户端无法连接的严重缺陷：SSE 响应体尚在写出时 transport 就被关闭，客户端表现为 `Connection closed` 或 60 秒超时。反向代理需为 `/mcp` 关闭 `proxy_buffering` |
 | 0.3.1 | 登录页支持「以 *** 的身份登录」：首访 `/auth/login` 用 `prompt=none` 静默探测 Authentik 会话，命中则显示确认按钮并提供「使用其他账号登录」。同时改为与生活看板一致的双栏布局与自托管字体，支持日间/夜间/跟随系统 |
+| 0.3.2 | 管理后台新增「客户端」页，按用户隔离并依据最近活动展示 MCP 客户端状态、协议/版本、工具调用和累计请求统计；需迁移 `010_client_sessions.sql` |
+| 0.3.3 | 修复登录回调同时设置 Sakura 会话 Cookie 与清理 Authentik 探测 Cookie 时的 `Set-Cookie` 覆盖问题，确保登录后能正常进入管理后台 |
 
 升级注意：
 
@@ -408,3 +410,5 @@ CI 会执行：
 - 使用 RP-Initiated Logout 时，需把 `https://<MCP 域名>/auth/login` 加入 Authentik 的 post-logout redirect URI。
 - `0.2.28` 之前创建的 Agent Key 没有加密副本，无法再次查看，需撤销后重新创建。
 - 升级到 `0.3.1` 需执行迁移 `009_login_probe.sql`（`AUTO_MIGRATE=true` 时自动执行）。「以 *** 的身份登录」还要求该 Provider 的同意模式为隐式（implicit consent）；若配置为每次登录都需确认，探测会得到 `consent_required`，页面静默回退到普通登录流程，不报错但功能不生效。
+- 升级到 `0.3.2` 需执行迁移 `010_client_sessions.sql`（`AUTO_MIGRATE=true` 时自动执行）；客户端会话是观测数据，写入失败只记录警告，不会阻断 MCP 请求。
+- `0.3.3` 修复探测 Cookie 清理与 Sakura Session Cookie 同时下发时的兼容性问题，升级后应重新验证登录、退出和“使用其他账号登录”流程。

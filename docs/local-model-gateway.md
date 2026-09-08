@@ -1,6 +1,6 @@
 # Local Model Gateway
 
-仓库：[Guyao146/Local-Model-Gateway](https://github.com/Guyao146/Local-Model-Gateway) · 当前版本 `0.1.0` · 许可证 `LGPL-v2.1`
+仓库：[Guyao146/Local-Model-Gateway](https://github.com/Guyao146/Local-Model-Gateway) · 当前版本 `1.1.0` · 许可证 `LGPL-v2.1`
 
 [![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
 [![Local Gateway](https://img.shields.io/badge/Local-Gateway-3f9d6d)](https://github.com/Guyao146/Local-Model-Gateway)
@@ -18,7 +18,7 @@ Local Model Gateway 是运行在本机的轻量模型聚合网关。它把本地
 
 | 项目 | 状态 |
 | --- | --- |
-| 仓库版本字段 | `0.1.0` |
+| 仓库版本字段 | `1.1.0` |
 | 运行要求 | Node.js `18+`（使用内置 `fetch`） |
 | 第三方依赖 | 无，仅使用 Node 内置模块 |
 | 默认监听 | `127.0.0.1:8787` |
@@ -39,8 +39,10 @@ Local Model Gateway 是运行在本机的轻量模型聚合网关。它把本地
 | 模型选择 | 同名模型跨站合并、按前缀分组、本地别名、默认思考强度 |
 | 轮询池 | 同名模型可勾选参与轮询的上游子集，未勾选的站点不参与分流 |
 | 可靠性 | 内存熔断（阈值 + 冷却 + 半开探测）、全局并发限制、每 Key 限流 |
-| 观测 | 聚合计数 + 可分页的追加式请求日志，`x-request-id` 全链路透传 |
+| 观测 | 聚合计数 + 可分页的追加式请求日志，`x-request-id` 全链路透传；支持导出最近 100 条或全部保留记录 |
 | 余额 | NewAPI Token Usage、常见额度字段、Sub2API 平台额度解析 |
+| 桌面端 | Windows WebView2 与 Electron 客户端，内嵌网关并自动选择空闲回环端口 |
+| 升级 | 后台检查 GitHub Release，校验 SHA-256、备份 `data/` 后自动升级并重启 |
 
 ## 架构
 
@@ -133,7 +135,9 @@ test/                  单元与集成测试
 
 日志默认保留 5000 条，可用 `LOCAL_MODEL_GATEWAY_MAX_LOGS` 调整，下限 100。文件行数超过上限两倍时压实回上限。日志只含脱敏元数据与 Token 数字，不含请求内容或密钥。
 
-管理接口 `GET /api/admin/metrics/logs` 支持 `limit` 与 `offset` 分页，后台「加载更多」按已渲染行数递增 offset。
+管理接口 `GET /api/admin/metrics/logs` 支持 `limit` 与 `offset` 分页，后台「加载更多」按已渲染行数递增 offset。`GET /api/admin/metrics/export?scope=recent|all` 可导出最近 100 条或当前保留的全部记录；管理页面每 5 秒只刷新统计，不会重新加载配置或打断尚未保存的模型选择。
+
+每次模型请求都会返回并向上游透传 `x-request-id`；客户端提供合法 ID 时沿用，否则由网关生成。JSON 错误与日志保留同一 ID，便于跨网关和上游排查。
 
 ## 认证边界
 
@@ -176,6 +180,15 @@ test/                  单元与集成测试
 | 每 Key 每分钟请求 | 0–10000，0 不限 | 0 |
 
 熔断状态、路由游标和余额缓存都只存内存，重启后重置。
+
+## Windows 桌面客户端
+
+`v1.0.0` 起仓库同时发布两种 Windows 客户端：
+
+- WebView2：.NET 8 WinForms，随包携带 Node.js 20 Windows x64 runtime，需要系统安装 Microsoft Edge WebView2 Runtime；
+- Electron：提供安装包和 Portable 版本，自带运行时。
+
+客户端内嵌网关并自动选择空闲的 `127.0.0.1` 端口，配置存放在当前用户目录，升级程序不会覆盖。Release 还包含源码升级包；后台检查到更新后会校验 SHA-256、备份 `data/`，再执行升级和重启。
 
 ## 安装与启动
 

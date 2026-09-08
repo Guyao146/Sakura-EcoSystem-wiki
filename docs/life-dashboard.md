@@ -1,6 +1,6 @@
 # Life Dashboard
 
-仓库：[Guyao146/Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) · 当前版本 `0.10.7` · 许可证 `LGPL-2.1`
+仓库：[Guyao146/Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) · 当前版本 `1.0.8` · 许可证 `LGPL-2.1`
 
 [![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
 [![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
@@ -8,6 +8,15 @@
 ## 项目定位
 
 Life Dashboard（生活看板）是一个 PHP 8.2 + 原生 JavaScript/CSS 的个人生活中枢。它把 Home Assistant 家庭设备、天气、Microsoft To Do、日历、纪念日、习惯、能耗、配送、AI 助手和 DSH 工作区动态放进同一个响应式 Dashboard。
+
+## 当前版本新增能力
+
+`1.0.0`–`1.0.8` 已将静默 SSO 检测、顶层 `prompt=none` 回退、`offline_access` 续期诊断、登录身份卡片、加载页问候/动画和窄屏登录优化落地。当前版本来源为上游 `version.js`，发布变更以 `CHANGELOG.md` 为准。
+
+- 无 refresh token 时先尝试静默重授权，避免不必要地退回登录页；
+- 设置页显示 refresh token 诊断，并提示 Authentik 的 `offline_access` Scope Mapping；
+- 交互式同意场景仍显示“以某身份继续”，并用 `login_hint` 帮助选择账号；
+- 登录与加载页面适配窄屏、夜间主题及减少动态效果偏好。
 
 ## 功能总览
 

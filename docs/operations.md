@@ -159,26 +159,28 @@ docker compose up -d
 curl -fsS https://mcp.example.com/health
 ```
 
-### 升级到 `v0.3.1`
+### 升级到 `v0.3.3`
 
-从 `v0.3.0` 升级只需替换镜像版本，但带一次数据库迁移：
+从 `v0.3.1` 升级到 `v0.3.3` 需替换镜像版本，并执行一次新增数据库迁移：
 
-- `009_login_probe.sql` 为 `oidc_login_attempts` 增加 `purpose` 列，用于隔离「静默探测」与真实登录事务。迁移是 forward-only 的加列操作，升级前仍应备份。
-- 登录页新增「以 *** 的身份登录」。该功能要求 Authentik 侧对应 Provider 的同意模式为隐式（implicit consent）；若配置为每次登录都需确认，探测会返回 `consent_required`，页面静默回退到普通登录流程，不报错但功能不生效。
-- 登录页从 `api.mcylyr.cn` 加载自托管字体。若该资源域不可达，浏览器会静默回退系统字体，页面功能不受影响。
-- 不需要在 Authentik 新增 redirect URI，探测复用现有的 `/auth/callback`。
+- `009_login_probe.sql` 为 `oidc_login_attempts` 增加 `purpose` 列，用于隔离「静默探测」与真实登录事务；若已运行 `v0.3.1`，该迁移已经完成。
+- `010_client_sessions.sql` 增加 MCP 客户端会话观测表，用于管理后台「客户端」页；`AUTO_MIGRATE=true` 时自动执行。观测写入失败只记录警告，不影响 MCP 请求。
+- 登录页「以 *** 的身份登录」要求 Authentik Provider 使用隐式同意；否则安全回退到普通登录。
+- `v0.3.3` 修复登录回调中探测 Cookie 清理覆盖 Sakura Session Cookie 的问题。升级后应验证登录、退出和切换账号流程。
+- 登录页从 `api.mcylyr.cn` 加载自托管字体；资源不可达时仅回退系统字体。
+- 不需要新增 Authentik redirect URI，探测复用现有 `/auth/callback`。
 
 ```bash
 # 备份数据库和 .env，见上文
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.3.1/docker-compose.yml
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.3.3/docker-compose.yml
 docker compose pull
 docker compose up -d
-curl -fsS https://mcp.example.com/health   # 确认 version 为 0.3.1
+curl -fsS https://mcp.example.com/health   # 确认 version 为 0.3.3
 ```
 
 当前生产容器来自 GHCR 版本镜像，内部使用 `node:24-bookworm-slim`，运行容器由 Debian `groupadd/useradd` 创建的非 root `mcp` 用户启动。Compose 使用 `pull_policy: always`，版本升级应执行 `docker compose pull && docker compose up -d`；本地源码构建才使用 `docker-compose.dev.yml`。
 
-生产 Compose 当前默认使用 `ghcr.io/guyao146/sakura-mcp-server:0.3.1` 多架构镜像。升级前先备份，再下载对应版本的 Compose/模板并执行 `docker compose pull && docker compose up -d`。管理后台会显示当前版本，并允许系统管理员检查 GitHub 最新 Release，但不会自动执行升级。本地源码构建应使用 `docker-compose.dev.yml`，不要用开发构建覆盖生产镜像。
+生产 Compose 当前默认使用 `ghcr.io/guyao146/sakura-mcp-server:0.3.3` 多架构镜像。升级前先备份，再下载对应版本的 Compose/模板并执行 `docker compose pull && docker compose up -d`。管理后台会显示当前版本，并允许系统管理员检查 GitHub 最新 Release，但不会自动执行升级。本地源码构建应使用 `docker-compose.dev.yml`，不要用开发构建覆盖生产镜像。
 
 ## Worker 运维
 

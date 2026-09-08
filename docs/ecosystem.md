@@ -14,6 +14,8 @@
 
 `Local Model Gateway` 关注“请求发往哪个上游”：它在本机聚合多个中转站，为所有本地 AI 客户端提供统一的 OpenAI/Anthropic/Responses 入口，并负责协议转换、路由轮询、熔断降级、限流和用量统计。上游只配置一次，客户端不再各自维护一份中转站清单。
 
+`Sakura-MCP-Server` 当前为 `v0.3.3`，新增客户端会话观测与登录 Cookie 修复；`Life Dashboard` 当前为 `v1.0.8`，已落地静默 SSO、续期诊断与窄屏登录优化；`Local Model Gateway` 当前为 `v1.1.0`，提供 Windows 客户端、用量导出和完整管理接口。三者分别覆盖长期记忆、生活状态汇总和模型请求转发，可独立部署。
+
 ## 集成链路
 
 1. 在本机安装并启用 DSH Activity Tracker。
