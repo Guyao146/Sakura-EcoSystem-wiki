@@ -1,6 +1,6 @@
 # DSH Windows Tool Fix
 
-> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（DSH Windows Tool Fix独立版本）
+> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（DSH Windows Tool Fix独立版本，上游 `v0.2.1`）
 
 仓库：[Guyao146/dsh-windows-tool-fix](https://github.com/Guyao146/dsh-windows-tool-fix) · 许可证 `LGPL-2.1-or-later`
 
@@ -19,6 +19,28 @@ subprocess-local: terminal inspection is unsupported on platform win32
 插件通过 DSH profile patch 把 `minimal-gitbash` 设为新会话的默认 Agent preset，让命令经 Git for Windows Bash 的 subprocess 执行，绕开 Windows 不支持的持久 PTY 检查路径。
 
 它不修改 DSH 安装目录、`app.asar` 或官方 shipped preset，因此 DSH 升级不会与之冲突。
+
+## 快速开始
+
+```cmd
+:: 1. 先安装 Git Bash 执行器（提供 minimal-gitbash preset）
+dsh plugin --profile desktop add @icelily/dsh-gitbash-preset
+
+:: 2. 安装本插件并完全重启 DSH Desktop
+dsh plugin --profile desktop add Guyao146/dsh-windows-tool-fix
+```
+
+3. 新建一个会话并执行任意 `bash` 命令，确认不再出现 `terminal inspection is unsupported on platform win32`。
+4. 用以下命令验证默认 preset 已切换：
+
+```cmd
+dsh plugin --profile desktop list
+dsh --profile desktop --dump-config
+```
+
+`--dump-config` 输出的 `agent-presets` 应包含 `default: minimal-gitbash`。注意插件只作用于**新建会话**，DSH 会保存会话创建时使用的 preset，旧会话需新建后验证。
+
+若 Git Bash 命令在沙箱中失败，把会话切到 `danger-full-access`，或对单次工具调用使用 `sandbox_permissions: "danger-full-access"` 并给出理由；插件不会自动提升权限。卸载用 `dsh plugin --profile desktop remove dsh-windows-tool-fix`，再把 `DSH_HOME/settings.yaml` 的默认 preset 改回原值。
 
 ## 功能
 

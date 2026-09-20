@@ -1,6 +1,6 @@
 # 樱落生态Wiki · 连接云，人，家
 
-> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（生态总览独立版本）
+> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（生态总览独立版本）
 
 > 🌸 Sakura EcoSystem · Connect Cloud, People and Home.
 
@@ -12,12 +12,12 @@
 
 | 项目 | 定位 | 连接方式 | Wiki 文档版本 |
 | --- | --- | --- | --- |
-| [Sakura-MCP-Server](docs/sakura-mcp-server.md) | 面向所有兼容 MCP Agent 的多用户长期记忆平台 | MCP、Authentik、pgvector、Provider、Worker、审计和 Web 管理 | Wiki `v1.0.0` |
-| [DSH Activity Tracker](docs/dsh-activity-tracker.md) | DeepSeek Harness 的本地活动统计与归档恢复插件 | 扫描本地 DSH 会话、查看/恢复归档，并可向 Life Dashboard 推送快照 | v1.0.0 |
-| [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md) | DSH 中转站模型思考强度配置与能力识别 | 读取 OpenAI 兼容 `/models`，写入 DSH 原生 `llm-pi-ai` 设置 | v1.0.0 |
-| [DSH Windows Tool Fix](docs/dsh-windows-tool-fix.md) | Windows 上 DSH Desktop 的默认 Git Bash preset 修复插件 | DSH profile patch，把 `minimal-gitbash` 设为默认 Agent preset | v1.0.0 |
-| [Local Model Gateway](docs/local-model-gateway.md) | 本机多上游模型聚合网关 | OpenAI/Anthropic/Responses 协议互转、路由轮询、熔断限流与用量统计 | v1.0.0 |
-| [Life Dashboard](docs/life-dashboard.md) | 个人生活中枢与可视化看板 | Authentik、Home Assistant、天气、To Do、AI 与 DSH | v1.0.0 |
+| [Sakura-MCP-Server](docs/sakura-mcp-server.md) | 面向所有兼容 MCP Agent 的多用户长期记忆平台 | MCP、Authentik、pgvector、Provider、Worker、审计和 Web 管理 | Wiki `v1.0.2` · 上游 `v0.3.4` |
+| [DSH Activity Tracker](docs/dsh-activity-tracker.md) | DeepSeek Harness 的本地活动统计与归档恢复插件 | 扫描本地 DSH 会话、查看/恢复归档，并可向 Life Dashboard 推送快照 | Wiki `v1.0.1` · 上游 `v1.7.0` |
+| [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md) | DSH 中转站模型思考强度配置与能力识别 | 读取 OpenAI 兼容 `/models`，写入 DSH 原生 `llm-pi-ai` 设置 | Wiki `v1.0.1` · 上游 `0.2.9` |
+| [DSH Windows Tool Fix](docs/dsh-windows-tool-fix.md) | Windows 上 DSH Desktop 的默认 Git Bash preset 修复插件 | DSH profile patch，把 `minimal-gitbash` 设为默认 Agent preset | Wiki `v1.0.1` · 上游 `v0.2.1` |
+| [Local Model Gateway](docs/local-model-gateway.md) | 本机多上游模型聚合网关 | OpenAI/Anthropic/Responses 协议互转、路由轮询、熔断限流与用量统计 | Wiki `v1.0.1` · 上游 `2.0.10` |
+| [Life Dashboard](docs/life-dashboard.md) | 个人生活中枢与可视化看板 | Authentik、Home Assistant、天气、To Do、AI 与 DSH | Wiki `v1.0.1` · 上游 `1.0.11` |
 
 ## 工作室网站群
 
@@ -58,9 +58,9 @@ DSH 本地会话 ── Activity Tracker ── Life Dashboard
 - 准备在服务器部署记忆平台：阅读 [Sakura-MCP-Server 生产部署](docs/sakura-mcp-deployment.md)。
 - 需要备份、升级、恢复或排障：阅读 [运维手册](docs/operations.md)。
 
-> Sakura-MCP-Server 当前上游版本 `v0.3.3`。生产部署建议固定 `v0.3.3` tag，并确认对应 GitHub Actions 为绿色。Compose 已支持无 `.env` 首次启动；公网仍需配置 HTTPS，并尽快完成 `/setup`。
+> Sakura-MCP-Server 当前上游版本 `v0.3.4`。生产部署建议固定 `v0.3.4` tag，并确认对应 GitHub Actions 为绿色。Compose 已支持无 `.env` 首次启动；公网仍需配置 HTTPS，并尽快完成 `/setup`。
 
-生产部署可以只下载 `docker-compose.yml`，直接从 GHCR 拉取 `v0.3.3` 多架构镜像；一次性 `bootstrap-secrets` 容器会生成持久化密钥。本地源码构建使用 `docker-compose.dev.yml`，详见 [生产部署](docs/sakura-mcp-deployment.md)。
+生产部署可以只下载 `docker-compose.yml`，直接从 GHCR 拉取 `v0.3.4` 多架构镜像；一次性 `bootstrap-secrets` 容器会生成持久化密钥。本地源码构建使用 `docker-compose.dev.yml`，详见 [生产部署](docs/sakura-mcp-deployment.md)。
 - 想配置中转站模型思考强度：阅读 [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md)。
 - Windows 上 DSH Desktop 报 `terminal inspection is unsupported on platform win32`：阅读 [DSH Windows Tool Fix](docs/dsh-windows-tool-fix.md)。
 - 想让多个本地 AI 客户端共用一套中转站配置：阅读 [Local Model Gateway](docs/local-model-gateway.md)。

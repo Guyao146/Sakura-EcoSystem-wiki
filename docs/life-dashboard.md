@@ -1,6 +1,6 @@
 # Life Dashboard
 
-> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（Life Dashboard独立版本）
+> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（Life Dashboard独立版本，上游 `1.0.11`）
 
 仓库：[Guyao146/Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) · 许可证 `LGPL-2.1`
 
@@ -11,14 +11,33 @@
 
 Life Dashboard（生活看板）是一个 PHP 8.2 + 原生 JavaScript/CSS 的个人生活中枢。它把 Home Assistant 家庭设备、天气、Microsoft To Do、日历、纪念日、习惯、能耗、配送、AI 助手和 DSH 工作区动态放进同一个响应式 Dashboard。
 
+## 快速开始
+
+```bash
+git clone https://github.com/Guyao146/Life-Dashboard.git
+cd Life-Dashboard
+cp .env.example .env
+chmod 600 .env
+```
+
+1. 在 `.env` 中至少填写 OIDC 端点、管理员白名单（组 / 用户名 / 邮箱任一）和 Home Assistant 地址与长期访问令牌。
+2. Web 服务器必须禁止提供 `.env` 与点文件，PHP FastCGI 需转发 `Authorization` 头（Nginx 规则见本文「安全与 Nginx 部署要点」一节）。
+3. 用浏览器打开站点域名，使用 Authentik 或本地账号登录后进入看板。
+4. 登录后到 **设置 → 连接与账户** 查看身份诊断，确认 OIDC 用户、组和管理员匹配结果；若显示“无 refresh_token”，按 README 在 Authentik Provider 的 Scope Mapping 中加入 `offline_access`。
+
+> 纯静态前端 + PHP 8.2 配置网关，不需要构建步骤。没有 Authentik 时可用本地账号密码登录（浏览器端 PBKDF2-SHA256），但本地账号不能解锁 Home Assistant Token。想用上“打开就进”的静默单点登录，需把 Authentik Provider 的授权流程改为隐式同意。
+
 ## 当前版本新增能力
 
-`1.0.0`–`1.0.8` 已将静默 SSO 检测、顶层 `prompt=none` 回退、`offline_access` 续期诊断、登录身份卡片、加载页问候/动画和窄屏登录优化落地。当前版本来源为上游 `version.js`，发布变更以 `CHANGELOG.md` 为准。
+`1.0.0`–`1.0.11` 已将静默 SSO 检测、顶层 `prompt=none` 回退、`offline_access` 续期诊断、登录身份卡片、加载页问候/动画和整轮登录页视觉重做落地。当前版本来源为上游 `version.js`，发布变更以 `CHANGELOG.md` 为准。
 
-- 无 refresh token 时先尝试静默重授权，避免不必要地退回登录页；
+- 无 refresh token 时先尝试一次静默重授权，避免不必要地退回登录页；
 - 设置页显示 refresh token 诊断，并提示 Authentik 的 `offline_access` Scope Mapping；
 - 交互式同意场景仍显示“以某身份继续”，并用 `login_hint` 帮助选择账号；
-- 登录与加载页面适配窄屏、夜间主题及减少动态效果偏好。
+- 登录页重做视觉层级：品牌标识、深色玻璃背景、SSO 身份卡片和更清晰的错误反馈，并适配窄屏间距与按钮尺寸；
+- 静默探测改为在登录身份区域显示紧凑加载状态，不再全屏加载；
+- 加载页改为品牌 Logo 弧线动画加身份问候，适配夜间主题与“减少动态效果”偏好；
+- 登录主要操作按钮间距增大，SSO 继续、切换账号和清除登录信息的层级更清晰。
 
 ## 功能总览
 

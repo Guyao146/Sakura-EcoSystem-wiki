@@ -1,6 +1,6 @@
 # DSH Better Model Thinking Control
 
-> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（DSH Better Model Thinking Control独立版本）
+> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（DSH Better Model Thinking Control独立版本，上游 `0.2.9`）
 
 仓库：[Guyao146/dsh-better-model-thinking-control](https://github.com/Guyao146/dsh-better-model-thinking-control) · 许可证见下方说明
 
@@ -9,6 +9,25 @@
 [![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 `dsh-better-model-thinking-control` 是樱落生态中的 DSH Web 插件，用于按中转站和模型配置思考强度（Reasoning Effort）。它读取 OpenAI 兼容中转站公开的模型能力，并把结果写入 DSH 原生 `llm-pi-ai` 设置，让 DSH 自己的模型选择器和思考档位机制继续负责实际请求。
+
+## 快速开始
+
+```bash
+# 1. 从源码打包（也可以从 Releases 页面下载对应版本的 .tgz）
+git clone https://github.com/Guyao146/dsh-better-model-thinking-control.git
+cd dsh-better-model-thinking-control
+npm pack
+
+# 2. 安装到实际运行的 profile
+dsh plugin --profile web add "file:./dsh-better-model-thinking-control-0.2.9.tgz"
+```
+
+3. **完全重启 DSH**，打开 **设置 → 模型思考强度**。
+4. 展开目标中转站，点击 **自动拉取**；DSH 没有可用凭据引用时，在一次性 API Key 输入框填写 Key（不会写入插件配置或 DSH credentials）。
+5. 检查拉取到的模型和档位，在下拉多选中修正，或把不支持思考的模型标记为 **非推理模型**。
+6. 点击 **保存配置**，写入 DSH 原生 `llm-pi-ai` 设置；回到 DSH 模型选择器选择模型和思考档位即可生效。
+
+> 自动拉取只合并模型信息并提示检查，不会立即覆盖 DSH 设置；只有点击“保存配置”才会写入。DSH Desktop 用户请改用 `--profile desktop`，`web` 与 `desktop` 是两个相互独立的插件环境。
 
 ## 项目定位
 

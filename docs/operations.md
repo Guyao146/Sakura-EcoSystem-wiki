@@ -1,6 +1,6 @@
 # 运维、备份、升级与排障
 
-> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（Sakura-MCP-Server 运维与排障独立版本）
+> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（Sakura-MCP-Server 运维与排障独立版本）
 
 本页以 Sakura-MCP-Server 的 Docker Compose 部署为主，同时列出樱落生态通用运维原则。
 
@@ -179,6 +179,23 @@ docker compose pull
 docker compose up -d
 curl -fsS https://mcp.example.com/health   # 确认 version 为 0.3.3
 ```
+
+### 升级到 `v0.3.4`
+
+`v0.3.4` 是纯修复版本，不含数据库迁移，只需替换镜像 tag 后重启：
+
+```bash
+# 备份数据库和 .env，见上文
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.3.4/docker-compose.yml
+docker compose pull
+docker compose up -d
+curl -fsS https://mcp.example.com/health   # 确认 version 为 0.3.4
+```
+
+升级要点：
+
+- 登录页不再依赖 `api.mcylyr.cn` 的共享字体 CSS 和字体切片，改用本机系统字体，消除该域名下不存在的 `.woff2` 请求产生的连续 404；中文与等宽字体回退显示保持不变。
+- 不涉及 `Set-Cookie`、会话或数据库结构变更，升级后验证一次登录页打开速度和登录流程即可。
 
 当前生产容器来自 GHCR 版本镜像，内部使用 `node:24-bookworm-slim`，运行容器由 Debian `groupadd/useradd` 创建的非 root `mcp` 用户启动。Compose 使用 `pull_policy: always`，版本升级应执行 `docker compose pull && docker compose up -d`；本地源码构建才使用 `docker-compose.dev.yml`。
 

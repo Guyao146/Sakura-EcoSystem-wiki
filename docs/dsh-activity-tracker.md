@@ -1,6 +1,6 @@
 # DSH Activity Tracker
 
-> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（DSH Activity Tracker独立版本）
+> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（DSH Activity Tracker独立版本，上游 `v1.7.0`）
 
 仓库：[Guyao146/dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker) · 许可证 `LGPL-2.1-only`
 
@@ -13,6 +13,29 @@
 这是 DeepSeek Harness（DSH）Web 的本地活动统计插件。插件不依赖外部数据库，直接读取 DSH 本地会话文件，解析用户消息、工具调用、助手 Token 使用和会话元数据，在 DSH Web 中提供可交互的统计浮层；可选地把“工作区摘要”推送到 Life Dashboard。
 
 它不是一个通用日志采集器：默认不会上传完整会话，远程功能也只发送工作区标识、活动时间、统计汇总和按授权返回的受限记录。
+
+## 快速开始
+
+```bash
+# 1. 下载最新 Release 安装包（固定下载名，始终指向最新版本）
+curl -fL https://github.com/Guyao146/dsh-activity-tracker/releases/latest/download/dsh-activity-tracker.tgz -o dsh-activity-tracker.tgz
+
+# 2. 安装到实际运行的 profile（Desktop 用户把 web 换成 desktop）
+dsh plugin --profile web add "file:./dsh-activity-tracker.tgz"
+```
+
+3. **完全重启 DSH Web**，在左侧栏“新会话”按钮附近应出现 **📊 活动统计** 入口。
+4. 点击入口打开统计浮层，用顶部筛选器选择项目、会话和时间范围。
+5. 点击热力图日期或每日汇总表中的日期，查看当天的小时分布和事件时间线。
+6. 产生新会话后，点击右上角 **刷新** 重新扫描。
+
+可选项：
+
+- 想知道花了多少钱：在 **设置** 中配置 Sub2API 账号，登录后自动同步价格并生成费用统计。
+- 想在看板里看实时工作区：在 Life Dashboard 生成六位码后，打开 **总设置 → 生活看板连接** 完成配对；只对需要查看详情的工作区勾选“允许查看会话详情”。
+- 找回归档对话：打开顶部 **已归档** 标签，搜索并查看记录，确认后点击 **恢复会话**。
+
+Windows PowerShell 用 `Invoke-WebRequest -Uri <地址> -OutFile dsh-activity-tracker.tgz` 替代 `curl`。首次扫描大量历史会话时需要一定时间，解析结果会按文件 `mtime + size` 增量缓存。
 
 ## 运行要求
 

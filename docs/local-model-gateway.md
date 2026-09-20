@@ -1,6 +1,6 @@
 # Local Model Gateway
 
-> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（Local Model Gateway独立版本）
+> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（Local Model Gateway独立版本，上游 `2.0.10`，最新 Release tag `v2.0.9`）
 
 仓库：[Guyao146/Local-Model-Gateway](https://github.com/Guyao146/Local-Model-Gateway) · 许可证 `LGPL-v2.1`
 
@@ -16,10 +16,26 @@ Local Model Gateway 是运行在本机的轻量模型聚合网关。它把本地
 
 它不是账单系统，也不是模型训练或推理引擎。余额查询是按需手工触发的读取操作，用量统计只用于本地排查，不等同于上游账单。
 
+## 快速开始
+
+```powershell
+git clone https://github.com/Guyao146/Local-Model-Gateway.git
+cd Local-Model-Gateway
+node src/server.js
+```
+
+1. 启动时终端会打印默认本地 API Key（`sk-local_...`）；打开 <http://127.0.0.1:8787/> 进入后台，本机回环访问不需要任何管理凭据。
+2. 在「上游」中添加中转站地址和 API Key，保存时可从 `/v1/models` 自动拉取并回填模型列表，也可对已保存上游执行同步。
+3. 在「模型目录」中按前缀展开，勾选要暴露给本地客户端的模型；同名模型可选「自动选择」（轮询）或固定站点，保存后网关自动生成托管路由。
+4. 客户端 Base URL 填 `http://127.0.0.1:8787/v1`，API Key 填后台创建的 `sk-local_...`，即可像调用 OpenAI 一样使用。
+
+> 网关零第三方依赖（仅 Node.js 18+ 内置模块），默认只监听 `127.0.0.1`。远程管理访问需配置 Authentik OIDC 环境变量，而 `/v1/*` 模型接口无论本机还是远程都必须使用本地 API Key。Windows 用户也可以直接下载 [Releases](https://github.com/Guyao146/Local-Model-Gateway/releases) 中的 WebView2 或 Electron 客户端，内嵌网关并自动选择空闲回环端口。
+
 ## 当前状态
 
 | 项目 | 状态 |
 | --- | --- |
+| 当前版本 | `2.0.10`（`package.json`，最新 Release tag `v2.0.9`） |
 | 运行要求 | Node.js `18+`（使用内置 `fetch`） |
 | 第三方依赖 | 无，仅使用 Node 内置模块 |
 | 默认监听 | `127.0.0.1:8787` |

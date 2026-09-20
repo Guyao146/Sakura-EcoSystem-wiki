@@ -1,6 +1,6 @@
 # Cline Sync 本地客户端
 
-> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-08`（Cline Sync 本地客户端独立版本）
+> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（Cline Sync 本地客户端独立版本）
 
 源码：[Sakura-MCP-Server/tools/cline-sync](https://github.com/Guyao146/Sakura-MCP-Server/tree/main/tools/cline-sync)
 
@@ -9,6 +9,24 @@
 Cline Sync 是 Sakura-MCP-Server 的配套本地工具。它定时读取 Cline 已经写入磁盘的任务历史，找出尚未处理的文本消息，再调用服务端 `memory_extract_and_remember`，把适合长期保留的信息抽取到 Sakura 记忆库。
 
 它不是 MCP Server、Cline 插件或实时监听器。Sakura-MCP-Server 无法被动看到本地 Cline 会话；只有运行 Cline Sync 并明确配置 Agent Key 后，本地历史才会按配置发送到服务端。
+
+## 快速开始
+
+```bash
+# 前置：已部署 Sakura-MCP-Server，并创建了具备 memory:write 权限的 Agent Key
+git clone https://github.com/Guyao146/Sakura-MCP-Server.git
+cd Sakura-MCP-Server/tools/cline-sync
+npm install
+npm run build
+node dist/main.js
+```
+
+1. 首次启动会自动打开配置窗口（找不到 Edge/Chrome 引擎时退回默认浏览器）。
+2. 填写 MCP URL、Agent Key 和 Cline `tasks` 目录（Windows 常见路径为 `%APPDATA%\Code\User\globalStorage\saoudrizwan.claude-dev\tasks`）。
+3. 按需设置扫描间隔、时间窗口和任务选择模式，打开 **自动同步**；调度器会先等待一个完整扫描间隔，不会在启动瞬间执行。
+4. 立即验证用面板的 **立即同步**，或命令行 `npm run sync-once`；只想预览本地任务规模用 `npm run dry-run`，它不会调用服务端抽取。
+
+> Windows 用户可以执行 `npm run package` 生成 `release/cline-sync.exe` 单文件程序（`@yao-pkg/pkg` SEA 模式，内置 Node 22 运行时），目标机器无需安装 Node.js。Agent Key 以明文保存在本地配置文件中，请使用最小权限的独立 Key。
 
 ## 同步流程与数据边界
 

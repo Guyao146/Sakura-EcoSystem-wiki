@@ -1,6 +1,6 @@
 # Sakura-MCP-Server
 
-> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-08`（Sakura-MCP-Server独立版本）
+> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-20`（Sakura-MCP-Server独立版本）
 
 仓库：[Guyao146/Sakura-MCP-Server](https://github.com/Guyao146/Sakura-MCP-Server) · 许可证 `LGPL-v2.1`
 
@@ -9,7 +9,7 @@
 [![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 > [!WARNING]
-> `v0.3.3` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
+> `v0.3.4` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
 
 ## 项目定位
 
@@ -28,9 +28,9 @@ Sakura-MCP-Server 是面向所有兼容 Model Context Protocol（MCP）的 AI Ag
 
 | 项目 | 状态 |
 | --- | --- |
-| 最新公开 Release | `v0.3.3` |
+| 最新公开 Release | `v0.3.4` |
 | 当前主线已验证 commit | 以 GitHub `main` 最新绿色 CI 为准 |
-| 生产容器镜像 | `ghcr.io/guyao146/sakura-mcp-server:0.3.3` |
+| 生产容器镜像 | `ghcr.io/guyao146/sakura-mcp-server:0.3.4` |
 | Docker 运行镜像 | GHCR 多架构镜像，内部使用 `node:24-bookworm-slim` 和非 root `mcp` 用户 |
 | 开发分支 | 直接使用 `main` |
 | MCP Transport | Streamable HTTP，推荐根域名 `/`，兼容 `/mcp` |
@@ -43,6 +43,26 @@ Sakura-MCP-Server 是面向所有兼容 Model Context Protocol（MCP）的 AI Ag
 | 安装向导 | `/setup`，自动诊断、OpenID Discovery 和 Public Client 预检 |
 
 实现变化以后，以项目仓库的 `README.md`、`CHANGELOG.md`、迁移文件和 GitHub Actions 为最终依据。
+
+## 快速开始
+
+最快的生产部署只需要一个 `docker-compose.yml`：Compose 会从 GHCR 拉取 `v0.3.4` 多架构镜像（`linux/amd64` + `linux/arm64`），并由一次性的 `bootstrap-secrets` 容器自动生成并持久化运行时密钥。
+
+```bash
+mkdir -p /opt/sakura-mcp-server && cd /opt/sakura-mcp-server
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.3.4/docker-compose.yml
+mkdir -p data && chmod 700 data
+docker compose up -d
+```
+
+启动后按顺序完成：
+
+1. 用 Nginx 等反向代理开放 `80/443`，**不要**向公网暴露宿主端口 `3001` 和数据库端口 `5432`。
+2. 打开 `https://<域名>/setup` 走完安装向导：环境诊断、OpenID Discovery、Authentik Public Client 预检和模型 Provider 配置；安装完成后写接口永久锁定。
+3. 打开 `https://<域名>/admin` 登录管理后台，创建共享空间、邀请成员，并创建 Agent Key。
+4. Agent 客户端使用根域名 `https://<域名>`（或兼容地址 `https://<域名>/mcp`），携带 `Authorization: Bearer sk_sakura_...` 直连；支持 OAuth 的客户端通过 `/.well-known/oauth-protected-resource` 自动发现。
+
+本地源码构建改用 `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build`；完整步骤、升级与回滚说明见 [生产部署](sakura-mcp-deployment.md)。
 
 ## 架构
 
@@ -385,9 +405,9 @@ CI 会执行：
 6. Docker Compose 配置检查；
 7. Trivy HIGH/CRITICAL 镜像扫描（当前报告模式，不因基础镜像上游临时 CVE 阻塞应用测试；生产依赖审计仍是阻塞检查）。
 
-最新 Release：[`v0.3.3`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.3.3)，包含 `sakura-mcp-server-0.3.3.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.3.3`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
+最新 Release：[`v0.3.4`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.3.4)，包含 `sakura-mcp-server-0.3.4.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.3.4`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
 
-## 0.2.22 – 0.3.3 变更要点
+## 0.2.22 – 0.3.4 变更要点
 
 这一段的迭代集中在 Authentik 认证体验和向量 Provider：
 
@@ -405,6 +425,7 @@ CI 会执行：
 | 0.3.1 | 登录页支持「以 *** 的身份登录」：首访 `/auth/login` 用 `prompt=none` 静默探测 Authentik 会话，命中则显示确认按钮并提供「使用其他账号登录」。同时改为与生活看板一致的双栏布局与自托管字体，支持日间/夜间/跟随系统 |
 | 0.3.2 | 管理后台新增「客户端」页，按用户隔离并依据最近活动展示 MCP 客户端状态、协议/版本、工具调用和累计请求统计；需迁移 `010_client_sessions.sql` |
 | 0.3.3 | 修复登录回调同时设置 Sakura 会话 Cookie 与清理 Authentik 探测 Cookie 时的 `Set-Cookie` 覆盖问题，确保登录后能正常进入管理后台 |
+| 0.3.4 | 移除登录页对失效共享字体 CSS 和字体切片的依赖，改用本机系统字体，避免浏览器向 `api.mcylyr.cn` 请求不存在的 `.woff2` 并连续产生 404；中文与等宽字体回退显示保持不变 |
 
 升级注意：
 
