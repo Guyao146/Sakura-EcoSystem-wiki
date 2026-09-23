@@ -12,6 +12,9 @@
   - [DSH Windows Tool Fix](docs/dsh-windows-tool-fix.md)
   - [Local Model Gateway](docs/local-model-gateway.md)
   - [Life Dashboard](docs/life-dashboard.md)
+  - [Sakura Chat](docs/sakura-chat.md)
+  - [Sakura AI Cut](docs/sakura-aicut.md)
+  - [UniLink](docs/unilink.md)
   - [AI 简历自动填充助手](docs/resume-smart-filler-assistant.md)
 - **开发与安全**
   - [配置与密钥规范](docs/security.md)

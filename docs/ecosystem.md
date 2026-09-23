@@ -16,7 +16,13 @@
 
 `Local Model Gateway` 关注“请求发往哪个上游”：它在本机聚合多个中转站，为所有本地 AI 客户端提供统一的 OpenAI/Anthropic/Responses 入口，并负责协议转换、路由轮询、熔断降级、限流和用量统计。上游只配置一次，客户端不再各自维护一份中转站清单。
 
-`Sakura-MCP-Server` 当前为 `v0.3.4`，已落地客户端会话观测、登录 Cookie 修复和登录页系统字体改造；`Life Dashboard` 当前为 `1.0.11`，已落地静默 SSO、续期诊断、登录页视觉重做与加载页品牌动画；`Local Model Gateway` 当前为 `2.0.10`，提供 Windows 桌面客户端、用量导出和完整管理接口。三者分别覆盖长期记忆、生活状态汇总和模型请求转发，可独立部署。
+`Sakura-Chat` 关注“自有通信如何不依赖第三方”：它是仿微信的网页聊天应用，账号、好友/群关系、消息与文件全部落在本机 SQLite，传输与存储双层加密，部署后完全自有。它不接入生态的任何其他项目，解决的是“聊天数据在自己手里”这一件事。
+
+`Sakura-AiCut` 关注“AI 内容如何串成流水线”：它把剧本、资产生成、运镜和在线剪辑组织在一张无限画布的五步工作台上，模型能力全部由用户自配的外部 API 提供。它可以把 Local Model Gateway 当作统一上游，但这是可选项而非依赖。
+
+`UniLink` 关注“手机与电脑如何互通”：它通过一台只转发密文的中继服务器，把状态栏通知、文字、剪贴板和文件在两端互相同步。它的扫码登录能力对所有接入 Authentik 的项目零侵入，是生态移动端登录的统一入口。
+
+`Sakura-MCP-Server` 当前为 `v0.3.4`，已落地客户端会话观测、登录 Cookie 修复和登录页系统字体改造；`Life Dashboard` 当前为 `1.0.11`，已落地静默 SSO、续期诊断、登录页视觉重做与加载页品牌动画；`Local Model Gateway` 当前为 `2.0.10`，提供 Windows 桌面客户端、用量导出和完整管理接口；`Sakura-AiCut` 当前为 `0.2.1`，`UniLink` 当前为 `v1.2`，`Sakura-Chat` 暂无 Release tag。各项目可独立部署，组合使用时不互相耦合。
 
 ## 集成链路
 
@@ -53,6 +59,11 @@ Sakura-MCP-Server 与现有 DSH、Life Dashboard 链路没有强制依赖。它�
 | Windows 默认 Agent preset | DSH Windows Tool Fix | DSH profile 的 `agent-presets` 默认值 |
 | 本地多上游转发与轮询 | Local Model Gateway | 经过网关的模型请求与上游站点配置 |
 | 网关级用量与请求日志 | Local Model Gateway | 脱敏元数据与 Token 计数，不含请求正文 |
+| 自有网页聊天 | Sakura-Chat | 本机 SQLite，消息密文存储，主密钥独立于数据库 |
+| 通话媒体 | Sakura-Chat / 浏览器 WebRTC | P2P 直连 + DTLS-SRTP，服务器不转发也不解密媒体 |
+| AI 短剧生成与剪辑 | Sakura-AiCut | 项目数据在本机 SQLite；模型调用走用户自配的外部 API |
+| 手机通知镜像 | UniLink / Android NotificationListenerService | 状态栏通知全文，端到端 AES-256-GCM，中继只转发密文 |
+| 扫码登录 | UniLink / Authentik | auth-server 只中转身份，授权码只交给发起登录的浏览器 |
 | 跨 Agent 长期记忆 | Sakura-MCP-Server | 当前用户有权访问的个人或共享空间 |
 | 语义与全文检索 | Sakura-MCP-Server / PostgreSQL + pgvector | 记忆正文、摘要、标签与向量，不包含其他租户数据 |
 | 自动记忆提取 | Sakura-MCP-Server / OpenAI-compatible 或 Ollama | 按空间策略启用，模型结果必须通过结构校验 |
