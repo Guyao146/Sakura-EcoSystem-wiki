@@ -2,7 +2,41 @@
 
 本文件记录各项目 Wiki 页面自己的文档版本。每个项目独立维护版本号和更新日期，不等同于上游项目的 Release 版本；上游版本、迁移版本和部署 tag 仍以对应项目仓库为准。
 
-## 当前版本（2026-09-23）
+## 当前版本（2026-09-23 · 设计规范）
+
+建立樱落生态 Wiki 的全局设计语言，统一排版、组件、章节结构与写作语气。参考 Apple Human Interface Guidelines 的「退让」与小米澎湃OS「生命感美学」的材质观，落到文档站场景。
+
+| 项目 | Wiki 文档版本 | 更新日期 | 上游版本 | 页面 |
+| --- | --- | --- | --- | --- |
+| 生态总览 | `v1.0.3` | 2026-09-23 | — | [README](README.md) |
+| 项目关系 | `v1.0.2` | 2026-09-23 | — | [项目关系](docs/ecosystem.md) |
+| Sakura-MCP-Server | `v1.0.3` | 2026-09-23 | `v0.3.4` | [项目页](docs/sakura-mcp-server.md) |
+| Cline Sync 本地客户端 | `v1.0.2` | 2026-09-23 | 随 Sakura 仓库 | [客户端页](docs/cline-sync.md) |
+| Sakura-MCP-Server 生产部署 | `v1.0.1` | 2026-09-20 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-deployment.md) |
+| Sakura-MCP-Server 运维与排障 | `v1.0.1` | 2026-09-20 | — | [运维页](docs/operations.md) |
+| DSH Activity Tracker | `v1.0.2` | 2026-09-23 | `v1.7.0` | [项目页](docs/dsh-activity-tracker.md) |
+| DSH Better Model Thinking Control | `v1.0.2` | 2026-09-23 | `0.2.9` | [项目页](docs/dsh-better-model-thinking-control.md) |
+| DSH Windows Tool Fix | `v1.0.1` | 2026-09-20 | `v0.2.1` | [项目页](docs/dsh-windows-tool-fix.md) |
+| Local Model Gateway | `v1.0.2` | 2026-09-23 | `v2.2.0` | [项目页](docs/local-model-gateway.md) |
+| Life Dashboard | `v1.0.2` | 2026-09-23 | `1.0.11` | [项目页](docs/life-dashboard.md) |
+| Sakura Chat | `v1.0.2` | 2026-09-23 | master（无 Release tag） | [项目页](docs/sakura-chat.md) |
+| Sakura AI Cut | `v1.0.1` | 2026-09-23 | `0.2.1` | [项目页](docs/sakura-aicut.md) |
+| UniLink | `v1.0.1` | 2026-09-23 | `v1.2` | [项目页](docs/unilink.md) |
+| AI 简历自动填充助手 | `v1.0.2` | 2026-09-23 | 无 Release tag | [项目页](docs/resume-smart-filler-assistant.md) |
+| 配置与密钥规范 | `v1.0.1` | 2026-09-20 | — | [安全规范](docs/security.md) |
+| 贡献与维护 | `v1.0.1` | 2026-09-23 | — | [维护说明](docs/contributing.md) |
+| 设计规范 | `v1.0.0` | 2026-09-23 | — | [设计规范](docs/design-guide.md) |
+| 十站一章 | `v1.0.0` | 2026-09-08 | — | [站群说明](docs/studio-sites.md) |
+
+### 本次变更内容
+
+- **新增设计规范页**：设计哲学、页面结构模板、组件规范、排印与间距、色彩 token 角色、写作语气，作为后续所有页面的写作依据。
+- **主题层重构**（`assets/theme.css`）：标题字重阶梯化、正文行高收到 1.7、建立 4px 间距变量与两级阴影；表格与代码块去硬边框改为背景明度差加投影分区；侧栏玻璃化并给当前项加左侧指示条；链接与按钮 hover 增加颜色过渡、轻微抬升与投影加深。色彩 token 结构不变，色值未动。
+- **贡献与维护**扩写：设计规范入口、版本号升降规则与相对链接规范。
+- **结构缺口补齐**：为 6 个项目页补上固定的结尾免责声明；把 4 个页面的「与樱落生态的关系」标题统一为「与生态其他项目的关系」。
+- 未改动内容的页面不升版本。
+
+## 历史版本（2026-09-23 · 上游扫描）
 
 本轮重新扫描全部 10 个上游仓库的最新提交与版本。仅 Local Model Gateway 与 Sakura Chat 有新进展，其余 8 个仓库与上次记录一致。
 

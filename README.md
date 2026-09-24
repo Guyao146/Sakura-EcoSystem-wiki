@@ -12,15 +12,15 @@
 
 | 项目 | 定位 | 连接方式 | Wiki 文档版本 |
 | --- | --- | --- | --- |
-| [Sakura-MCP-Server](docs/sakura-mcp-server.md) | 面向所有兼容 MCP Agent 的多用户长期记忆平台 | MCP、Authentik、pgvector、Provider、Worker、审计和 Web 管理 | Wiki `v1.0.2` · 上游 `v0.3.4` |
-| [DSH Activity Tracker](docs/dsh-activity-tracker.md) | DeepSeek Harness 的本地活动统计与归档恢复插件 | 扫描本地 DSH 会话、查看/恢复归档，并可向 Life Dashboard 推送快照 | Wiki `v1.0.1` · 上游 `v1.7.0` |
-| [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md) | DSH 中转站模型思考强度配置与能力识别 | 读取 OpenAI 兼容 `/models`，写入 DSH 原生 `llm-pi-ai` 设置 | Wiki `v1.0.1` · 上游 `0.2.9` |
+| [Sakura-MCP-Server](docs/sakura-mcp-server.md) | 面向所有兼容 MCP Agent 的多用户长期记忆平台 | MCP、Authentik、pgvector、Provider、Worker、审计和 Web 管理 | Wiki `v1.0.3` · 上游 `v0.3.4` |
+| [DSH Activity Tracker](docs/dsh-activity-tracker.md) | DeepSeek Harness 的本地活动统计与归档恢复插件 | 扫描本地 DSH 会话、查看/恢复归档，并可向 Life Dashboard 推送快照 | Wiki `v1.0.2` · 上游 `v1.7.0` |
+| [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md) | DSH 中转站模型思考强度配置与能力识别 | 读取 OpenAI 兼容 `/models`，写入 DSH 原生 `llm-pi-ai` 设置 | Wiki `v1.0.2` · 上游 `0.2.9` |
 | [DSH Windows Tool Fix](docs/dsh-windows-tool-fix.md) | Windows 上 DSH Desktop 的默认 Git Bash preset 修复插件 | DSH profile patch，把 `minimal-gitbash` 设为默认 Agent preset | Wiki `v1.0.1` · 上游 `v0.2.1` |
 | [Local Model Gateway](docs/local-model-gateway.md) | 本机多上游模型聚合网关 | OpenAI/Anthropic/Responses 协议互转、路由轮询、熔断限流与用量统计 | Wiki `v1.0.2` · 上游 `v2.2.0` |
-| [Life Dashboard](docs/life-dashboard.md) | 个人生活中枢与可视化看板 | Authentik、Home Assistant、天气、To Do、AI 与 DSH | Wiki `v1.0.1` · 上游 `1.0.11` |
-| [Sakura Chat](docs/sakura-chat.md) | 仿微信的网页聊天应用 | 好友/群聊、实时消息、音视频通话、加密传输+加密存储 | Wiki `v1.0.0` |
-| [Sakura AI Cut](docs/sakura-aicut.md) | 无限画布式 AI 短剧生成与在线剪辑 | 五步工作台、资产生成、运镜模板、自动规划 Agent | Wiki `v1.0.0` · 上游 `0.2.1` |
-| [UniLink](docs/unilink.md) | 手机与电脑互联助手 | 通知镜像、剪贴板同步、文件互传、Authentik 扫码登录 | Wiki `v1.0.0` · 上游 `v1.2` |
+| [Life Dashboard](docs/life-dashboard.md) | 个人生活中枢与可视化看板 | Authentik、Home Assistant、天气、To Do、AI 与 DSH | Wiki `v1.0.2` · 上游 `1.0.11` |
+| [Sakura Chat](docs/sakura-chat.md) | 仿微信的网页聊天应用 | 好友/群聊、实时消息、音视频通话、加密传输+加密存储 | Wiki `v1.0.2` |
+| [Sakura AI Cut](docs/sakura-aicut.md) | 无限画布式 AI 短剧生成与在线剪辑 | 五步工作台、资产生成、运镜模板、自动规划 Agent | Wiki `v1.0.1` · 上游 `0.2.1` |
+| [UniLink](docs/unilink.md) | 手机与电脑互联助手 | 通知镜像、剪贴板同步、文件互传、Authentik 扫码登录 | Wiki `v1.0.1` · 上游 `v1.2` |
 
 ## 工作室网站群
 

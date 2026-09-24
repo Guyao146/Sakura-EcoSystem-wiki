@@ -1,6 +1,6 @@
 # DSH Activity Tracker
 
-> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（DSH Activity Tracker独立版本，上游 `v1.7.0`）
+> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-23`（DSH Activity Tracker独立版本，上游 `v1.7.0`）
 
 仓库：[Guyao146/dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker) · 许可证 `LGPL-2.1-only`
 
@@ -220,3 +220,6 @@ cordis.patch.yml
 ```
 
 项目使用 GNU Lesser General Public License v2.1 only（`LGPL-2.1-only`）。
+
+
+> 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

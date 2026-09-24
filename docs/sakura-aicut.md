@@ -1,6 +1,6 @@
 # Sakura AI Cut
 
-> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-09-20`（Sakura AI Cut独立版本）
+> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-23`（Sakura AI Cut独立版本）
 
 仓库：[Guyao146/Sakura-AiCut](https://github.com/Guyao146/Sakura-AiCut) · 许可证 `LGPL-2.1` · `package.json` 版本 `0.2.1`
 
@@ -101,7 +101,7 @@ Web 端投递任务到 SQLite 表队列，独立 Worker 长驻进程轮询认领
 - **异步任务**：视频生成等需要轮询的接口，由 Worker 按上游任务 ID 轮询，`ASYNC_TASK_TIMEOUT` 控制最大轮询时长（默认 30 分钟）。
 - Worker 支持并发与重试；重启后未完成的任务会重新进入队列。
 
-## 与樱落生态的关系
+## 与生态其他项目的关系
 
 | 项目 | 作用 |
 | --- | --- |

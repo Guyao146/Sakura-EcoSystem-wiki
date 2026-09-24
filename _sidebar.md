@@ -19,5 +19,6 @@
 - **开发与安全**
   - [配置与密钥规范](docs/security.md)
   - [贡献与维护](docs/contributing.md)
+  - [设计规范](docs/design-guide.md)
 - **工作室网站群**
   - [十站一章](docs/studio-sites.md)

@@ -1,6 +1,6 @@
 # Sakura-MCP-Server
 
-> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-20`（Sakura-MCP-Server独立版本）
+> Wiki 文档版本：`v1.0.3` · 更新日期：`2026-09-23`（Sakura-MCP-Server独立版本）
 
 仓库：[Guyao146/Sakura-MCP-Server](https://github.com/Guyao146/Sakura-MCP-Server) · 许可证 `LGPL-v2.1`
 
@@ -435,3 +435,6 @@ CI 会执行：
 - 升级到 `0.3.1` 需执行迁移 `009_login_probe.sql`（`AUTO_MIGRATE=true` 时自动执行）。「以 *** 的身份登录」还要求该 Provider 的同意模式为隐式（implicit consent）；若配置为每次登录都需确认，探测会得到 `consent_required`，页面静默回退到普通登录流程，不报错但功能不生效。
 - 升级到 `0.3.2` 需执行迁移 `010_client_sessions.sql`（`AUTO_MIGRATE=true` 时自动执行）；客户端会话是观测数据，写入失败只记录警告，不会阻断 MCP 请求。
 - `0.3.3` 修复探测 Cookie 清理与 Sakura Session Cookie 同时下发时的兼容性问题，升级后应重新验证登录、退出和“使用其他账号登录”流程。
+
+
+> 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

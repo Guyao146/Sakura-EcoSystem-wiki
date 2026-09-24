@@ -1,6 +1,6 @@
 # DSH Better Model Thinking Control
 
-> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（DSH Better Model Thinking Control独立版本，上游 `0.2.9`）
+> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-23`（DSH Better Model Thinking Control独立版本，上游 `0.2.9`）
 
 仓库：[Guyao146/dsh-better-model-thinking-control](https://github.com/Guyao146/dsh-better-model-thinking-control) · 许可证见下方说明
 
@@ -292,7 +292,7 @@ Content-Type: application/json
 
 插件按模型 ID 精确合并。大小写、别名或不同前缀会被视为不同模型，请在保存前删除不需要的条目。
 
-## 与樱落生态的关系
+## 与生态其他项目的关系
 
 | 项目 | 作用 |
 | --- | --- |
@@ -384,3 +384,6 @@ GitHub Actions 在推送 `main` 后会使用 Node.js 22 执行测试、`npm pack
 - [项目 GitHub](https://github.com/Guyao146/dsh-better-model-thinking-control)
 - [项目 Issues](https://github.com/Guyao146/dsh-better-model-thinking-control/issues)
 - [樱落生态总览](../README.md)
+
+
+> 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

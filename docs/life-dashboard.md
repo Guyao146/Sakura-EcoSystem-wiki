@@ -1,6 +1,6 @@
 # Life Dashboard
 
-> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（Life Dashboard独立版本，上游 `1.0.11`）
+> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-23`（Life Dashboard独立版本，上游 `1.0.11`）
 
 仓库：[Guyao146/Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) · 许可证 `LGPL-2.1`
 
@@ -197,3 +197,6 @@ nginx-life-dashboard.conf.example  # Nginx 安全规则示例
 ## 版本与路线
 
 当前实现已经包含 OIDC、Home Assistant、天气、纪念日、AI、DSH 工作区动态、自动续期和服务器升级控制台；README 中仍标记为未来方向的设备状态增强、自动化场景、完整天气统计、移动 App 和更多数据分析，需以实际 CHANGELOG 为准。
+
+
+> 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

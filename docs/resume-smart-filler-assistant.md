@@ -1,6 +1,6 @@
 # AI 简历自动填充助手
 
-> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（AI 简历自动填充助手独立版本）
+> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-23`（AI 简历自动填充助手独立版本）
 
 仓库：[Guyao146/Resume-Smart-Filler-Assistant](https://github.com/Guyao146/Resume-Smart-Filler-Assistant) · 许可证见下方说明
 
@@ -258,3 +258,6 @@ README 顶部的 AGPL v3 徽章与实际 `LICENSE` 文件不一致。本 Wiki �
 - 表单数据导出和保存能力。
 
 这些属于项目规划，不代表当前版本已经实现。欢迎通过 [GitHub Issues](https://github.com/Guyao146/Resume-Smart-Filler-Assistant/issues) 反馈问题或提交 Pull Request。
+
+
+> 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

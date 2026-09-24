@@ -1,6 +1,6 @@
 # Cline Sync 本地客户端
 
-> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（Cline Sync 本地客户端独立版本）
+> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-23`（Cline Sync 本地客户端独立版本）
 
 源码：[Sakura-MCP-Server/tools/cline-sync](https://github.com/Guyao146/Sakura-MCP-Server/tree/main/tools/cline-sync)
 
@@ -208,3 +208,6 @@ Agent Key 未被删除
 - CI 当前只检查类型和测试，不代表单文件打包、签名或跨平台发行已经验证。
 
 > 工具行为以 Sakura-MCP-Server 仓库中 `tools/cline-sync` 的源码、README 和 CI 为最终依据。
+
+
+> 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。
