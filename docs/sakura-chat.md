@@ -1,12 +1,12 @@
 # Sakura Chat
 
-> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-23`（Sakura Chat独立版本）
+> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（Sakura Chat独立版本）
+
+[![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
+[![Sakura Chat](../assets/badges/sakura-chat.svg)](https://github.com/Guyao146/Sakura-Chat)
+[![已编写Wiki](../assets/sakura-wiki.svg)](sakura-chat.md)
 
 仓库：[Guyao146/Sakura-Chat](https://github.com/Guyao146/Sakura-Chat) · 许可证见下方说明
-
-[![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
-[![Node.js](https://img.shields.io/badge/Node.js-≥22-3c873a)](https://nodejs.org/)
-[![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 ## 项目定位
 
@@ -97,6 +97,18 @@ test/e2e.js         端到端集成测试（45 项断言）
 ## 接口
 
 | 方法 | 路径 | 作用 |
+| --- | --- | --- |
+| `POST` | `/api/auth/register` `/login` | 注册 / 登录，返回 JWT 与会话密钥 |
+| `GET` | `/api/friends` `/api/friends/requests` | 好友列表与请求 |
+| `POST` | `/api/groups` | 建群、邀请成员、公告 |
+| `GET` | `/api/conversations/:id/messages` | 分页历史（服务端解密后返回） |
+| `POST` | `/api/conversations/:id/read` | 标记已读并回执对方 |
+| `GET` | `/api/conversations/:id/search?q=` | 聊天记录搜索（服务端解密后检索） |
+| `POST` | `/api/upload` | Base64 图片/文件/语音上传 |
+| — | `ws(s)://host/ws?token=&sid=` | 加密实时通道 |
+
+WebSocket 协议：客户端发送 `{sid, d: base64(IV+密文+Tag)}`，服务端解密后按 `type` 分发（`chat / read / typing / recall / call_* / ping`），服务端推送 `message / ack / status / read / typing / presence / recall / friend_request / group_* / call_*`。
+
 ## 测试
 
 ```bash
@@ -107,15 +119,6 @@ HOST=http://127.0.0.1:3000 npm test      # 运行端到端测试
 覆盖注册登录、JWT、会话密钥、好友请求/同意、加密 WS 收发、ACK、已读回执、撤回、群聊广播、表情包与语音消息、通话信令中继、引用回复/表情反应/消息编辑/拍一拍、置顶+免打扰、全局搜索、收藏、隐身状态广播、文件传输助手，以及**断言数据库中不存在明文聊天记录**，共 45 项。
 
 GitHub Actions 在每次 push/PR 执行**语法检查 + 45 项 E2E + Docker 镜像构建冒烟**；push master 时额外把镜像推送到 GHCR。
-
-## 近期更新
-
-| 提交 | 要点 |
-| --- | --- |
-| 文件传输助手 | 内置系统账号，注册即自动互加好友，消息自动送达+已读，不可登录/搜索/删除 |
-| 输入框高度自适应 | 输入框高度随内容自适应增长，顶部把手可拖拽调节并记忆；默认占满剩余空间，拖到顶或双击把手恢复占满 |
-
-> 仓库使用 master 分支且暂无 Release tag，上表以 master 提交记录为准。
 
 ## 音视频通话说明
 
@@ -146,6 +149,12 @@ GitHub Actions 在每次 push/PR 执行**语法检查 + 45 项 E2E + Docker 镜�
 - 音视频通话仅支持**好友间 1 对 1**；群组多人通话需要 SFU 媒体服务器，暂未集成。
 - 语音消息的波形为录音时采集的频谱峰值快照，并非精确音频波形。
 
+## 许可证
+
+仓库当前**没有 LICENSE 文件**，也未在 `package.json` 声明 `license` 字段。按 GitHub 默认规则，代码在无许可证声明时保留所有权利，他人不具备使用、修改或再分发的默认授权。
+
+正式发布或让他人部署前，应先在仓库添加明确的许可证（生态其他项目常用 `LGPL-2.1`），本 Wiki 页面以仓库最终声明为准。
+
 ## 与生态其他项目的关系
 
 | 项目 | 作用 |
@@ -156,22 +165,16 @@ GitHub Actions 在每次 push/PR 执行**语法检查 + 45 项 E2E + Docker 镜�
 
 Sakura-Chat 当前使用自建账号体系，不依赖 Authentik；可以与生态其他项目部署在同一台机器上，互不干扰。
 
-## 许可证
+## 版本记录
 
-仓库当前**没有 LICENSE 文件**，也未在 `package.json` 声明 `license` 字段。按 GitHub 默认规则，代码在无许可证声明时保留所有权利，他人不具备使用、修改或再分发的默认授权。
+此前扫描未发现 Release tag，`package.json` 为 `1.0.0`。以下按提交标识记录本页已覆盖的 master 快照，不把提交称作正式发布版本，也不声称代表当前分支最新状态。
 
-正式发布或让他人部署前，应先在仓库添加明确的许可证（生态其他项目常用 `LGPL-2.1`），本 Wiki 页面以仓库最终声明为准。
+| 版本 | 要点 |
+| --- | --- |
+| master · `74de4f9` | 新增文件传输助手：内置系统账号，注册即互加好友，消息自动送达与已读 |
+| master · `92428c1` | 输入框随内容增长，支持顶部把手拖拽调节并记忆高度 |
+| master · `1831610` | 该快照将输入框默认设为占满剩余空间，并修复屏幕溢出与拖拽范围 |
+
+来源：[文件传输助手](https://github.com/Guyao146/Sakura-Chat/commit/74de4f9)、[高度自适应](https://github.com/Guyao146/Sakura-Chat/commit/92428c1)、[剩余空间布局](https://github.com/Guyao146/Sakura-Chat/commit/1831610)。本轮只整理结构；更新到后续提交时需重新核对输入框行为和测试数量。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。
-
-| --- | --- | --- |
-| `POST` | `/api/auth/register` `/login` | 注册 / 登录，返回 JWT 与会话密钥 |
-| `GET` | `/api/friends` `/api/friends/requests` | 好友列表与请求 |
-| `POST` | `/api/groups` | 建群、邀请成员、公告 |
-| `GET` | `/api/conversations/:id/messages` | 分页历史（服务端解密后返回） |
-| `POST` | `/api/conversations/:id/read` | 标记已读并回执对方 |
-| `GET` | `/api/conversations/:id/search?q=` | 聊天记录搜索（服务端解密后检索） |
-| `POST` | `/api/upload` | Base64 图片/文件/语音上传 |
-| — | `ws(s)://host/ws?token=&sid=` | 加密实时通道 |
-
-WebSocket 协议：客户端发送 `{sid, d: base64(IV+密文+Tag)}`，服务端解密后按 `type` 分发（`chat / read / typing / recall / call_* / ping`），服务端推送 `message / ack / status / read / typing / presence / recall / friend_request / group_* / call_*`。

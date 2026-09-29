@@ -1,12 +1,12 @@
 # DSH Activity Tracker
 
-> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-23`（DSH Activity Tracker独立版本，上游 `v1.7.0`）
+> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（DSH Activity Tracker独立版本，上游 `v1.7.0`）
+
+[![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
+[![DSH Plugin](../assets/badges/dsh-plugin.svg)](https://github.com/Guyao146/dsh-activity-tracker)
+[![已编写Wiki](../assets/sakura-wiki.svg)](dsh-activity-tracker.md)
 
 仓库：[Guyao146/dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker) · 许可证 `LGPL-2.1-only`
-
-[![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
-[![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-4c7dff)](https://github.com/deepseek-ai/deepseek-harness)
-[![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 ## 项目定位
 
@@ -221,5 +221,20 @@ cordis.patch.yml
 
 项目使用 GNU Lesser General Public License v2.1 only（`LGPL-2.1-only`）。
 
+
+## 与生态其他项目的关系
+
+- [Life Dashboard](life-dashboard.md) 可接收显式配对后的工作区摘要；会话详情需额外授权，不是默认上传全部历史。
+- [DSH Better Model Thinking Control](dsh-better-model-thinking-control.md) 配置模型思考档位，[DSH Windows Tool Fix](dsh-windows-tool-fix.md) 修复 Windows 默认执行 preset；本插件只负责活动统计与归档管理。
+
+## 版本记录
+
+本表摘录已核实的上游版本，不表示完整发布历史。
+
+| 版本 | 要点 |
+| --- | --- |
+| `v1.7.0` | 新增已归档会话浏览与恢复，可搜索归档记录、查看内容后恢复会话 |
+
+来源：[归档浏览与恢复提交 `879cf1d`](https://github.com/Guyao146/dsh-activity-tracker/commit/879cf1d) 及该提交的 [package.json](https://github.com/Guyao146/dsh-activity-tracker/blob/879cf1d/package.json)。完整发布信息见 [Releases](https://github.com/Guyao146/dsh-activity-tracker/releases)。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

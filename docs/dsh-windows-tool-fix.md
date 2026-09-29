@@ -1,12 +1,12 @@
 # DSH Windows Tool Fix
 
-> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（DSH Windows Tool Fix独立版本，上游 `v0.2.1`）
+> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（DSH Windows Tool Fix独立版本，上游 `v0.2.1`）
+
+[![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
+[![DSH Plugin](../assets/badges/dsh-plugin.svg)](https://github.com/Guyao146/dsh-windows-tool-fix)
+[![已编写Wiki](../assets/sakura-wiki.svg)](dsh-windows-tool-fix.md)
 
 仓库：[Guyao146/dsh-windows-tool-fix](https://github.com/Guyao146/dsh-windows-tool-fix) · 许可证 `LGPL-2.1-or-later`
-
-[![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
-[![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-4c7dff)](https://github.com/deepseek-ai/deepseek-harness)
-[![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 ## 项目定位
 
@@ -152,5 +152,15 @@ dsh plugin --profile desktop remove dsh-windows-tool-fix
 - 本插件只改默认 Agent preset，不解析会话也不读取模型能力。
 
 三者可同时安装，互不干扰；但要注意它们分属 `desktop` 与 `web` 两个独立 profile，需装到实际运行的那个。
+
+## 版本记录
+
+本表摘录已核实的上游版本，不表示完整发布历史。
+
+| 版本 | 要点 |
+| --- | --- |
+| `v0.2.1` | 对齐 README 与许可证元数据；当前实现通过 profile patch 复用 `minimal-gitbash`，不修改官方安装文件 |
+
+来源：[文档与许可证提交 `6aeeb91`](https://github.com/Guyao146/dsh-windows-tool-fix/commit/6aeeb91) 及该提交的 [package.json](https://github.com/Guyao146/dsh-windows-tool-fix/blob/6aeeb91/package.json)。功能边界见上文，发布包见 [Releases](https://github.com/Guyao146/dsh-windows-tool-fix/releases)。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

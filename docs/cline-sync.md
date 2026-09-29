@@ -1,6 +1,10 @@
 # Cline Sync 本地客户端
 
-> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-23`（Cline Sync 本地客户端独立版本）
+> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（Cline Sync 本地客户端独立版本）
+
+[![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
+[![Cline Sync](../assets/badges/cline-sync.svg)](https://github.com/Guyao146/Sakura-MCP-Server/tree/main/tools/cline-sync)
+[![已编写Wiki](../assets/sakura-wiki.svg)](cline-sync.md)
 
 源码：[Sakura-MCP-Server/tools/cline-sync](https://github.com/Guyao146/Sakura-MCP-Server/tree/main/tools/cline-sync)
 
@@ -209,5 +213,20 @@ Agent Key 未被删除
 
 > 工具行为以 Sakura-MCP-Server 仓库中 `tools/cline-sync` 的源码、README 和 CI 为最终依据。
 
+
+## 与生态其他项目的关系
+
+- [Sakura-MCP-Server](sakura-mcp-server.md) 提供记忆抽取、存储和权限校验；Cline Sync 只是主动发送本地文本的客户端，必须连接可用的服务端。
+- [DSH Activity Tracker](dsh-activity-tracker.md) 读取 DSH 会话做统计；Cline Sync 读取 Cline 任务历史写入长期记忆，两者不共享会话目录或游标。
+
+## 版本记录
+
+以下是客户端源码版本，不是 Sakura-MCP-Server 的服务端版本，也不是独立客户端 Release。
+
+| 版本 | 要点 |
+| --- | --- |
+| `0.1.0`（源码） | 定时扫描 Cline 文本历史、按任务保存增量游标，提供托盘、配置窗口、单次同步与 dry-run；可自行构建 Windows 单文件程序 |
+
+来源：[服务端 `v0.3.4` 中的客户端 package.json](https://github.com/Guyao146/Sakura-MCP-Server/blob/v0.3.4/tools/cline-sync/package.json) 与 [客户端说明](https://github.com/Guyao146/Sakura-MCP-Server/tree/v0.3.4/tools/cline-sync)。未确认独立客户端 Release，不把服务端 tag 当作客户端版本。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

@@ -1,6 +1,6 @@
 # 运维、备份、升级与排障
 
-> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-20`（Sakura-MCP-Server 运维与排障独立版本）
+> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-24`（Sakura-MCP-Server 运维与排障独立版本）
 
 本页以 Sakura-MCP-Server 的 Docker Compose 部署为主，同时列出樱落生态通用运维原则。
 
@@ -370,3 +370,5 @@ Trivy HIGH/CRITICAL 镜像扫描
 - Life Dashboard 升级应先备份 `.env`，并确认 Nginx 禁止访问点文件。
 - DSH Activity Tracker 默认数据保留在本机；远端连接只授权必要工作区。
 - DSH 插件升级后应重启 DSH Web，并确认插件 profile 为 `web`。
+
+> 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

@@ -1,12 +1,12 @@
 # AI 简历自动填充助手
 
-> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-23`（AI 简历自动填充助手独立版本）
+> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（AI 简历自动填充助手独立版本）
+
+[![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
+[![Resume Filler](../assets/badges/resume-filler.svg)](https://github.com/Guyao146/Resume-Smart-Filler-Assistant)
+[![已编写Wiki](../assets/sakura-wiki.svg)](resume-smart-filler-assistant.md)
 
 仓库：[Guyao146/Resume-Smart-Filler-Assistant](https://github.com/Guyao146/Resume-Smart-Filler-Assistant) · 许可证见下方说明
-
-[![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
-[![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-1677ff)](https://github.com/Guyao146/Resume-Smart-Filler-Assistant)
-[![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 ## 项目定位
 
@@ -259,5 +259,20 @@ README 顶部的 AGPL v3 徽章与实际 `LICENSE` 文件不一致。本 Wiki �
 
 这些属于项目规划，不代表当前版本已经实现。欢迎通过 [GitHub Issues](https://github.com/Guyao146/Resume-Smart-Filler-Assistant/issues) 反馈问题或提交 Pull Request。
 
+
+## 与生态其他项目的关系
+
+- 本扩展独立运行在 Chrome/Edge 中，不依赖 [Life Dashboard](life-dashboard.md) 或 [Sakura-MCP-Server](sakura-mcp-server.md)，也不会默认同步简历到生态其他服务。
+- [Local Model Gateway](local-model-gateway.md) 提供 OpenAI 兼容转发，可作为自定义模型端点的候选；需自行核对完整请求地址、Key 和浏览器扩展访问条件，不代表已有专用集成。
+
+## 版本记录
+
+本表记录扩展清单中的源码版本；此前扫描未发现 Release tag，不据此推定已上架浏览器商店。
+
+| 版本 | 要点 |
+| --- | --- |
+| `1.0.0`（manifest） | Manifest V3 扩展快照：简历上传或粘贴、本地规则与 AI 两阶段匹配、表单填充及手动补充；不会自动提交表单 |
+
+来源：[manifest.json](https://github.com/Guyao146/Resume-Smart-Filler-Assistant/blob/e3d73c5/manifest.json) 与 [仓库说明](https://github.com/Guyao146/Resume-Smart-Filler-Assistant/blob/e3d73c5/README.md)。未核实更早版本，不补造发布历史。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

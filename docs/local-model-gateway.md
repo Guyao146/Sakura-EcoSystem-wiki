@@ -1,12 +1,12 @@
 # Local Model Gateway
 
-> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-23`（Local Model Gateway独立版本，上游 `v2.2.0`）
+> Wiki 文档版本：`v1.0.3` · 更新日期：`2026-09-24`（Local Model Gateway独立版本，上游 `v2.2.0`）
+
+[![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
+[![Local Gateway](../assets/badges/local-gateway.svg)](https://github.com/Guyao146/Local-Model-Gateway)
+[![已编写Wiki](../assets/sakura-wiki.svg)](local-model-gateway.md)
 
 仓库：[Guyao146/Local-Model-Gateway](https://github.com/Guyao146/Local-Model-Gateway) · 许可证 `LGPL-v2.1`
-
-[![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
-[![Local Gateway](https://img.shields.io/badge/Local-Gateway-3f9d6d)](https://github.com/Guyao146/Local-Model-Gateway)
-[![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 ## 项目定位
 
@@ -33,7 +33,7 @@ node src/server.js
 
 ## 当前状态
 
-| 项目 | 状态 |
+| 项目 | 说明 |
 | --- | --- |
 | 当前版本 | `v2.2.0` |
 | 运行要求 | Node.js `18+`（使用内置 `fetch`） |
@@ -224,14 +224,6 @@ node src/server.js
 
 客户端配置：Base URL 填 `http://127.0.0.1:8787/v1`，API Key 填后台创建的 `sk-local_...`。
 
-## 与生态其他项目的关系
-
-Local Model Gateway 处在模型调用链路的最前端，与生态其他项目没有强制依赖：
-
-- [DSH Better Model Thinking Control](dsh-better-model-thinking-control.md) 关注「在 DSH 里配置思考档位」，写入 DSH 原生设置；Local Model Gateway 关注「请求实际发往哪个上游」。两者都会读取中转站 `/models` 的能力元数据，但作用层次不同，可以叠加使用：DSH 把网关当作一个中转站，网关再向真实上游分流。
-- [Sakura-MCP-Server](sakura-mcp-server.md) 处理 Agent 的长期记忆，走 MCP 协议；网关处理模型请求转发，走 OpenAI/Anthropic 协议。两者互不经过对方。
-- 网关的用量统计只覆盖经过它的请求，不替代 [DSH Activity Tracker](dsh-activity-tracker.md) 的会话级统计。
-
 ## 测试
 
 ```powershell
@@ -239,6 +231,18 @@ npm.cmd test
 ```
 
 覆盖协议转换、分流策略、模型分组、余额解析、客户端标识、来源识别六组单元测试，以及 OIDC 登录、网关转发与熔断、流式响应、模型选择四组集成测试。集成测试会在临时目录启动真实网关进程并用内存 mock 模拟上游。
+
+## 项目内文档
+
+仓库自带一份更细的文档，位于 `wiki/` 目录，可通过 `wiki/index.html` 在浏览器中阅读，包含架构与模块、接口参考、路由与轮询、指标与日志、认证与安全、部署与配置、开发与测试七个章节。
+
+## 与生态其他项目的关系
+
+Local Model Gateway 处在模型调用链路的最前端，与生态其他项目没有强制依赖：
+
+- [DSH Better Model Thinking Control](dsh-better-model-thinking-control.md) 关注「在 DSH 里配置思考档位」，写入 DSH 原生设置；Local Model Gateway 关注「请求实际发往哪个上游」。两者都会读取中转站 `/models` 的能力元数据，但作用层次不同，可以叠加使用：DSH 把网关当作一个中转站，网关再向真实上游分流。
+- [Sakura-MCP-Server](sakura-mcp-server.md) 处理 Agent 的长期记忆，走 MCP 协议；网关处理模型请求转发，走 OpenAI/Anthropic 协议。两者互不经过对方。
+- 网关的用量统计只覆盖经过它的请求，不替代 [DSH Activity Tracker](dsh-activity-tracker.md) 的会话级统计。
 
 ## 版本记录
 
@@ -251,9 +255,5 @@ npm.cmd test
 | `v2.2.0` | 新增每个上游的可配置重试次数（0–10，默认 0）：连接失败、超时、429 或 5xx 先原地重试同一上游，仍失败才切换备用上游 |
 
 升级只需在后台「检查更新」中升级，或重新 `git pull && node src/server.js`；配置和数据目录向后兼容。
-
-## 项目内文档
-
-仓库自带一份更细的文档，位于 `wiki/` 目录，可通过 `wiki/index.html` 在浏览器中阅读，包含架构与模块、接口参考、路由与轮询、指标与日志、认证与安全、部署与配置、开发与测试七个章节。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

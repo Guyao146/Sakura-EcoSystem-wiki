@@ -1,12 +1,12 @@
 # DSH Better Model Thinking Control
 
-> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-23`（DSH Better Model Thinking Control独立版本，上游 `0.2.9`）
+> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（DSH Better Model Thinking Control独立版本，上游 `0.2.9`）
+
+[![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
+[![DSH Plugin](../assets/badges/dsh-plugin.svg)](https://github.com/Guyao146/dsh-better-model-thinking-control)
+[![已编写Wiki](../assets/sakura-wiki.svg)](dsh-better-model-thinking-control.md)
 
 仓库：[Guyao146/dsh-better-model-thinking-control](https://github.com/Guyao146/dsh-better-model-thinking-control) · 许可证见下方说明
-
-[![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
-[![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-4c7dff)](https://github.com/deepseek-ai/deepseek-harness)
-[![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 `dsh-better-model-thinking-control` 是樱落生态中的 DSH Web 插件，用于按中转站和模型配置思考强度（Reasoning Effort）。它读取 OpenAI 兼容中转站公开的模型能力，并把结果写入 DSH 原生 `llm-pi-ai` 设置，让 DSH 自己的模型选择器和思考档位机制继续负责实际请求。
 
@@ -292,16 +292,6 @@ Content-Type: application/json
 
 插件按模型 ID 精确合并。大小写、别名或不同前缀会被视为不同模型，请在保存前删除不需要的条目。
 
-## 与生态其他项目的关系
-
-| 项目 | 作用 |
-| --- | --- |
-| `dsh-better-model-thinking-control` | 配置 DSH 模型思考档位和中转站能力映射 |
-| `dsh-activity-tracker` | 统计 DSH 本地活动、工具调用和 Token 使用 |
-| `Life Dashboard` | 汇总生活信息，并接收授权的 DSH 工作区状态 |
-
-三个项目可以独立使用。思考强度插件不依赖 Activity Tracker，也不会上传活动统计；它只在用户点击自动拉取时访问所配置中转站的 `/models`。
-
 ## 项目结构与实现
 
 ```text
@@ -352,23 +342,6 @@ npm pack
 
 GitHub Actions 在推送 `main` 后会使用 Node.js 22 执行测试、`npm pack`、创建版本化 Tag 和 Release，并上传 `.tgz`。创建 Release 需要 Actions 工作流具有 `Read and write permissions`。
 
-### 客户端版本演进
-
-- `0.1.6`：只保留设置侧栏中的独立入口，档位改为英文标准值；
-- `0.1.7`：自动识别说明移到总标题下方；
-- `0.1.8`：档位复选区域改为下拉多选；
-- `0.1.9`：模型 ID、强度下拉和删除按钮改为同一行，非推理模型移入下拉菜单；
-- `0.2.0`：移除最外层卡片边框，只保留中转站分组框，并固定三项控件的对齐布局；
-- `0.2.1`：新增每模型输入模态选择（文字默认勾选，可选图片/视频/语音），保存在插件本地；
-- `0.2.2`：新增设置页与主页面模型搜索；模型行改为两行布局（模型名/删除、思考档位/输入模态）；
-- `0.2.3`：修正主页面模型搜索菜单样式，保持对 DSH 原生选择逻辑的兼容；
-- `0.2.4`：用统一三列网格对齐模型名、删除、思考档位与输入模态；
-- `0.2.5`：新增 `Ultra` 档位，自动拉取保留网关返回的档位和模态，中转站默认全部收起；
-- `0.2.6`：修正新增模型的 Ultra 默认档位；
-- `0.2.7`：自动拉取同时补全网关和 DSH 本地目录提供的档位与输入模态；
-- `0.2.8`：改用严格两列网格对齐；
-- `0.2.9`：恢复紧凑的模型名/删除布局，将非推理模型纳入思考档位菜单，两个下拉菜单互斥避免重叠（当前版本）。
-
 ## 维护建议
 
 - 修改能力字段解析前先补充测试；
@@ -385,5 +358,38 @@ GitHub Actions 在推送 `main` 后会使用 Node.js 22 执行测试、`npm pack
 - [项目 Issues](https://github.com/Guyao146/dsh-better-model-thinking-control/issues)
 - [樱落生态总览](../README.md)
 
+
+## 与生态其他项目的关系
+
+| 项目 | 作用 |
+| --- | --- |
+| `dsh-better-model-thinking-control` | 配置 DSH 模型思考档位和中转站能力映射 |
+| `dsh-activity-tracker` | 统计 DSH 本地活动、工具调用和 Token 使用 |
+| `Life Dashboard` | 汇总生活信息，并接收授权的 DSH 工作区状态 |
+
+三个项目可以独立使用。思考强度插件不依赖 Activity Tracker，也不会上传活动统计；它只在用户点击自动拉取时访问所配置中转站的 `/models`。
+
+## 版本记录
+
+本表归并原「客户端版本演进」，按源码版本记录，不把包版本与不同命名规则的 Git tag 混为一谈。
+
+| 版本 | 要点 |
+| --- | --- |
+| `0.1.6` | 只保留设置侧栏独立入口，档位改为英文标准值 |
+| `0.1.7` | 自动识别说明移到总标题下方 |
+| `0.1.8` | 档位复选区域改为下拉多选 |
+| `0.1.9` | 模型 ID、强度下拉和删除按钮同排，非推理模型移入菜单 |
+| `0.2.0` | 移除最外层卡片边框，保留中转站分组并固定控件对齐 |
+| `0.2.1` | 新增每模型输入模态选择，保存在插件本地 |
+| `0.2.2` | 新增设置页与主页面模型搜索，模型行改为两行布局 |
+| `0.2.3` | 修正主页面搜索菜单样式，保持原生选择逻辑 |
+| `0.2.4` | 用三列网格对齐模型名、删除、档位与输入模态 |
+| `0.2.5` | 新增 Ultra，保留网关档位与模态，中转站默认收起 |
+| `0.2.6` | 修正新增模型的 Ultra 默认档位 |
+| `0.2.7` | 拉取时同时补全网关与 DSH 本地目录的能力 |
+| `0.2.8` | 改用严格两列网格对齐 |
+| `0.2.9` | 恢复紧凑布局，非推理模型纳入档位菜单，两个下拉菜单互斥 |
+
+来源：[截至 `321244e` 的提交历史](https://github.com/Guyao146/dsh-better-model-thinking-control/commits/321244e/) 与 [package.json](https://github.com/Guyao146/dsh-better-model-thinking-control/blob/321244e/package.json)。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

@@ -1,12 +1,12 @@
 # Sakura-MCP-Server
 
-> Wiki 文档版本：`v1.0.3` · 更新日期：`2026-09-23`（Sakura-MCP-Server独立版本）
+> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（Sakura-MCP-Server独立版本）
+
+[![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
+[![MCP Server](../assets/badges/mcp-server.svg)](https://github.com/Guyao146/Sakura-MCP-Server)
+[![已编写Wiki](../assets/sakura-wiki.svg)](sakura-mcp-server.md)
 
 仓库：[Guyao146/Sakura-MCP-Server](https://github.com/Guyao146/Sakura-MCP-Server) · 许可证 `LGPL-v2.1`
-
-[![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
-[![MCP Server](https://img.shields.io/badge/MCP-Server-7c5cff)](https://modelcontextprotocol.io/)
-[![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 > [!WARNING]
 > `v0.3.4` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
@@ -26,7 +26,7 @@ Sakura-MCP-Server 是面向所有兼容 Model Context Protocol（MCP）的 AI Ag
 
 ## 当前状态
 
-| 项目 | 状态 |
+| 项目 | 说明 |
 | --- | --- |
 | 最新公开 Release | `v0.3.4` |
 | 当前主线已验证 commit | 以 GitHub `main` 最新绿色 CI 为准 |
@@ -407,9 +407,15 @@ CI 会执行：
 
 最新 Release：[`v0.3.4`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.3.4)，包含 `sakura-mcp-server-0.3.4.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.3.4`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
 
-## 0.2.22 – 0.3.4 变更要点
+## 与生态其他项目的关系
 
-这一段的迭代集中在 Authentik 认证体验和向量 Provider：
+- [Cline Sync](cline-sync.md) 是配套的本地同步客户端，主动读取 Cline 文本历史并调用本服务抽取记忆；服务端不会被动读取客户端磁盘。
+- [Local Model Gateway](local-model-gateway.md) 聚合模型请求，本服务管理长期记忆，二者作用层次不同、没有强制依赖。
+- [Life Dashboard](life-dashboard.md) 与 DSH 插件仍独立运行；跨业务记忆接入需通过显式授权的 Connector，不是当前默认同步行为。
+
+## 版本记录
+
+摘录上游 `0.2.22`–`0.3.4` 的变更，来源为 [上游 CHANGELOG](https://github.com/Guyao146/Sakura-MCP-Server/blob/v0.3.4/CHANGELOG.md) 与 [Releases](https://github.com/Guyao146/Sakura-MCP-Server/releases)，不表示完整发布历史：
 
 | 版本 | 要点 |
 | --- | --- |

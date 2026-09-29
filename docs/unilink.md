@@ -1,12 +1,12 @@
 # UniLink
 
-> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-23`（UniLink独立版本）
+> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（UniLink独立版本）
+
+[![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
+[![UniLink](../assets/badges/unilink.svg)](https://github.com/Guyao146/UniLink)
+[![已编写Wiki](../assets/sakura-wiki.svg)](unilink.md)
 
 仓库：[Guyao146/UniLink](https://github.com/Guyao146/UniLink) · 当前版本 `v1.2`（协议 v1） · 许可证见下方说明
-
-[![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
-[![Android](https://img.shields.io/badge/Android-Client-3ddc84)](https://github.com/Guyao146/UniLink)
-[![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 ## 项目定位
 
@@ -63,17 +63,26 @@ py main.py
 
 用 Android Studio（Hedgehog 2023.1.1+）打开 `unilink/android`，连上手机点 Run ▶；或命令行 `cd android && gradle wrapper && ./gradlew assembleDebug`，APK 位于 `app/build/outputs/apk/debug/`。
 
+安装后在 App 内完成：
+
+1. 填服务器地址 / 房间码 / 令牌 → 点 **「连接并保持后台」**。
+2. 点 **「授予通知使用权」**，在系统设置里允许 UniLink（同步状态栏消息的关键授权）。
+3. 点 **「允许弹出通知」**（Android 13+ 需要）。
+4. （可选，推荐）点 **「登录 authentik」** 以启用扫码登录。
+
+> 两端必须使用相同的房间码与令牌；扫码登录还需单独部署和配置 auth-server。
+
 ## 功能总览
 
 | 功能 | 手机 → 电脑 | 电脑 → 手机 |
 | --- | --- | --- |
-| 文字消息 | ✅ | ✅ |
-| **状态栏/系统通知镜像** | ✅（NotificationListenerService） | ✅（WinRT UserNotificationListener） |
-| **在电脑上直接回复手机通知** | — | ✅（无障碍自动填写发送，失败自动回落） |
-| 剪贴板同步 | ✅ | ✅ |
-| 文件传输 | ✅ 接收 | ✅ 发送 |
-| 端到端加密 AES-256-GCM | ✅ | ✅ |
-| **扫码登录 authentik 项目** | ✅（手机扫码授权） | — |
+| 文字消息 | 已实现 | 已实现 |
+| **状态栏/系统通知镜像** | 已实现（NotificationListenerService） | 已实现（WinRT UserNotificationListener） |
+| **在电脑上直接回复手机通知** | 不适用 | 已实现（无障碍自动填写发送，失败自动回落） |
+| 剪贴板同步 | 已实现 | 已实现 |
+| 文件传输 | 已实现（接收） | 已实现（发送） |
+| 端到端加密 AES-256-GCM | 已实现 | 已实现 |
+| **扫码登录 authentik 项目** | 已实现（手机扫码授权） | 不适用 |
 
 > 🔐 **扫码登录**：手机登录一次 authentik 后，之后在任意接入 authentik OIDC 的项目登录页上点「手机扫码登录」，用 UniLink 扫码确认即可完成登录——无需为每个项目单独改造。部署见仓库 [docs/QR-LOGIN.md](https://github.com/Guyao146/UniLink/blob/main/docs/QR-LOGIN.md)。
 
@@ -90,6 +99,41 @@ unilink/
 │     ├─ LinkService.kt      # 前台服务：WebSocket 收发 / 弹通知 / 存文件
 │     ├─ NotifCaptureService.kt  # 抓取状态栏所有通知
 │     └─ auth/               # 扫码登录：authentik OIDC + 本地会话
+├─ docs/PROTOCOL.md          # 通信协议与加密算法说明
+├─ docs/QR-LOGIN.md          # 扫码登录部署指南（authentik 接入）
+└─ tools/test_client.html    # 浏览器联调页
+```
+
+中继、PC 与 Android 客户端分别运行；扫码登录由独立的 `auth-server` 处理，协议与部署说明保留在仓库 `docs/` 中。
+
+## 通知回复的实现
+
+PC 点「回复通知…」选中一条手机通知并输入内容后：
+
+- 弹窗中每条通知带 **⟨适配模式⟩ 徽标**（微信模式 / QQ 模式 / Telegram 模式 / 通用模式），模式来自**手机端动态同步的能力表**——在 `AppRules.kt` 里新增规则后无需改 PC 端。
+- 手机无障碍已开启 → 全自动：拉下通知栏、点"回复"、填入文本、点"发送"，发送完成后**自动收起通知栏并回到原来的应用**。
+- 未开启 / 屏幕锁定 / 控件识别失败 → 回复自动复制到手机剪贴板并打开来源 App，手动粘贴即可（PC 会收到失败原因提示）。
+
+> Android 禁止第三方直接触发他应用通知里的 RemoteInput 动作，因此全自动回复依赖无障碍服务模拟点击（与 Pushbullet 同方案）。匹配关键词覆盖中/英文常见文案，个别定制 UI 可能识别失败，此时自动回落为"复制内容并打开来源 App"。
+
+## 安全模型
+
+**消息互通部分**：
+
+- 房间码 + 访问令牌共同派生 32 字节密钥（PBKDF2-HMAC-SHA256 ×120000），所有业务 payload 用 **AES-256-GCM** 加密——服务器只转发密文。
+- 令牌即密码：请使用强口令；浏览器测试页无加密能力，加入会强制房间降级为明文，正式使用时不要让 Web 页面进入房间。
+
+**扫码登录部分**（独立于消息互通，两者互不影响）：
+
+- auth-server 只**中转身份**：手机递上 authentik 令牌，服务端拿它去问 authentik「这是谁」。伪造令牌换不出身份，令牌被吊销立刻失效。服务端不存密码、不存长期令牌。
+- 签发的 `sub` 沿用 authentik 的 `sub`，回连时匹配到同一用户，不会重复建号。
+- 二维码 ticket 为 32 字节随机串（3 分钟过期），授权码一次性且 60 秒过期，支持并强制校验下游传来的 PKCE。
+- **授权码只交给发起登录的那个浏览器**：页面里另有一个不进二维码的轮询密钥，因此别人拍下或截屏二维码也拿不到 code。
+- **扫码后必须在手机上人工确认**，确认框显示"以谁的身份登录到哪个应用"——这是防"把二维码摆到别人面前"的唯一有效手段。
+- 手机端令牌用 Android Keystore 硬件密钥加密后落盘；拒绝向公网 http 发送令牌；拒绝指向非本机登录服务器的二维码。
+- App 是 public client，**强制 PKCE S256**——Android 自定义 scheme 可被抢注，没有 PKCE 时授权码被截获即等于账号失守。
+
+详细协议见仓库 `docs/PROTOCOL.md` 与 `docs/QR-LOGIN.md`。
 
 ## 常见问题
 
@@ -127,6 +171,12 @@ unilink/
 - [ ] 局域网 mDNS 自动发现服务器（免手填 IP）
 - [ ] auth-server 多实例部署（现为单实例内存会话）
 
+## 许可证
+
+仓库当前**没有 LICENSE 文件**，README 也未声明许可证。按 GitHub 默认规则，代码在无许可证声明时保留所有权利，他人不具备使用、修改或再分发的默认授权。
+
+README 结尾注明"仅供学习与个人使用"。正式发布或让他人部署前，应先在仓库添加明确的许可证，本 Wiki 页面以仓库最终声明为准。
+
 ## 与生态其他项目的关系
 
 | 项目 | 作用 |
@@ -138,52 +188,16 @@ unilink/
 
 UniLink 的扫码登录设计为对下游项目零侵入：只要项目接入 authentik OIDC 并在登录页放一个「手机扫码登录」按钮，就能复用；不需要每个项目改造后端。
 
-## 许可证
+## 版本记录
 
-仓库当前**没有 LICENSE 文件**，README 也未声明许可证。按 GitHub 默认规则，代码在无许可证声明时保留所有权利，他人不具备使用、修改或再分发的默认授权。
+版本名来自 README 的已完成清单；此前扫描未发现 Release tag，不能把下表当作安装包发布列表。协议版本仍为 v1。
 
-README 结尾注明"仅供学习与个人使用"。正式发布或让他人部署前，应先在仓库添加明确的许可证，本 Wiki 页面以仓库最终声明为准。
+| 版本 | 要点 |
+| --- | --- |
+| `v1`（README） | 文字、通知、剪贴板、文件互传与端到端加密 |
+| `v1.1`（README） | 在电脑上回复手机通知，提供无障碍自动化与复制回落；PC 使用真实 Windows 系统 Toast |
+| `v1.2`（README） | 手机扫码登录接入 Authentik OIDC 的项目 |
+
+来源：[README 的已完成清单](https://github.com/Guyao146/UniLink/blob/794432f/README.md)。PyInstaller 打包、mDNS 发现与多实例 auth-server 等仍是规划，不列入已发布能力。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。
-
-├─ docs/PROTOCOL.md          # 通信协议与加密算法说明
-├─ docs/QR-LOGIN.md          # 扫码登录部署指南（authentik 接入）
-└─ tools/test_client.html    # 浏览器联调页
-```
-
-## 通知回复的实现
-
-PC 点「回复通知…」选中一条手机通知并输入内容后：
-
-- 弹窗中每条通知带 **⟨适配模式⟩ 徽标**（微信模式 / QQ 模式 / Telegram 模式 / 通用模式），模式来自**手机端动态同步的能力表**——在 `AppRules.kt` 里新增规则后无需改 PC 端。
-- 手机无障碍已开启 → 全自动：拉下通知栏、点"回复"、填入文本、点"发送"，发送完成后**自动收起通知栏并回到原来的应用**。
-- 未开启 / 屏幕锁定 / 控件识别失败 → 回复自动复制到手机剪贴板并打开来源 App，手动粘贴即可（PC 会收到失败原因提示）。
-
-> Android 禁止第三方直接触发他应用通知里的 RemoteInput 动作，因此全自动回复依赖无障碍服务模拟点击（与 Pushbullet 同方案）。匹配关键词覆盖中/英文常见文案，个别定制 UI 可能识别失败，此时自动回落为"复制内容并打开来源 App"。
-
-## 安全模型
-
-**消息互通部分**：
-
-- 房间码 + 访问令牌共同派生 32 字节密钥（PBKDF2-HMAC-SHA256 ×120000），所有业务 payload 用 **AES-256-GCM** 加密——服务器只转发密文。
-- 令牌即密码：请使用强口令；浏览器测试页无加密能力，加入会强制房间降级为明文，正式使用时不要让 Web 页面进入房间。
-
-**扫码登录部分**（独立于消息互通，两者互不影响）：
-
-- auth-server 只**中转身份**：手机递上 authentik 令牌，服务端拿它去问 authentik「这是谁」。伪造令牌换不出身份，令牌被吊销立刻失效。服务端不存密码、不存长期令牌。
-- 签发的 `sub` 沿用 authentik 的 `sub`，回连时匹配到同一用户，不会重复建号。
-- 二维码 ticket 为 32 字节随机串（3 分钟过期），授权码一次性且 60 秒过期，支持并强制校验下游传来的 PKCE。
-- **授权码只交给发起登录的那个浏览器**：页面里另有一个不进二维码的轮询密钥，因此别人拍下或截屏二维码也拿不到 code。
-- **扫码后必须在手机上人工确认**，确认框显示"以谁的身份登录到哪个应用"——这是防"把二维码摆到别人面前"的唯一有效手段。
-- 手机端令牌用 Android Keystore 硬件密钥加密后落盘；拒绝向公网 http 发送令牌；拒绝指向非本机登录服务器的二维码。
-- App 是 public client，**强制 PKCE S256**——Android 自定义 scheme 可被抢注，没有 PKCE 时授权码被截获即等于账号失守。
-
-详细协议见仓库 `docs/PROTOCOL.md` 与 `docs/QR-LOGIN.md`。
-
-
-App 内：
-
-1. 填服务器地址 / 房间码 / 令牌 → 点 **「连接并保持后台」**。
-2. 点 **「授予通知使用权」**，在系统设置里允许 UniLink（★ 同步状态栏消息的关键授权）。
-3. 点 **「允许弹出通知」**（Android 13+ 需要）。
-4. （可选，推荐）点 **「登录 authentik」** 以启用扫码登录。

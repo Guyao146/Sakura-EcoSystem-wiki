@@ -1,12 +1,12 @@
 # Sakura AI Cut
 
-> Wiki 文档版本：`v1.0.1` · 更新日期：`2026-09-23`（Sakura AI Cut独立版本）
+> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（Sakura AI Cut独立版本）
+
+[![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
+[![Sakura AI Cut](../assets/badges/sakura-aicut.svg)](https://github.com/Guyao146/Sakura-AiCut)
+[![已编写Wiki](../assets/sakura-wiki.svg)](sakura-aicut.md)
 
 仓库：[Guyao146/Sakura-AiCut](https://github.com/Guyao146/Sakura-AiCut) · 许可证 `LGPL-2.1` · `package.json` 版本 `0.2.1`
-
-[![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
-[![Next.js](https://img.shields.io/badge/Next.js-16-000000)](https://nextjs.org/)
-[![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 ## 项目定位
 
@@ -101,16 +101,6 @@ Web 端投递任务到 SQLite 表队列，独立 Worker 长驻进程轮询认领
 - **异步任务**：视频生成等需要轮询的接口，由 Worker 按上游任务 ID 轮询，`ASYNC_TASK_TIMEOUT` 控制最大轮询时长（默认 30 分钟）。
 - Worker 支持并发与重试；重启后未完成的任务会重新进入队列。
 
-## 与生态其他项目的关系
-
-| 项目 | 作用 |
-| --- | --- |
-| `Sakura-AiCut` | AI 内容创作流水线，消费模型 API 产出短剧/视频 |
-| [Local Model Gateway](local-model-gateway.md) | 可作为 AiCut 的统一上游：AiCut 把网关地址当作 OpenAI 兼容 API 填入，网关再向真实中转站分流 |
-| [DSH Better Model Thinking Control](dsh-better-model-thinking-control.md) | 管理的是 DSH 内的思考档位；AiCut 的模型路由在自身设置内独立配置，两者互不影响 |
-
-AiCut 不依赖生态任何其他项目即可独立运行；接入 Local Model Gateway 只是可选的统一管理方式。
-
 ## 已知限制
 
 - 依赖外部模型 API 才能生成内容；未配置 API 时只能使用画布编排与剪辑能力。
@@ -125,5 +115,25 @@ AiCut 不依赖生态任何其他项目即可独立运行；接入 Local Model G
 - 可以自由使用、修改、分发（包括商业用途）；
 - 对本项目的**修改**必须以 LGPL-2.1 开源；
 - 通过动态链接 / 独立模块方式调用本项目，你的程序可以不受 LGPL 约束。
+
+## 与生态其他项目的关系
+
+| 项目 | 作用 |
+| --- | --- |
+| `Sakura-AiCut` | AI 内容创作流水线，消费模型 API 产出短剧/视频 |
+| [Local Model Gateway](local-model-gateway.md) | 可作为 AiCut 的统一上游：AiCut 把网关地址当作 OpenAI 兼容 API 填入，网关再向真实中转站分流 |
+| [DSH Better Model Thinking Control](dsh-better-model-thinking-control.md) | 管理的是 DSH 内的思考档位；AiCut 的模型路由在自身设置内独立配置，两者互不影响 |
+
+AiCut 不依赖生态任何其他项目即可独立运行；接入 Local Model Gateway 只是可选的统一管理方式。
+
+## 版本记录
+
+本表记录已核实的源码版本，不把包版本直接视为 Release tag。
+
+| 版本 | 要点 |
+| --- | --- |
+| `0.2.1`（package.json） | 五步工作台与无限画布的源码快照；本次核实的提交调整了按节点类型分流的右键菜单、菜单宽度与直线连线 |
+
+来源：[package.json](https://github.com/Guyao146/Sakura-AiCut/blob/45e81df/package.json) 与 [画布调整提交 `45e81df`](https://github.com/Guyao146/Sakura-AiCut/commit/45e81df)。本表只摘录可确认内容，不推断更早版本的功能归属。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

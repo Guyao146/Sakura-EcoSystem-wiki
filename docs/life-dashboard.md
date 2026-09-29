@@ -1,11 +1,12 @@
 # Life Dashboard
 
-> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-23`（Life Dashboard独立版本，上游 `1.0.11`）
+> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（Life Dashboard独立版本，上游 `1.0.11`）
+
+[![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
+[![Life Dashboard](../assets/badges/life-dashboard.svg)](https://github.com/Guyao146/Life-Dashboard)
+[![已编写Wiki](../assets/sakura-wiki.svg)](life-dashboard.md)
 
 仓库：[Guyao146/Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) · 许可证 `LGPL-2.1`
-
-[![樱落生态成员](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/ConnectEcoSystem.svg)](https://mcylyr.cn)
-[![已编写Wiki](https://raw.githubusercontent.com/Guyao146/Sakura-EcoSystem-wiki/main/assets/sakura-wiki.svg)](https://wiki.mcylyr.cn/)
 
 ## 项目定位
 
@@ -198,5 +199,25 @@ nginx-life-dashboard.conf.example  # Nginx 安全规则示例
 
 当前实现已经包含 OIDC、Home Assistant、天气、纪念日、AI、DSH 工作区动态、自动续期和服务器升级控制台；README 中仍标记为未来方向的设备状态增强、自动化场景、完整天气统计、移动 App 和更多数据分析，需以实际 CHANGELOG 为准。
 
+
+## 与生态其他项目的关系
+
+- [DSH Activity Tracker](dsh-activity-tracker.md) 经配对后推送工作区摘要；看板负责展示，并按管理员权限与工作区授权开放详情和消息操作。
+- [UniLink](unilink.md) 的扫码登录可作为 Authentik 登录链路的可选入口，不替代看板自身的管理员白名单。
+- [Sakura-MCP-Server](sakura-mcp-server.md) 提供 Agent 长期记忆；看板不依赖该服务，也不会默认把家庭或工作区数据写入记忆库。
+
+## 版本记录
+
+版本号来自上游 `version.js`；本表摘录登录体验相关变更，不等同于 Git tag 列表。
+
+| 版本 | 要点 |
+| --- | --- |
+| `1.0.7` | 无 refresh token 时尝试静默重授权；设置页增加续期诊断与 offline_access 配置提示 |
+| `1.0.8` | 修复已有 SSO 会话与切换账号时的登录入口显示，优化窄屏布局 |
+| `1.0.9` | 重做登录页视觉层级、SSO 身份卡片与错误反馈 |
+| `1.0.10` | 静默 SSO 探测使用登录卡片内的紧凑加载状态，不再全屏加载 |
+| `1.0.11` | 增大登录页主要操作按钮间距，区分继续、切换账号与清除登录信息 |
+
+来源：[上游 CHANGELOG](https://github.com/Guyao146/Life-Dashboard/blob/bad41fa/CHANGELOG.md) 与 [version.js](https://github.com/Guyao146/Life-Dashboard/blob/bad41fa/version.js)。更早的变更以该日志为准。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。
