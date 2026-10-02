@@ -2,7 +2,43 @@
 
 本文件记录各项目 Wiki 页面自己的文档版本。每个项目独立维护版本号和更新日期，不等同于上游项目的 Release 版本；上游版本、迁移版本和部署 tag 仍以对应项目仓库为准。
 
-## 当前版本（2026-09-24 · 结构合规补齐）
+## 当前版本（2026-10-02 · Sakura-License）
+
+发布并接入 Sakura-License v1.0：源码可见、衍生共享、标注来源、商用需授权的许可证。本轮只新增许可证文档并接入站点结构，不改动既有项目页内容。
+
+| 项目 | Wiki 文档版本 | 更新日期 | 上游版本 | 页面 |
+| --- | --- | --- | --- | --- |
+| 生态总览 | `v1.1.1` | 2026-10-02 | — | [README](README.md) |
+| 项目关系 | `v1.0.3` | 2026-09-24 | — | [项目关系](docs/ecosystem.md) |
+| Sakura-MCP-Server | `v1.1.0` | 2026-09-24 | `v0.3.4` | [项目页](docs/sakura-mcp-server.md) |
+| Cline Sync 本地客户端 | `v1.1.0` | 2026-09-24 | 源码 `0.1.0`，无独立 Release | [客户端页](docs/cline-sync.md) |
+| Sakura-MCP-Server 生产部署 | `v1.0.2` | 2026-09-24 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-deployment.md) |
+| Sakura-MCP-Server 运维与排障 | `v1.0.2` | 2026-09-24 | — | [运维页](docs/operations.md) |
+| DSH Activity Tracker | `v1.1.0` | 2026-09-24 | `v1.7.0` | [项目页](docs/dsh-activity-tracker.md) |
+| DSH Better Model Thinking Control | `v1.1.0` | 2026-09-24 | `0.2.9` | [项目页](docs/dsh-better-model-thinking-control.md) |
+| DSH Windows Tool Fix | `v1.1.0` | 2026-09-24 | `v0.2.1` | [项目页](docs/dsh-windows-tool-fix.md) |
+| Local Model Gateway | `v1.0.3` | 2026-09-24 | `v2.2.0` | [项目页](docs/local-model-gateway.md) |
+| Life Dashboard | `v1.1.0` | 2026-09-24 | `1.0.11` | [项目页](docs/life-dashboard.md) |
+| Sakura Chat | `v1.1.0` | 2026-09-24 | master（无 Release tag） | [项目页](docs/sakura-chat.md) |
+| Sakura AI Cut | `v1.1.0` | 2026-09-24 | `0.2.1` | [项目页](docs/sakura-aicut.md) |
+| UniLink | `v1.1.0` | 2026-09-24 | README 自述 `v1.2`，无 Release tag | [项目页](docs/unilink.md) |
+| AI 简历自动填充助手 | `v1.1.0` | 2026-09-24 | manifest `1.0.0`，无 Release tag | [项目页](docs/resume-smart-filler-assistant.md) |
+| 配置与密钥规范 | `v1.0.2` | 2026-09-24 | — | [安全规范](docs/security.md) |
+| 贡献与维护 | `v1.0.3` | 2026-10-02 | — | [维护说明](docs/contributing.md) |
+| 设计规范 | `v1.0.1` | 2026-09-24 | — | [设计规范](docs/design-guide.md) |
+| Sakura 许可证 | `v1.0.0` | 2026-10-02 | — | [许可证](docs/sakura-license.md) |
+| 十站一章 | `v1.0.1` | 2026-09-24 | — | [站群说明](docs/studio-sites.md) |
+
+### 本次变更内容
+
+- **新增 Sakura-License v1.0**（[docs/sakura-license.md](docs/sakura-license.md)）：源码可见、衍生共享、署名标注、网络服务视同分发、商用需书面授权、商标与专利不随许可授权、终止与恢复、变更披露与适用法律共 13 条正文，附「快速核查表」与「在你自己的仓库采用本许可」指引。
+- **诚实标注边界**：页面明确说明限制商用的许可证不属于 OSI 开源许可证（OSD 第 6 条），属于 source-available / 共享源码一类，并说明与 `AGPL-3.0` / `GPL-3.0` 的近似关系，提示自定义许可证无 SPDX 短 id（使用 `LicenseRef-Sakura-License-1.0`）。
+- **接入站点结构**：侧栏「开发与安全」加入口；README 项目表后加许可证声明；「贡献与维护」补「许可证」段落，区分 Wiki 文档许可与各代码仓库自身许可。
+- **范围界定**：各代码仓库（多为 `LGPL-2.1`）不受本许可约束，仍以其根目录 `LICENSE` 为准；Wiki 仓库根目录的 GPL-3.0 文本仅作历史参考。
+- 新增许可证徽章 `assets/badges/sakura-license.svg`。
+- 未改动内容的页面不升版本。
+
+## 历史版本（2026-09-24 · 结构合规补齐）
 
 按设计规范模板审计并补齐各项目页的结构缺口，统一徽章来源、页尾章节顺序与版本记录写法。本轮只整理文档结构，不改动部署工作流与 `.zcode`。
 
