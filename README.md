@@ -1,6 +1,6 @@
 # 樱落生态Wiki · 连接云，人，家
 
-> Wiki 文档版本：`v1.1.2` · 更新日期：`2026-10-02`（生态总览独立版本）
+> Wiki 文档版本：`v1.1.3` · 更新日期：`2026-10-02`（生态总览独立版本）
 
 > 🌸 Sakura EcoSystem · Connect Cloud, People and Home.
 
@@ -24,7 +24,7 @@
 | [UniLink](docs/unilink.md) | 手机与电脑互联助手 | 通知镜像、剪贴板同步、文件互传、Authentik 扫码登录 | Wiki `v1.1.0` · README `v1.2` |
 | [AI 简历自动填充助手](docs/resume-smart-filler-assistant.md) | Chrome/Edge 简历表单填充扩展 | 本地规则与 AI 两阶段匹配，填充后由用户检查并提交 | Wiki `v1.1.0` · manifest `1.0.0` |
 
-Wiki 文档内容采用 [Sakura-License v1.1](docs/sakura-license.md)：源码可见、衍生须开源并标注来源、商用需取得授权；通过公开 API/MCP 协议调用不构成引用；各代码仓库的许可证以其根目录 `LICENSE` 为准。
+许可证修订见 [Sakura-License v1.2 审阅稿导读](docs/sakura-license.md) 与 [采用及授权指引](docs/sakura-license-adoption.md)。本轮不自动改许可：根 [LICENSE](LICENSE) 仍是 GPL-3.0，先前 Wiki 页面的 Sakura-License 声明与其适用范围尚待权属核查和迁移说明；历史合法授权不因新稿撤销。各上游项目继续按自身有效许可与声明判断。
 
 ## 工作室网站群
 
