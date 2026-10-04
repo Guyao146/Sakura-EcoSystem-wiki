@@ -1,12 +1,12 @@
 # Sakura Chat
 
-> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（Sakura Chat独立版本）
+> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-04`（Sakura Chat独立版本）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![Sakura Chat](../assets/badges/sakura-chat.svg)](https://github.com/Guyao146/Sakura-Chat)
 [![已编写Wiki](../assets/sakura-wiki.svg)](sakura-chat.md)
 
-仓库：[Guyao146/Sakura-Chat](https://github.com/Guyao146/Sakura-Chat) · 许可证见下方说明
+仓库：[Guyao146/Sakura-Chat](https://github.com/Guyao146/Sakura-Chat) · 许可证 [`Sakura-License v1.2（审阅稿）`](https://wiki.mcylyr.cn/#/../licenses/Sakura-License-1.2-draft)
 
 ## 项目定位
 
@@ -151,9 +151,12 @@ GitHub Actions 在每次 push/PR 执行**语法检查 + 45 项 E2E + Docker 镜�
 
 ## 许可证
 
-仓库当前**没有 LICENSE 文件**，也未在 `package.json` 声明 `license` 字段。按 GitHub 默认规则，代码在无许可证声明时保留所有权利，他人不具备使用、修改或再分发的默认授权。
+自 2026-10-04 起采用 **Sakura-License v1.2（审阅稿）**：源码可见、受覆盖的衍生作品同许可共享、保留署名，特定商用须事先取得版权人书面授权。它限制特定商业利用，属于源码可用（source-available）许可证，不是 OSI 批准的开源许可证。
 
-正式发布或让他人部署前，应先在仓库添加明确的许可证（生态其他项目常用 `LGPL-2.1`），本 Wiki 页面以仓库最终声明为准。
+- 许可正文与采用声明在仓库根目录 [`LICENSE`](https://github.com/Guyao146/Sakura-Chat/blob/master/LICENSE) 与 [`NOTICE.md`](https://github.com/Guyao146/Sakura-Chat/blob/master/NOTICE.md)；`package.json` 声明 `SEE LICENSE IN LICENSE`。
+- 正文固定于本 Wiki 提交 `a8cbb9e`（[`Sakura-License-1.2-draft`](../licenses/Sakura-License-1.2-draft.md)）；正式固定版本发布后将在仓库整体替换，不影响已授予的权利。
+- 运行依赖 `express`（MIT）与 `ws`（MIT）保持各自原许可，不因一同分发而改用 Sakura-License。
+- 该仓库此前没有 LICENSE 文件与许可声明；本次采用不追溯改变既有状态。上游项目以仓库最终声明为准。
 
 ## 与生态其他项目的关系
 

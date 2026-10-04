@@ -2,7 +2,22 @@
 
 本文件记录各项目 Wiki 页面自己的文档版本。每个项目独立维护版本号和更新日期，不等同于上游项目的 Release 版本；上游版本、迁移版本和部署 tag 仍以对应项目仓库为准。
 
-## 当前版本（2026-10-04 · Wiki 视觉与轻动效）
+## 当前版本（2026-10-04 · Sakura Chat 采用 Sakura-License）
+
+Sakura-Chat 仓库由版权人明确采用 Sakura-License v1.2 审阅稿固定文本：新增仓库根 `LICENSE`（正文逐字复制）与 `NOTICE.md` 采用声明，`package.json` / `package-lock.json` 声明 `SEE LICENSE IN LICENSE`。Wiki 根 LICENSE 与其他上游项目许可不变。
+
+| 页面 | Wiki 文档版本 | 更新日期 | 内容 |
+| --- | --- | --- | --- |
+| [Sakura Chat](docs/sakura-chat.md) | `v1.2.0` | 2026-10-04 | 许可证段落改为采用声明，新增 Sakura License 徽章 |
+| [生态总览](README.md) | `v1.1.4` | 2026-10-04 | 许可证段落注明 Sakura Chat 已采用，其余项目不变 |
+
+### 本次变更内容
+
+- **Sakura Chat 采用许可证**：正文固定于本 Wiki 提交 `a8cbb9ee` 的 `licenses/Sakura-License-1.2-draft.md`；采用范围、生效提交、第三方依赖（`express` / `ws`，MIT）与联系方式记录在项目仓库根 `NOTICE.md`。
+- **项目页更新**：原「仓库当前没有 LICENSE 文件」的提示改为采用说明，保留「上游项目以仓库最终声明为准」的口径；新增许可证徽章指向固定正文。
+- 不替换 Wiki 根 GPL-3.0 LICENSE，不迁移其他上游项目，不追溯修改旧授权；Sakura-Chat 仓库此前无 LICENSE 文件，无历史许可版本。
+
+## 历史版本（2026-10-04 · Wiki 视觉与轻动效）
 
 为 Wiki 实际主题加入克制的品牌细节与交互反馈，不引入动画库或外部字体。其他页面版本延续历史记录。
 
