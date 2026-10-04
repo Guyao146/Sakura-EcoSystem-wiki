@@ -2,7 +2,22 @@
 
 本文件记录各项目 Wiki 页面自己的文档版本。每个项目独立维护版本号和更新日期，不等同于上游项目的 Release 版本；上游版本、迁移版本和部署 tag 仍以对应项目仓库为准。
 
-## 当前版本（2026-10-04 · Sakura-License v1.2 正式发布）
+## 当前版本（2026-10-04 · Life Dashboard 采用 Sakura-License）
+
+Life Dashboard（上游 `1.0.14`）由版权人明确采用 Sakura-License v1.2 正式固定正文：仓库根 `LICENSE` 为固定正文副本，新增 `LICENSING.md` 采用声明，看板设置页「版本与更新」卡片提供许可正文入口。Wiki 根 LICENSE 与其他上游项目许可不变。
+
+| 页面 | Wiki 文档版本 | 更新日期 | 内容 |
+| --- | --- | --- | --- |
+| [Life Dashboard](docs/life-dashboard.md) | `v1.2.0` | 2026-10-04 | 许可证标注改为 Sakura-License v1.2，新增许可证章节 |
+| [生态总览](README.md) | `v1.1.6` | 2026-10-04 | 已采用项目列表加入 Life Dashboard |
+
+### 本次变更内容
+
+- **Life Dashboard 采用许可证**：采用文本为正式固定正文 [Sakura-License-1.2](licenses/Sakura-License-1.2.md)（2026-10-04 发布）；适用范围、生效边界（`1.0.14`）、历史权利（`1.0.13` 及之前仍按 LGPL-2.1 授权）、排除项与联系方式记录在项目仓库根 `LICENSING.md`。
+- Life Dashboard 历史版本按 LGPL-2.1 取得的权利不追溯撤销；网页 GUI 的署名入口随设置页版本卡片提供。
+- 本次只新增 Life Dashboard 的采用记录，不改动许可证正文与审阅稿存档；Wiki 根 LICENSE 仍为 GPL-3.0，其余上游项目许可不变，不追溯修改旧授权。文档与链接检查不证明法律有效性。
+
+## 历史版本（2026-10-04 · Sakura-License v1.2 正式发布）
 
 发布 v1.2 固定正文：第 1 至 14 条与审阅稿修订 3 逐字一致，仅标题、文本标识、前言与第 15 条的状态表述不同。各项目采用与迁移仍按采用指引单独声明；Wiki 根 LICENSE 仍为 GPL-3.0，其余项目许可不变。
 

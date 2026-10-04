@@ -1,12 +1,12 @@
 # Life Dashboard
 
-> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（Life Dashboard独立版本，上游 `1.0.11`）
+> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-04`（Life Dashboard独立版本，上游 `1.0.14`）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![Life Dashboard](../assets/badges/life-dashboard.svg)](https://github.com/Guyao146/Life-Dashboard)
 [![已编写Wiki](../assets/sakura-wiki.svg)](life-dashboard.md)
 
-仓库：[Guyao146/Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) · 许可证 `LGPL-2.1`
+仓库：[Guyao146/Life-Dashboard](https://github.com/Guyao146/Life-Dashboard) · 许可证 [`Sakura-License v1.2`](../licenses/Sakura-License-1.2.md)
 
 ## 项目定位
 
@@ -205,6 +205,16 @@ nginx-life-dashboard.conf.example  # Nginx 安全规则示例
 - [DSH Activity Tracker](dsh-activity-tracker.md) 经配对后推送工作区摘要；看板负责展示，并按管理员权限与工作区授权开放详情和消息操作。
 - [UniLink](unilink.md) 的扫码登录可作为 Authentik 登录链路的可选入口，不替代看板自身的管理员白名单。
 - [Sakura-MCP-Server](sakura-mcp-server.md) 提供 Agent 长期记忆；看板不依赖该服务，也不会默认把家庭或工作区数据写入记忆库。
+
+## 许可证
+
+自上游 `1.0.14` 起，Life Dashboard 采用 **Sakura-License v1.2**：源码可见、受覆盖的衍生作品同许可共享、保留署名，特定商用须事先取得版权人书面授权。它限制特定商业利用，属于源码可用（source-available）许可证，不是 OSI 批准的开源许可证。
+
+- 许可正文与采用声明在仓库根目录 [`LICENSE`](https://github.com/Guyao146/Life-Dashboard/blob/main/LICENSE) 与 [`LICENSING.md`](https://github.com/Guyao146/Life-Dashboard/blob/main/LICENSING.md)；看板设置页「版本与更新」卡片提供许可正文入口。
+- 采用文本为正式固定版本 [`Sakura-License-1.2`](../licenses/Sakura-License-1.2.md)（2026-10-04 发布，条文与审阅稿修订 3 一致），与本 Wiki 固定正文逐字一致。
+- `1.0.13` 及此前发布版本仍按 `LGPL-2.1` 授权；本次更换不追溯撤销已依法取得的权利。
+- 经 Google Fonts 加载的 Noto Sans SC、DM Mono 网络字体与 Home Assistant、Authentik、Open-Meteo 等外部服务不在本许可覆盖范围，各自许可保持不变。
+- 上游项目以仓库最终声明为准。
 
 ## 版本记录
 
