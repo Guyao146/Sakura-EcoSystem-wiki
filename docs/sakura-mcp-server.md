@@ -6,7 +6,7 @@
 [![MCP Server](../assets/badges/mcp-server.svg)](https://github.com/Guyao146/Sakura-MCP-Server)
 [![已编写Wiki](../assets/sakura-wiki.svg)](sakura-mcp-server.md)
 
-仓库：[Guyao146/Sakura-MCP-Server](https://github.com/Guyao146/Sakura-MCP-Server) · 许可证 `LGPL-v2.1`
+仓库：[Guyao146/Sakura-MCP-Server](https://github.com/Guyao146/Sakura-MCP-Server) · 许可证 [`Sakura-License v1.2（审阅稿）`](https://wiki.mcylyr.cn/#/../licenses/Sakura-License-1.2-draft)
 
 > [!WARNING]
 > `v0.3.4` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
