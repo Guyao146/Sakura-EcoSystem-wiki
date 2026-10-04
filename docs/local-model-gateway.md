@@ -6,7 +6,7 @@
 [![Local Gateway](../assets/badges/local-gateway.svg)](https://github.com/Guyao146/Local-Model-Gateway)
 [![已编写Wiki](../assets/sakura-wiki.svg)](local-model-gateway.md)
 
-仓库：[Guyao146/Local-Model-Gateway](https://github.com/Guyao146/Local-Model-Gateway) · 许可证 `LGPL-v2.1`
+仓库：[Guyao146/Local-Model-Gateway](https://github.com/Guyao146/Local-Model-Gateway) · 许可证 [Sakura-License-1.2-draft](https://github.com/Guyao146/Local-Model-Gateway/blob/main/LICENSE)（审阅稿）
 
 ## 项目定位
 
