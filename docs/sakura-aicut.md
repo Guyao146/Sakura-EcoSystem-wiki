@@ -1,12 +1,12 @@
 # Sakura AI Cut
 
-> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（Sakura AI Cut独立版本）
+> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-04`（Sakura AI Cut独立版本）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![Sakura AI Cut](../assets/badges/sakura-aicut.svg)](https://github.com/Guyao146/Sakura-AiCut)
 [![已编写Wiki](../assets/sakura-wiki.svg)](sakura-aicut.md)
 
-仓库：[Guyao146/Sakura-AiCut](https://github.com/Guyao146/Sakura-AiCut) · 许可证 `LGPL-2.1` · `package.json` 版本 `0.2.1`
+仓库：[Guyao146/Sakura-AiCut](https://github.com/Guyao146/Sakura-AiCut) · 许可证 [`Sakura-License v1.2`](../licenses/Sakura-License-1.2.md) · `package.json` 版本 `0.2.1`
 
 ## 项目定位
 
@@ -110,11 +110,13 @@ Web 端投递任务到 SQLite 表队列，独立 Worker 长驻进程轮询认领
 
 ## 许可证
 
-项目采用 [GNU Lesser General Public License v2.1](https://github.com/Guyao146/Sakura-AiCut/blob/main/LICENSE)（`LGPL-2.1`）：
+自 2026-10-04（提交 `88600c5`）起采用 **Sakura-License v1.2**：源码可见、受覆盖的衍生作品同许可共享、保留署名，特定商用须事先取得版权人书面授权。它限制特定商业利用，属于源码可用（source-available）许可证，不是 OSI 批准的开源许可证。
 
-- 可以自由使用、修改、分发（包括商业用途）；
-- 对本项目的**修改**必须以 LGPL-2.1 开源；
-- 通过动态链接 / 独立模块方式调用本项目，你的程序可以不受 LGPL 约束。
+- 许可正文与采用声明在仓库根目录 [`LICENSE`](https://github.com/Guyao146/Sakura-AICut/blob/main/LICENSE) 与 [`NOTICE.md`](https://github.com/Guyao146/Sakura-AICut/blob/main/NOTICE.md)；`package.json` 声明 `SEE LICENSE IN LICENSE`。
+- 仓库 `LICENSE` 为正式固定版本 [`Sakura-License-1.2`](../licenses/Sakura-License-1.2.md)（2026-10-04 发布）；条文与审阅稿修订 3（[存档](../licenses/Sakura-License-1.2-draft.md)）逐字一致，不影响已授予的权利。
+- 该仓库此前以 LGPL-2.1 授权；在 LGPL-2.1 下已取得副本的接收者可继续按该许可使用、修改与再分发，本次采用不追溯撤销既有授权。
+- 运行依赖（Next.js、React、@xyflow/react、zod、zustand、clsx、Tailwind 等）多为 MIT，TypeScript 为 Apache-2.0，均保持各自原许可，不因一同分发而改用 Sakura-License。
+- 商用授权申请入口见 [NOTICE.md](https://github.com/Guyao146/Sakura-AICut/blob/main/NOTICE.md)；上游项目以仓库最终声明为准。
 
 ## 与生态其他项目的关系
 
@@ -133,7 +135,8 @@ AiCut 不依赖生态任何其他项目即可独立运行；接入 Local Model G
 | 版本 | 要点 |
 | --- | --- |
 | `0.2.1`（package.json） | 五步工作台与无限画布的源码快照；本次核实的提交调整了按节点类型分流的右键菜单、菜单宽度与直线连线 |
+| 提交 `88600c5`（`0.2.1` 之后） | 仓库根 `LICENSE` 自 LGPL-2.1 切换为 Sakura-License-1.2 固定正文，新增 `NOTICE.md` 采用声明；`package.json` 改为 `SEE LICENSE IN LICENSE` |
 
-来源：[package.json](https://github.com/Guyao146/Sakura-AiCut/blob/45e81df/package.json) 与 [画布调整提交 `45e81df`](https://github.com/Guyao146/Sakura-AiCut/commit/45e81df)。本表只摘录可确认内容，不推断更早版本的功能归属。
+来源：[package.json](https://github.com/Guyao146/Sakura-AiCut/blob/45e81df/package.json) 与 [画布调整提交 `45e81df`](https://github.com/Guyao146/Sakura-AiCut/commit/45e81df)；许可证切换见 [采用提交 `88600c5`](https://github.com/Guyao146/Sakura-AICut/commit/88600c5)。本表只摘录可确认内容，不推断更早版本的功能归属。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

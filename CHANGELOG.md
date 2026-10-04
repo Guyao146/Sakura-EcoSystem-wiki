@@ -2,7 +2,22 @@
 
 本文件记录各项目 Wiki 页面自己的文档版本。每个项目独立维护版本号和更新日期，不等同于上游项目的 Release 版本；上游版本、迁移版本和部署 tag 仍以对应项目仓库为准。
 
-## 当前版本（2026-10-04 · Sakura-Chat 仓库 LICENSE 换用正式固定正文）
+## 当前版本（2026-10-04 · Sakura AI Cut 采用 Sakura-License）
+
+Sakura AI Cut（上游 `0.2.1`）由版权人明确采用 Sakura-License v1.2 正式固定正文：仓库根 `LICENSE` 为固定正文副本（采用提交 `88600c5`），新增 `NOTICE.md` 采用声明，`package.json` 改为 `SEE LICENSE IN LICENSE`。Wiki 根 LICENSE 与其他上游项目许可不变，不追溯撤销旧授权。
+
+| 页面 | Wiki 文档版本 | 更新日期 | 内容 |
+| --- | --- | --- | --- |
+| [Sakura AI Cut](docs/sakura-aicut.md) | `v1.2.0` | 2026-10-04 | 许可证标注改为 Sakura-License v1.2，许可证章节改为采用声明 |
+| [生态总览](README.md) | `v1.1.8` | 2026-10-04 | 已采用项目列表加入 Sakura AI Cut，项目表版本号同步 |
+
+### 本次变更内容
+
+- **Sakura AI Cut 采用许可证**：采用文本为正式固定正文 [Sakura-License-1.2](licenses/Sakura-License-1.2.md)（2026-10-04 发布）；适用范围、生效提交（`88600c5`）、历史权利（此前按 LGPL-2.1 授权，既有权利不追溯撤销）、排除项与联系方式记录在项目仓库根 `NOTICE.md`。
+- 仓库 `LICENSE` 与本 Wiki 的 `licenses/Sakura-License-1.2.md` 逐字一致（仅去除 Markdown 标记符）；`package.json` 声明 `SEE LICENSE IN LICENSE`，README 许可证段落同步改写。
+- 本次只新增 Sakura AI Cut 的采用记录，不改动许可证正文与审阅稿存档；Wiki 根 LICENSE 仍为 GPL-3.0，其余上游项目许可不变，不追溯修改旧授权。文档与链接检查不证明法律有效性。
+
+## 历史版本（2026-10-04 · Sakura-Chat 仓库 LICENSE 换用正式固定正文）
 
 Sakura-Chat 仓库根 `LICENSE` 从审阅稿修订 3 副本替换为正式固定正文 `Sakura-License-1.2`（本 Wiki 提交 `359d2e9`），条文逐字一致；`NOTICE.md` 与 `README.md` 同步更新固定版本说明。
 
