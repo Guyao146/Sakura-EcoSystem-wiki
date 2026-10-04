@@ -18,7 +18,7 @@
   - [AI 简历自动填充助手](docs/resume-smart-filler-assistant.md)
 - **开发与安全**
   - [配置与密钥规范](docs/security.md)
-  - [Sakura 许可证（审阅稿）](docs/sakura-license.md)
+  - [Sakura 许可证](docs/sakura-license.md)
   - [许可证采用与授权](docs/sakura-license-adoption.md)
   - [贡献与维护](docs/contributing.md)
   - [设计规范](docs/design-guide.md)

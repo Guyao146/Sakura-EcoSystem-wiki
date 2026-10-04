@@ -2,7 +2,30 @@
 
 本文件记录各项目 Wiki 页面自己的文档版本。每个项目独立维护版本号和更新日期，不等同于上游项目的 Release 版本；上游版本、迁移版本和部署 tag 仍以对应项目仓库为准。
 
-## 当前版本（2026-10-04 · Sakura Chat 采用 Sakura-License）
+## 当前版本（2026-10-04 · Sakura-License v1.2 正式发布）
+
+发布 v1.2 固定正文：第 1 至 14 条与审阅稿修订 3 逐字一致，仅标题、文本标识、前言与第 15 条的状态表述不同。各项目采用与迁移仍按采用指引单独声明；Wiki 根 LICENSE 仍为 GPL-3.0，其余项目许可不变。
+
+| 页面 | Wiki 文档版本 | 更新日期 | 内容 |
+| --- | --- | --- | --- |
+| [Sakura 许可证导读](docs/sakura-license.md) | `v1.5.0` | 2026-10-04 | 转正：正文链接、状态措辞与版本记录表 |
+| [采用与授权指引](docs/sakura-license-adoption.md) | `v1.3.0` | 2026-10-04 | 采用流程改为基于已发布固定正文 |
+| [贡献与维护](docs/contributing.md) | `v1.1.1` | 2026-10-04 | 许可证段落去掉审阅稿表述 |
+| [生态总览](README.md) | `v1.1.5` | 2026-10-04 | 许可证段落改为正式版，补 Local Model Gateway |
+| [Sakura Chat](docs/sakura-chat.md) | `v1.2.1` | 2026-10-04 | 许可证标注与链接改为 v1.2 固定正文 |
+| [Sakura-MCP-Server](docs/sakura-mcp-server.md) | `v1.1.1` | 2026-10-04 | 许可证标注与链接改为 v1.2 固定正文 |
+| [Local Model Gateway](docs/local-model-gateway.md) | `v1.0.4` | 2026-10-04 | 许可证标注改为 v1.2 |
+
+### 本次变更内容
+
+- **发布固定正文**：新增 [licenses/Sakura-License-1.2.md](licenses/Sakura-License-1.2.md)，第 1 至 14 条与审阅稿修订 3 逐字一致，仅标题、文本标识、前言与第 15 条改为固定版本状态；许可证徽章去掉 draft 标注。
+- **审阅稿存档**：licenses/Sakura-License-1.2-draft.md 加历史存档说明，指向正式固定正文；条文与修订记录未改动。
+- **导读与采用指引转正**：采用流程从“完成审查后另行发布固定文本”改为“基于已发布固定正文作采用声明”；状态说明、徽章链接与版本记录表同步更新，保留 GPL-3.0 根 LICENSE 冲突待迁移的表述。
+- **已采用项目标注**：Sakura-MCP-Server、Sakura-Chat、Local-Model-Gateway 项目页许可证标注由“v1.2 审阅稿”改为“v1.2”；条文未变，已授予的权利不受正式版发布影响。
+- 不替换 Wiki 根 GPL-3.0 LICENSE，不迁移其余上游项目，不追溯修改旧授权；项目正式采用仍须按采用指引完成权属核查与采用声明，文档与链接检查不证明法律有效性。
+
+
+## 历史版本（2026-10-04 · Sakura Chat 采用 Sakura-License）
 
 Sakura-Chat 仓库由版权人明确采用 Sakura-License v1.2 审阅稿固定文本：新增仓库根 `LICENSE`（正文逐字复制）与 `NOTICE.md` 采用声明，`package.json` / `package-lock.json` 声明 `SEE LICENSE IN LICENSE`。Wiki 根 LICENSE 与其他上游项目许可不变。
 

@@ -1,12 +1,12 @@
 # Sakura-MCP-Server
 
-> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（Sakura-MCP-Server独立版本）
+> Wiki 文档版本：`v1.1.1` · 更新日期：`2026-10-04`（Sakura-MCP-Server独立版本）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![MCP Server](../assets/badges/mcp-server.svg)](https://github.com/Guyao146/Sakura-MCP-Server)
 [![已编写Wiki](../assets/sakura-wiki.svg)](sakura-mcp-server.md)
 
-仓库：[Guyao146/Sakura-MCP-Server](https://github.com/Guyao146/Sakura-MCP-Server) · 许可证 [`Sakura-License v1.2（审阅稿）`](https://wiki.mcylyr.cn/#/../licenses/Sakura-License-1.2-draft)
+仓库：[Guyao146/Sakura-MCP-Server](https://github.com/Guyao146/Sakura-MCP-Server) · 许可证 [`Sakura-License v1.2`](../licenses/Sakura-License-1.2.md)
 
 > [!WARNING]
 > `v0.3.4` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。

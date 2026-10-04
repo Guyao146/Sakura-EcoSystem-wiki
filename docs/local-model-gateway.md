@@ -1,12 +1,12 @@
 # Local Model Gateway
 
-> Wiki 文档版本：`v1.0.3` · 更新日期：`2026-09-24`（Local Model Gateway独立版本，上游 `v2.2.0`）
+> Wiki 文档版本：`v1.0.4` · 更新日期：`2026-10-04`（Local Model Gateway独立版本，上游 `v2.2.0`）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![Local Gateway](../assets/badges/local-gateway.svg)](https://github.com/Guyao146/Local-Model-Gateway)
 [![已编写Wiki](../assets/sakura-wiki.svg)](local-model-gateway.md)
 
-仓库：[Guyao146/Local-Model-Gateway](https://github.com/Guyao146/Local-Model-Gateway) · 许可证 [Sakura-License-1.2-draft](https://github.com/Guyao146/Local-Model-Gateway/blob/main/LICENSE)（审阅稿）
+仓库：[Guyao146/Local-Model-Gateway](https://github.com/Guyao146/Local-Model-Gateway) · 许可证 [`Sakura-License v1.2`](https://github.com/Guyao146/Local-Model-Gateway/blob/main/LICENSE)
 
 ## 项目定位
 
