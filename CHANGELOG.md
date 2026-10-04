@@ -2,7 +2,22 @@
 
 本文件记录各项目 Wiki 页面自己的文档版本。每个项目独立维护版本号和更新日期，不等同于上游项目的 Release 版本；上游版本、迁移版本和部署 tag 仍以对应项目仓库为准。
 
-## 当前版本（2026-10-04 · Life Dashboard 采用 Sakura-License）
+## 当前版本（2026-10-04 · Sakura-Chat 仓库 LICENSE 换用正式固定正文）
+
+Sakura-Chat 仓库根 `LICENSE` 从审阅稿修订 3 副本替换为正式固定正文 `Sakura-License-1.2`（本 Wiki 提交 `359d2e9`），条文逐字一致；`NOTICE.md` 与 `README.md` 同步更新固定版本说明。
+
+| 页面 | Wiki 文档版本 | 更新日期 | 内容 |
+| --- | --- | --- | --- |
+| [Sakura Chat](docs/sakura-chat.md) | `v1.2.2` | 2026-10-04 | 许可证段落改为仓库持有正式固定正文 |
+| [生态总览](README.md) | `v1.1.7` | 2026-10-04 | 项目表 Sakura Chat 版本号同步 |
+
+### 本次变更内容
+
+- **仓库换正文**：Sakura-Chat 仓库 `LICENSE` 为正式固定正文副本（文本标识 `Sakura-License-1.2`，发布日期 2026-10-04）；`NOTICE.md` 固定许可版本与生效边界段落同步更新，`package.json` 维持 `SEE LICENSE IN LICENSE`。
+- 条文与 2026-10-04 首次采用时的审阅稿修订 3 逐字一致，仅标题、文本标识、前言与第 15 条的状态表述不同；不改变生效边界与已授予的权利。
+- 不替换 Wiki 根 GPL-3.0 LICENSE，不迁移其余上游项目；文档与链接检查不证明法律有效性。
+
+## 历史版本（2026-10-04 · Life Dashboard 采用 Sakura-License）
 
 Life Dashboard（上游 `1.0.14`）由版权人明确采用 Sakura-License v1.2 正式固定正文：仓库根 `LICENSE` 为固定正文副本，新增 `LICENSING.md` 采用声明，看板设置页「版本与更新」卡片提供许可正文入口。Wiki 根 LICENSE 与其他上游项目许可不变。
 

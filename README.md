@@ -1,6 +1,6 @@
 # 樱落生态Wiki · 连接云，人，家
 
-> Wiki 文档版本：`v1.1.6` · 更新日期：`2026-10-04`（生态总览独立版本）
+> Wiki 文档版本：`v1.1.7` · 更新日期：`2026-10-04`（生态总览独立版本）
 
 > 🌸 Sakura EcoSystem · Connect Cloud, People and Home.
 
@@ -19,7 +19,7 @@
 | [DSH Windows Tool Fix](docs/dsh-windows-tool-fix.md) | Windows 上 DSH Desktop 的默认 Git Bash preset 修复插件 | DSH profile patch，把 `minimal-gitbash` 设为默认 Agent preset | Wiki `v1.1.0` · 上游 `v0.2.1` |
 | [Local Model Gateway](docs/local-model-gateway.md) | 本机多上游模型聚合网关 | OpenAI/Anthropic/Responses 协议互转、路由轮询、熔断限流与用量统计 | Wiki `v1.0.4` · 上游 `v2.2.0` |
 | [Life Dashboard](docs/life-dashboard.md) | 个人生活中枢与可视化看板 | Authentik、Home Assistant、天气、To Do、AI 与 DSH | Wiki `v1.2.0` · 上游 `1.0.14` |
-| [Sakura Chat](docs/sakura-chat.md) | 仿微信的网页聊天应用 | 好友/群聊、实时消息、音视频通话、加密传输+加密存储 | Wiki `v1.2.1` · master 提交快照 |
+| [Sakura Chat](docs/sakura-chat.md) | 仿微信的网页聊天应用 | 好友/群聊、实时消息、音视频通话、加密传输+加密存储 | Wiki `v1.2.2` · master 提交快照 |
 | [Sakura AI Cut](docs/sakura-aicut.md) | 无限画布式 AI 短剧生成与在线剪辑 | 五步工作台、资产生成、运镜模板、自动规划 Agent | Wiki `v1.1.0` · 源码 `0.2.1` |
 | [UniLink](docs/unilink.md) | 手机与电脑互联助手 | 通知镜像、剪贴板同步、文件互传、Authentik 扫码登录 | Wiki `v1.1.0` · README `v1.2` |
 | [AI 简历自动填充助手](docs/resume-smart-filler-assistant.md) | Chrome/Edge 简历表单填充扩展 | 本地规则与 AI 两阶段匹配，填充后由用户检查并提交 | Wiki `v1.1.0` · manifest `1.0.0` |

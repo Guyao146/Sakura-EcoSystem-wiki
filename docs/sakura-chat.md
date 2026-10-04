@@ -1,6 +1,6 @@
 # Sakura Chat
 
-> Wiki 文档版本：`v1.2.1` · 更新日期：`2026-10-04`（Sakura Chat独立版本）
+> Wiki 文档版本：`v1.2.2` · 更新日期：`2026-10-04`（Sakura Chat独立版本）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![Sakura Chat](../assets/badges/sakura-chat.svg)](https://github.com/Guyao146/Sakura-Chat)
@@ -154,7 +154,7 @@ GitHub Actions 在每次 push/PR 执行**语法检查 + 45 项 E2E + Docker 镜�
 自 2026-10-04 起采用 **Sakura-License v1.2**：源码可见、受覆盖的衍生作品同许可共享、保留署名，特定商用须事先取得版权人书面授权。它限制特定商业利用，属于源码可用（source-available）许可证，不是 OSI 批准的开源许可证。
 
 - 许可正文与采用声明在仓库根目录 [`LICENSE`](https://github.com/Guyao146/Sakura-Chat/blob/master/LICENSE) 与 [`NOTICE.md`](https://github.com/Guyao146/Sakura-Chat/blob/master/NOTICE.md)；`package.json` 声明 `SEE LICENSE IN LICENSE`。
-- 采用文本对应本 Wiki 提交 `a8cbb9e` 的审阅稿修订 3（[存档](../licenses/Sakura-License-1.2-draft.md)）；正式固定版本 [`Sakura-License-1.2`](../licenses/Sakura-License-1.2.md) 已于 2026-10-04 发布，条文与采用文本逐字一致，不影响已授予的权利。
+- 仓库 `LICENSE` 为正式固定版本 [`Sakura-License-1.2`](../licenses/Sakura-License-1.2.md)（本 Wiki 提交 `359d2e9`，2026-10-04 发布）；条文与首次采用时的审阅稿修订 3（[存档](../licenses/Sakura-License-1.2-draft.md)）逐字一致，不影响已授予的权利。
 - 运行依赖 `express`（MIT）与 `ws`（MIT）保持各自原许可，不因一同分发而改用 Sakura-License。
 - 该仓库此前没有 LICENSE 文件与许可声明；本次采用不追溯改变既有状态。上游项目以仓库最终声明为准。
 
