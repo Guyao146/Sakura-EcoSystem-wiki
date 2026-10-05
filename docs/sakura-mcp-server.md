@@ -1,6 +1,6 @@
 # Sakura-MCP-Server
 
-> Wiki 文档版本：`v1.1.1` · 更新日期：`2026-10-04`（Sakura-MCP-Server独立版本）
+> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-05`（Sakura-MCP-Server独立版本，上游 `v0.4.1`）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![MCP Server](../assets/badges/mcp-server.svg)](https://github.com/Guyao146/Sakura-MCP-Server)
@@ -9,7 +9,7 @@
 仓库：[Guyao146/Sakura-MCP-Server](https://github.com/Guyao146/Sakura-MCP-Server) · 许可证 [`Sakura-License v1.2`](../licenses/Sakura-License-1.2.md)
 
 > [!WARNING]
-> `v0.3.4` 已发布，但项目仍建议先在测试环境完成备份、恢复、Authentik、权限、限流和监控演练，再投入生产环境。
+> `v0.4.1` 已发布，但项目仍建议先在测试环境完成备份、恢复、登录提供方、权限、限流和监控演练，再投入生产环境。`main` 分支正在开发 `0.5.0`（工作区分页筛选、批量操作、回收站、版本对比/恢复、成员邀请与角色管理等），未发布的能力以仓库 `CHANGELOG.md` 和 Actions 记录为准。
 
 ## 项目定位
 
@@ -28,16 +28,16 @@ Sakura-MCP-Server 是面向所有兼容 Model Context Protocol（MCP）的 AI Ag
 
 | 项目 | 说明 |
 | --- | --- |
-| 最新公开 Release | `v0.3.4` |
+| 最新公开 Release | `v0.4.1` |
 | 当前主线已验证 commit | 以 GitHub `main` 最新绿色 CI 为准 |
-| 生产容器镜像 | `ghcr.io/guyao146/sakura-mcp-server:0.3.4` |
-| Docker 运行镜像 | GHCR 多架构镜像，内部使用 `node:24-bookworm-slim` 和非 root `mcp` 用户 |
+| 生产容器镜像 | `ghcr.io/guyao146/sakura-mcp-server:0.4.1` |
+| Docker 运行镜像 | GHCR 多架构镜像，内部使用 `node:24-bookworm-slim` 和非 root `mcp` 用户，镜像内随附 `LICENSE` 与 `NOTICE.md` |
 | 开发分支 | 直接使用 `main` |
 | MCP Transport | Streamable HTTP，推荐根域名 `/`，兼容 `/mcp` |
 | 数据库 | PostgreSQL 16 + pgvector |
-| 登录 | 默认 Authentik Authorization Code + PKCE，含独立登录页与 RP-Initiated Logout；可选私有网络 `AUTH=false` |
+| 浏览器登录 | 本地账号密码、可选 Sakura（SakuraID / Sakura-Auth-Server）与 Authentik，均为 OIDC 授权码 + PKCE；入口按 本地账号 → Sakura → Authentik 排列，可纯本地、可混合部署；无完整外部配置时自动渲染本地登录页 |
 | Agent 认证 | 数据库 API Key 或 Authentik JWT；Key 可随时查看（AES-256-GCM 加密副本） |
-| 管理员判定 | Authentik 超级用户（内置 `authentik Admins` 组）自动为系统管理员；可自定义管理员用户组 |
+| 管理员判定 | Authentik 超级用户（内置 `authentik Admins` 组）自动为系统管理员；可自定义管理员用户组；外部提供方邮箱必须 `email_verified === true` 才参与白名单/邀请匹配 |
 | 模型 Provider | 对话与向量（Embedding）可分别指向不同的 OpenAI-compatible 端点 |
 | 管理后台 | `/admin` |
 | 安装向导 | `/setup`，自动诊断、OpenID Discovery 和 Public Client 预检 |
@@ -46,11 +46,11 @@ Sakura-MCP-Server 是面向所有兼容 Model Context Protocol（MCP）的 AI Ag
 
 ## 快速开始
 
-最快的生产部署只需要一个 `docker-compose.yml`：Compose 会从 GHCR 拉取 `v0.3.4` 多架构镜像（`linux/amd64` + `linux/arm64`），并由一次性的 `bootstrap-secrets` 容器自动生成并持久化运行时密钥。
+最快的生产部署只需要一个 `docker-compose.yml`：Compose 会从 GHCR 拉取 `v0.4.1` 多架构镜像（`linux/amd64` + `linux/arm64`），并由一次性的 `bootstrap-secrets` 容器自动生成并持久化运行时密钥。
 
 ```bash
 mkdir -p /opt/sakura-mcp-server && cd /opt/sakura-mcp-server
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.3.4/docker-compose.yml
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.4.1/docker-compose.yml
 mkdir -p data && chmod 700 data
 docker compose up -d
 ```
@@ -58,7 +58,7 @@ docker compose up -d
 启动后按顺序完成：
 
 1. 用 Nginx 等反向代理开放 `80/443`，**不要**向公网暴露宿主端口 `3001` 和数据库端口 `5432`。
-2. 打开 `https://<域名>/setup` 走完安装向导：环境诊断、OpenID Discovery、Authentik Public Client 预检和模型 Provider 配置；安装完成后写接口永久锁定。
+2. 打开 `https://<域名>/setup` 走完安装向导：环境诊断、OpenID Discovery（Authentik 或 Sakura）、Public Client 预检和模型 Provider 配置；安装完成后写接口永久锁定。也可以选择本地账号方式创建第一位管理员。
 3. 打开 `https://<域名>/admin` 登录管理后台，创建共享空间、邀请成员，并创建 Agent Key。
 4. Agent 客户端使用根域名 `https://<域名>`（或兼容地址 `https://<域名>/mcp`），携带 `Authorization: Bearer sk_sakura_...` 直连；支持 OAuth 的客户端通过 `/.well-known/oauth-protected-resource` 自动发现。
 
@@ -82,7 +82,7 @@ Claude / Cline / Cursor / Windsurf / 其他 Agent
                     │
       OpenAI-compatible / Ollama
 
-用户浏览器 ── Authentik OIDC + PKCE ── /admin
+用户浏览器 ── 本地账号 / Sakura / Authentik（OIDC + PKCE）── /admin
 ```
 
 HTTP/MCP、Web 和 Worker 共用同一套 Repository 和空间权限服务，不维护两套互相不一致的规则。
@@ -405,12 +405,13 @@ CI 会执行：
 6. Docker Compose 配置检查；
 7. Trivy HIGH/CRITICAL 镜像扫描（当前报告模式，不因基础镜像上游临时 CVE 阻塞应用测试；生产依赖审计仍是阻塞检查）。
 
-最新 Release：[`v0.3.4`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.3.4)，包含 `sakura-mcp-server-0.3.4.tgz`。同时发布 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.3.4`。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
+最新 Release：[`v0.4.1`](https://github.com/Guyao146/Sakura-MCP-Server/releases/tag/v0.4.1)，包含 `sakura-mcp-server-0.4.1.tgz` 与 GHCR 多架构镜像 `ghcr.io/guyao146/sakura-mcp-server:0.4.1`（镜像内随附 `LICENSE` 与 `NOTICE.md`，与 npm 发布包许可文件一致）。后续推送 `v*` 标签后，Release 工作流会继续生成 npm tarball、GitHub Release 和版本化镜像。正式部署前应确认对应 commit 的 CI 为绿色。
 
 ## 与生态其他项目的关系
 
 - [Cline Sync](cline-sync.md) 是配套的本地同步客户端，主动读取 Cline 文本历史并调用本服务抽取记忆；服务端不会被动读取客户端磁盘。
 - [Local Model Gateway](local-model-gateway.md) 聚合模型请求，本服务管理长期记忆，二者作用层次不同、没有强制依赖。
+- [SakuraID（Sakura-Auth-Server）](sakura-auth-server.md) 是 `0.4.0` 起内置的第三方浏览器登录提供方之一；不配置任何外部提供方时，管理后台也可使用内置本地账号。
 - [Life Dashboard](life-dashboard.md) 与 DSH 插件仍独立运行；跨业务记忆接入需通过显式授权的 Connector，不是当前默认同步行为。
 
 ## 版本记录
@@ -432,6 +433,8 @@ CI 会执行：
 | 0.3.2 | 管理后台新增「客户端」页，按用户隔离并依据最近活动展示 MCP 客户端状态、协议/版本、工具调用和累计请求统计；需迁移 `010_client_sessions.sql` |
 | 0.3.3 | 修复登录回调同时设置 Sakura 会话 Cookie 与清理 Authentik 探测 Cookie 时的 `Set-Cookie` 覆盖问题，确保登录后能正常进入管理后台 |
 | 0.3.4 | 移除登录页对失效共享字体 CSS 和字体切片的依赖，改用本机系统字体，避免浏览器向 `api.mcylyr.cn` 请求不存在的 `.woff2` 并连续产生 404；中文与等宽字体回退显示保持不变 |
+| `0.4.0` | 新增服务器本地账号登录（scrypt PHC 哈希、失败 5 次锁定且锁定时长递增、`LOCAL_ADMIN_USERNAME/PASSWORD` 幂等创建、安装向导可选本地方式建首位管理员）；新增「账号安全」管理台（本地账号增删改、自助改密、会话列表与批量退出、`/api/me/*` 独立限流，迁移 `015_account_security.sql`）；新增可选 Sakura（SakuraID）浏览器登录（授权码 + PKCE、RS256、`/jwks.json`，身份以 `sakura:<sha256(issuer)>:<sub>` 隔离，迁移 `014_sakura_oidc_provider.sql`）；`013_local_login.sql` 为会话记录真实 `auth_source`；会话跟踪与资料查询合并、活动时间改 5 分钟粒度、请求体按字节限制（默认 6 MiB，`MAX_REQUEST_BODY_BYTES` 可调）等性能优化 |
+| `0.4.1` | 管理台新增「关于」页（版本、许可证与仓库/Wiki/反馈链接）；统一登录页、安装向导与管理台视觉；运行镜像随附 `LICENSE` 与 `NOTICE.md`；安全修复：本地登录与安装写接口按 `PUBLIC_BASE_URL` 校验 Origin/Fetch Metadata 且只接受 JSON、外部提供方邮箱仅 `email_verified === true` 参与白名单/邀请匹配、显式管理员组在重新登录时重算；许可证由 LGPL-2.1 改为 Sakura-License v1.2 |
 
 升级注意：
 
@@ -441,6 +444,8 @@ CI 会执行：
 - 升级到 `0.3.1` 需执行迁移 `009_login_probe.sql`（`AUTO_MIGRATE=true` 时自动执行）。「以 *** 的身份登录」还要求该 Provider 的同意模式为隐式（implicit consent）；若配置为每次登录都需确认，探测会得到 `consent_required`，页面静默回退到普通登录流程，不报错但功能不生效。
 - 升级到 `0.3.2` 需执行迁移 `010_client_sessions.sql`（`AUTO_MIGRATE=true` 时自动执行）；客户端会话是观测数据，写入失败只记录警告，不会阻断 MCP 请求。
 - `0.3.3` 修复探测 Cookie 清理与 Sakura Session Cookie 同时下发时的兼容性问题，升级后应重新验证登录、退出和“使用其他账号登录”流程。
+- 升级到 `0.4.0` 会执行迁移 `013_local_login.sql`、`014_sakura_oidc_provider.sql`、`015_account_security.sql`（`AUTO_MIGRATE=true` 时自动执行）。升级会撤销全部已有**本地**会话（Sakura / Authentik 会话不受影响）；曾用未验证邮箱匹配白名单或邀请的部署应复核管理员账号，必要时降权。依赖邮箱白名单的部署需确认 IdP 下发布尔型 `email_verified: true`。
+- 仅使用 Sakura 登录时必须显式填写管理员用户组（不继承 Authentik 默认管理员组）；Sakura 邮箱当前未验证，不能用于白名单提权。
 
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

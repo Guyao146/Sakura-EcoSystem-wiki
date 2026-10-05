@@ -12,6 +12,7 @@
   - [DSH Windows Tool Fix](docs/dsh-windows-tool-fix.md)
   - [Local Model Gateway](docs/local-model-gateway.md)
   - [Life Dashboard](docs/life-dashboard.md)
+  - [SakuraID（Sakura-Auth-Server）](docs/sakura-auth-server.md)
   - [Sakura Chat](docs/sakura-chat.md)
   - [Sakura AI Cut](docs/sakura-aicut.md)
   - [UniLink](docs/unilink.md)

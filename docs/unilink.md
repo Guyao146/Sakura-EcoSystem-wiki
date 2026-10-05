@@ -1,6 +1,6 @@
 # UniLink
 
-> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（UniLink独立版本）
+> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-05`（UniLink独立版本）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![UniLink](../assets/badges/unilink.svg)](https://github.com/Guyao146/UniLink)
@@ -71,6 +71,14 @@ py main.py
 4. （可选，推荐）点 **「登录 authentik」** 以启用扫码登录。
 
 > 两端必须使用相同的房间码与令牌；扫码登录还需单独部署和配置 auth-server。
+
+### 扫码登录 auth-server 的网页化配置（`v1.2` 之后新增）
+
+扫码登录配套的 `auth-server` 已改为网页向导 + 管理面板方式，不再需要手工编辑 `.env`，也移除了一次性 setup token：
+
+- 首次启动后访问网页向导完成初始化配置，之后可在 Web 管理面板中维护配置，**面板中的设置会覆盖同名环境变量**；
+- `/healthz` 修复了 setup 模式下的崩溃；认证请求改为请求级取消并及时回收空闲工作线程，多个 AuthClient 共用一个 OkHttpClient，Docker 部署下认证工作负载有界并会清理废弃请求；
+- 客户端暗色主题从接近纯黑调整为中性石墨色系（参考 iOS 灰阶）。
 
 ## 功能总览
 
@@ -197,7 +205,8 @@ UniLink 的扫码登录设计为对下游项目零侵入：只要项目接入 au
 | `v1`（README） | 文字、通知、剪贴板、文件互传与端到端加密 |
 | `v1.1`（README） | 在电脑上回复手机通知，提供无障碍自动化与复制回落；PC 使用真实 Windows 系统 Toast |
 | `v1.2`（README） | 手机扫码登录接入 Authentik OIDC 的项目 |
+| 提交 `a6ce432`–`539679f`（README 之后） | auth-server 改为网页配置向导 + Web 管理面板（免 `.env`、免一次性 token，面板配置覆盖环境变量）；`/healthz` setup 模式崩溃修复；认证请求取消与空闲工作线程回收、共享 OkHttpClient；Docker 下认证工作有界并清理废弃请求；暗色主题重做为中性石墨色系 |
 
-来源：[README 的已完成清单](https://github.com/Guyao146/UniLink/blob/794432f/README.md)。PyInstaller 打包、mDNS 发现与多实例 auth-server 等仍是规划，不列入已发布能力。
+来源：[README 的已完成清单](https://github.com/Guyao146/UniLink/blob/794432f/README.md) 与提交 [`a6ce432`](https://github.com/Guyao146/UniLink/commit/a6ce432)、[`539679f`](https://github.com/Guyao146/UniLink/commit/539679f)。PyInstaller 打包、mDNS 发现与多实例 auth-server 等仍是规划，不列入已发布能力。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

@@ -1,6 +1,6 @@
 # Cline Sync 本地客户端
 
-> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（Cline Sync 本地客户端独立版本）
+> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-05`（Cline Sync 本地客户端独立版本，源码 `0.2.0`）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![Cline Sync](../assets/badges/cline-sync.svg)](https://github.com/Guyao146/Sakura-MCP-Server/tree/main/tools/cline-sync)
@@ -130,6 +130,8 @@ npm run package
 
 配置窗口优先使用本机 Edge/WebView2 或 Chrome 的 `--app` 模式，并使用独立浏览器 profile；找不到兼容浏览器引擎时退回默认浏览器。面板服务只绑定 `127.0.0.1`，每次进程启动生成随机 token，读取配置时会掩码显示 Agent Key。
 
+`0.2.0` 起新增运行可靠性能力：支持开机自启动；每轮同步的运行结果（成功、跳过与失败任务）持久化为运行历史，面板可翻看；连续多轮失败时触发失败熔断，自动暂停同步避免对服务端造成压力，修复后可在面板手动恢复。
+
 ## 命令行与检查
 
 ```bash
@@ -206,7 +208,7 @@ Agent Key 未被删除
 - 不上传图片和工具结果；
 - 少于两条新增消息不会立即抽取；
 - 不支持在客户端配置目标 `space_id`；
-- 不提供安装器、开机自启、Windows Service 注册或自动更新；
+- 不提供安装器、签名发行版或自动更新（`0.2.0` 起已支持开机自启与运行历史持久化）；
 - 不自动删除或修改 Cline 原始任务历史；
 - 脱敏无法覆盖所有秘密、个人信息和业务数据；
 - CI 当前只检查类型和测试，不代表单文件打包、签名或跨平台发行已经验证。
@@ -226,7 +228,8 @@ Agent Key 未被删除
 | 版本 | 要点 |
 | --- | --- |
 | `0.1.0`（源码） | 定时扫描 Cline 文本历史、按任务保存增量游标，提供托盘、配置窗口、单次同步与 dry-run；可自行构建 Windows 单文件程序 |
+| `0.2.0`（源码） | 开机自启动；同步运行结果持久化为可翻阅的运行历史；连续失败触发熔断自动暂停，避免持续向服务端施压 |
 
-来源：[服务端 `v0.3.4` 中的客户端 package.json](https://github.com/Guyao146/Sakura-MCP-Server/blob/v0.3.4/tools/cline-sync/package.json) 与 [客户端说明](https://github.com/Guyao146/Sakura-MCP-Server/tree/v0.3.4/tools/cline-sync)。未确认独立客户端 Release，不把服务端 tag 当作客户端版本。
+来源：[服务端 `v0.4.1` 中的客户端 package.json](https://github.com/Guyao146/Sakura-MCP-Server/blob/v0.4.1/tools/cline-sync/package.json) 与 [客户端说明](https://github.com/Guyao146/Sakura-MCP-Server/tree/v0.4.1/tools/cline-sync)。未确认独立客户端 Release，不把服务端 tag 当作客户端版本。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

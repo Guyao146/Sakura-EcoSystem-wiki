@@ -1,6 +1,6 @@
 # Life Dashboard
 
-> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-04`（Life Dashboard独立版本，上游 `1.0.14`）
+> Wiki 文档版本：`v1.3.0` · 更新日期：`2026-10-05`（Life Dashboard独立版本，上游 `1.0.15`）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![Life Dashboard](../assets/badges/life-dashboard.svg)](https://github.com/Guyao146/Life-Dashboard)
@@ -30,7 +30,7 @@ chmod 600 .env
 
 ## 当前版本新增能力
 
-`1.0.0`–`1.0.11` 已将静默 SSO 检测、顶层 `prompt=none` 回退、`offline_access` 续期诊断、登录身份卡片、加载页问候/动画和整轮登录页视觉重做落地。当前版本来源为上游 `version.js`，发布变更以 `CHANGELOG.md` 为准。
+`1.0.0`–`1.0.15` 已将静默 SSO 检测、顶层 `prompt=none` 回退、`offline_access` 续期诊断、登录身份卡片、加载页问候/动画、整轮登录页视觉重做、许可证迁移与「关于我们」落地。当前版本来源为上游 `version.js`，发布变更以 `CHANGELOG.md` 为准。
 
 - 无 refresh token 时先尝试一次静默重授权，避免不必要地退回登录页；
 - 设置页显示 refresh token 诊断，并提示 Authentik 的 `offline_access` Scope Mapping；
@@ -38,7 +38,11 @@ chmod 600 .env
 - 登录页重做视觉层级：品牌标识、深色玻璃背景、SSO 身份卡片和更清晰的错误反馈，并适配窄屏间距与按钮尺寸；
 - 静默探测改为在登录身份区域显示紧凑加载状态，不再全屏加载；
 - 加载页改为品牌 Logo 弧线动画加身份问候，适配夜间主题与“减少动态效果”偏好；
-- 登录主要操作按钮间距增大，SSO 继续、切换账号和清除登录信息的层级更清晰。
+- 登录主要操作按钮间距增大，SSO 继续、切换账号和清除登录信息的层级更清晰；
+- 登录页品牌面板、图标与介绍内容统一，桌面端渐变品牌栏与居中表单列，窄屏布局适配（`1.0.12`）；
+- 登录页柔和光晕与表单卡片层次、看板首次进入错峰动效与统一的页面切换、按钮反馈、键盘焦点和弹窗入场效果（`1.0.13`）；
+- 许可证由 LGPL-2.1 迁移至 Sakura-License v1.2 并在设置页「版本与更新」卡片提供许可入口（`1.0.14`）；
+- 设置页新增「关于我们」卡片：项目简介、樱落生态官网 / Wiki / 项目文档 / GitHub 源码入口，以及许可证与采用声明入口和数据来源说明（`1.0.15`）。
 
 ## 功能总览
 
@@ -227,7 +231,11 @@ nginx-life-dashboard.conf.example  # Nginx 安全规则示例
 | `1.0.9` | 重做登录页视觉层级、SSO 身份卡片与错误反馈 |
 | `1.0.10` | 静默 SSO 探测使用登录卡片内的紧凑加载状态，不再全屏加载 |
 | `1.0.11` | 增大登录页主要操作按钮间距，区分继续、切换账号与清除登录信息 |
+| `1.0.12` | 登录页品牌面板、图标与介绍内容更新；桌面端渐变品牌栏与居中表单列，窄屏适配 |
+| `1.0.13` | 登录页光晕与卡片层次优化；看板首次进入错峰动效，统一页面切换、按钮反馈、键盘焦点与弹窗入场；减少动态效果模式下停用动画 |
+| `1.0.14` | 许可证由 LGPL-2.1 迁移至 Sakura-License v1.2（正式固定正文）；新增 `LICENSING.md` 采用声明；设置页「版本与更新」卡片增加许可正文入口；README 增加许可证章节 |
+| `1.0.15` | 设置页新增「关于我们」卡片（项目简介、官网 / Wiki / 文档 / GitHub 入口、许可证与数据来源说明）；新卡片在已保存布局的设备上默认排在末尾，可拖动排序与调尺寸 |
 
-来源：[上游 CHANGELOG](https://github.com/Guyao146/Life-Dashboard/blob/bad41fa/CHANGELOG.md) 与 [version.js](https://github.com/Guyao146/Life-Dashboard/blob/bad41fa/version.js)。更早的变更以该日志为准。
+来源：[上游 CHANGELOG](https://github.com/Guyao146/Life-Dashboard/blob/61a3bb0/CHANGELOG.md) 与 [version.js](https://github.com/Guyao146/Life-Dashboard/blob/61a3bb0/version.js)。更早的变更以该日志为准。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

@@ -2,7 +2,36 @@
 
 本文件记录各项目 Wiki 页面自己的文档版本。每个项目独立维护版本号和更新日期，不等同于上游项目的 Release 版本；上游版本、迁移版本和部署 tag 仍以对应项目仓库为准。
 
-## 当前版本（2026-10-05 · Wiki 主题布局修复）
+## 当前版本（2026-10-05 · 全项目同步扫描）
+
+对照本地各上游仓库逐一扫描，把 wiki 未覆盖的已发布变动补齐；同时新增此前未收录的 SakuraID（Sakura-Auth-Server）项目页。本次只补文档，不改任何上游代码。
+
+| 页面 | Wiki 文档版本 | 更新日期 | 内容 |
+| --- | --- | --- | --- |
+| [Sakura-MCP-Server](docs/sakura-mcp-server.md) | `v1.2.0` | 2026-10-05 | 上游 `v0.3.4` → `v0.4.1`：本地账号登录、账号安全管理台、可选 SakuraID 登录、管理台「关于」页、镜像随附许可文件、性能与安全修复、迁移 013–015 与升级注意 |
+| [Cline Sync 本地客户端](docs/cline-sync.md) | `v1.2.0` | 2026-10-05 | 源码 `0.1.0` → `0.2.0`：开机自启、运行历史持久化、失败熔断 |
+| [Local Model Gateway](docs/local-model-gateway.md) | `v1.1.0` | 2026-10-05 | 上游 `v2.2.0` → `v2.4.0`：模型权限/能力/模态互转（2.3.0）、网关本地账号认证（2.4.0）与「关于我们」页 |
+| [Life Dashboard](docs/life-dashboard.md) | `v1.3.0` | 2026-10-05 | 上游 `1.0.14` → `1.0.15`：设置页「关于我们」卡片；补录 `1.0.12`–`1.0.14` |
+| [Sakura Chat](docs/sakura-chat.md) | `v1.3.0` | 2026-10-05 | 首个 Release tag `v1.1.0`：可选第三方登录（SakuraID/Authentik）、GHCR 镜像按 tag 版本化、安全与性能修复 |
+| [Sakura AI Cut](docs/sakura-aicut.md) | `v1.3.0` | 2026-10-05 | 首个 Release tag `v1.0.0`：看板式主页、设置页与「关于我们」、本地管理员登录与可选 OIDC、节点 AI 全面化、开放 API |
+| [UniLink](docs/unilink.md) | `v1.2.0` | 2026-10-05 | auth-server 网页配置向导 + Web 管理面板（免 `.env`、免一次性 token）、认证加固与资源回收、暗色主题重做 |
+| [SakuraID（Sakura-Auth-Server）](docs/sakura-auth-server.md) | `v1.0.0` | 2026-10-05 | 新增项目页：自托管 IdP，上游 `v1.5.1`，Passkey/应用门户/审计/品牌定制与生态登录集成 |
+| [十站一章](docs/studio-sites.md) | `v1.0.2` | 2026-10-05 | 统一认证条目注明由 SakuraID 提供 |
+| [项目关系](docs/ecosystem.md) | `v1.0.4` | 2026-10-05 | 新增 SakuraID 项目段落；各项目当前版本快照全量刷新 |
+| [生态总览](README.md) | `v1.2.0` | 2026-10-05 | 项目表全量同步版本号，新增 SakuraID 行；部署段落固定到 `v0.4.1` |
+
+### 本次变更内容
+
+- **Sakura-MCP-Server 补到 `v0.4.1`**：`0.4.0` 带来服务器本地账号登录（scrypt、失败锁定递增）、账号安全管理台（本地账号 CRUD、自助改密、会话管理，迁移 `015_account_security.sql`）与可选 Sakura（SakuraID）浏览器登录（PKCE + RS256，身份按 `sakura:<sha256(issuer)>:<sub>` 隔离，迁移 `013/014`）；`0.4.1` 增加管理台「关于」页、镜像随附 `LICENSE`/`NOTICE.md` 与 Origin/Fetch Metadata 校验、`email_verified` 提权防护等安全修复。版本记录、升级注意、当前状态表与快速开始中的 tag 引用同步更新，并注明 `0.5.0` 管理增强正在 `main` 开发、未发布。
+- **Cline Sync 补到 `0.2.0`**：`508e767` 起客户端支持开机自启、运行历史持久化与失败熔断；「已知限制」中相应去掉「不提供开机自启」，保留「无安装器/签名发行版/自动更新」。
+- **Local Model Gateway 补到 `v2.4.0`**：`2.3.0` 按模型能力与模态做互转翻译并可单独限制模态；`2.4.0` 新增网关本地账号认证与可选仅回环免认证模式，管理后台不再强制依赖外部 OIDC；全局设置新增「关于我们」标签页。
+- **Sakura Chat 补到 Release `v1.1.0`**：此前的 master 快照记录保留，新增首个 tag Release 行——可选第三方登录（本地/Sakura/Authentik，OIDC + PKCE）、登录失败锁定与注册限频、SVG 存储型 XSS 防护、群资料越权修复、性能与音视频资源回收修复、GHCR 镜像按 tag 打版本号标签。
+- **Sakura AI Cut 补到 tag `v1.0.0`**：补录 `0.2.1` 之后的画布大扩展（节点内 AI 生成、片段重拍与多参创作、节点拖拽缩放持久化等）与 `1.0.0` 的看板主页、设置页/关于我们、本地管理员登录与可选 Sakura/通用 OIDC、`/api/open/*` 开放 API（`X-API-Key`）；快速开始改为先设本地管理员密码。
+- **UniLink 补 README 之后的提交**：扫码登录配套 auth-server 改为网页向导 + Web 管理面板，面板配置覆盖环境变量；`/healthz` setup 崩溃修复；认证请求取消、共享 OkHttpClient 与 Docker 下有界认证工作；暗色主题改为中性石墨色系。
+- **新增 SakuraID（Sakura-Auth-Server）项目页**：此前 wiki 未收录该生态 IdP。它是 Sakura-MCP-Server `0.4.0` 与 Sakura Chat `v1.1.0` 第三方登录的提供方，依照其 README 整理定位、快速开始、功能概览（OAuth2/OIDC、Passkey、应用门户、审计、品牌定制等）与版本记录（`v1.2.0`–`v1.5.1`），并加入 README 项目表与侧栏。
+- **无变动项目**：DSH Activity Tracker（`1.7.0`）、DSH Better Model Thinking Control（`0.2.9`，最近提交在 wiki 记录之前）、DSH Windows Tool Fix（`v0.2.1`）、AI 简历自动填充助手（manifest `1.0.0`）核对后均无新增变动，版本号不变。
+
+## 历史版本（2026-10-05 · Wiki 主题布局修复）
 
 修复左侧栏、页内目录与正文区的布局错乱：页内目录回归 docsify 原生的侧栏内嵌结构，不再以 `position: fixed` 浮动面板悬挂在正文左侧；正文列改为单一居中规则（最大宽 1080px、自动居中），删除 1700px 断点；移动端 ≤768px 保持全宽正文与 `.sidebar-toggle` 行为不变。`assets/theme.css` 缓存版本号升至 `v=13`。
 

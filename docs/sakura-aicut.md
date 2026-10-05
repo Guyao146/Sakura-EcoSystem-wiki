@@ -1,12 +1,12 @@
 # Sakura AI Cut
 
-> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-04`（Sakura AI Cut独立版本）
+> Wiki 文档版本：`v1.3.0` · 更新日期：`2026-10-05`（Sakura AI Cut独立版本，Release `v1.0.0`）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![Sakura AI Cut](../assets/badges/sakura-aicut.svg)](https://github.com/Guyao146/Sakura-AiCut)
 [![已编写Wiki](../assets/sakura-wiki.svg)](sakura-aicut.md)
 
-仓库：[Guyao146/Sakura-AiCut](https://github.com/Guyao146/Sakura-AiCut) · 许可证 [`Sakura-License v1.2`](../licenses/Sakura-License-1.2.md) · `package.json` 版本 `0.2.1`
+仓库：[Guyao146/Sakura-AiCut](https://github.com/Guyao146/Sakura-AiCut) · 许可证 [`Sakura-License v1.2`](../licenses/Sakura-License-1.2.md) · Release tag `v1.0.0`（`package.json` `1.0.0`）
 
 ## 项目定位
 
@@ -30,7 +30,7 @@ docker compose up -d
 ```
 
 3. 打开 <http://localhost:3000> 即可使用；容器数据持久化在 `sakura-data` 卷中。
-4. 首次使用先到 **设置 → API 接入** 填写模型服务（NewAPI / OneAPI / 各家官方 API）。
+4. 首次使用请先设置本地管理员密码，再到 **设置 → API 接入** 选择协议模板，填写接口地址、凭证与实际模型 ID；登录可选接入 Sakura 账号或通用 OIDC。
 
 > 生产环境请把 `.env` 中的 `SAKURA_SECRET` 改成至少 32 位的随机字符串——它用于加密保存供应商 API Key。默认端口 `3000`，Worker 并发 `3`。
 
@@ -50,8 +50,11 @@ pnpm dev             # 同时启动 web(3000) 与 worker
   3. **资产生成** —— 人物 / 场景 / 道具 图片批量生成
   4. **镜头片段** —— 从内置运镜模板挑选，或自定义运镜提示模板
   5. **在线剪辑** —— 时间线编排、导出成片
-- **自定义 API 接入** —— NewAPI / OneAPI / 火山引擎 / OpenAI / Claude / Gemini / Kling / MiniMax / DashScope 等通用与专用标准，**支持同步 / 异步任务**
-- **按能力选模型** —— 文字、图片、视频三类能力各自指定路由，模型可任意组合
+- **自定义 API 接入** —— 按协议配置模型服务，覆盖对话、消息、多模态内容与媒体任务接口，**支持同步 / 异步任务**
+- **按能力选模型** —— 文字、图片、视频、语音各自指定路由，模型可任意组合
+- **所有素材节点支持 AI 优化 / 生成** —— 文字、图片、视频、语音及角色 / 场景 / 道具节点，均可使用新输入或节点已有文字；生成结果自动回填并保留最近 24 条历史，任务可在任务中心查看、取消和重试
+- **看板式主页与极简顶栏** —— 首页磁贴化平铺项目，项目库首格直接新建项目，主导航移至首页磁贴与顶栏；设置页聚合 API 接入、偏好与「关于我们」（含樱落生态官网 / Wiki / 项目文档 / GitHub 入口，顶栏可返回主页）
+- **账号与开放 API** —— 本地管理员密码登录，可选接入 Sakura 账号或通用 OIDC；`/api/open/*` 机器接口用请求头 `X-API-Key` 鉴权（`AICUT_OPEN_API_KEYS` 英文逗号分隔配置多个，未配置时返回 401），提供项目列表、创建项目、提交导出任务与任务状态查询
 - **提示词库** —— 内置 12 条模板（剧本 / 镜头 / 风格 / 负面词 / 人物 / 场景 / 道具…），一键复制改造
 - **运镜模板** —— 内置固定 / 推拉 / 摇移 / 跟随 / 环绕 / 升降 / 特殊，支持自定义运镜模板
 - **自动规划 Agent** —— 一句话需求 → 自动拆解并执行全流程，随时可中断、可追问
@@ -136,7 +139,9 @@ AiCut 不依赖生态任何其他项目即可独立运行；接入 Local Model G
 | --- | --- |
 | `0.2.1`（package.json） | 五步工作台与无限画布的源码快照；本次核实的提交调整了按节点类型分流的右键菜单、菜单宽度与直线连线 |
 | 提交 `88600c5`（`0.2.1` 之后） | 仓库根 `LICENSE` 自 LGPL-2.1 切换为 Sakura-License-1.2 固定正文，新增 `NOTICE.md` 采用声明；`package.json` 改为 `SEE LICENSE IN LICENSE` |
+| 提交 `8199303`–`73b382d`（`0.2.1` 之后） | 画布能力大扩展：节点内 AI 生成（文字→图片，RunningHub 式）、片段重拍与多参创作（首尾帧/参考图 UI 化）、15 项功能落地（画布层/流程层/接入层）、节点拖拽缩放并持久化尺寸与位置、右键菜单按节点类型分流、连线改曲线与统一节点尺寸、dock 吸底、空画布引导与无障碍降级 |
+| `v1.0.0`（tag · 提交 `d3b95f0`） | 首个 Release tag：主页看板化平铺与极简顶栏（主导航移至首页磁贴）、项目库首格新建项目、顶栏设置与注销、设置页去横幅与「关于我们」（含工作室官网、Sakura-License 说明与返回主页按钮）；本地管理员密码登录与可选 Sakura / 通用 OIDC；`/api/open/*` 开放 API（`X-API-Key`） |
 
-来源：[package.json](https://github.com/Guyao146/Sakura-AiCut/blob/45e81df/package.json) 与 [画布调整提交 `45e81df`](https://github.com/Guyao146/Sakura-AiCut/commit/45e81df)；许可证切换见 [采用提交 `88600c5`](https://github.com/Guyao146/Sakura-AICut/commit/88600c5)。本表只摘录可确认内容，不推断更早版本的功能归属。
+来源：[package.json](https://github.com/Guyao146/Sakura-AiCut/blob/45e81df/package.json)、[画布调整提交 `45e81df`](https://github.com/Guyao146/Sakura-AiCut/commit/45e81df)、[画布扩展提交 `73b382d`](https://github.com/Guyao146/Sakura-AiCut/commit/73b382d)、[Release `v1.0.0`（提交 `d3b95f0`）](https://github.com/Guyao146/Sakura-AiCut/commit/d3b95f0)；许可证切换见 [采用提交 `88600c5`](https://github.com/Guyao146/Sakura-AICut/commit/88600c5)。本表只摘录可确认内容，不推断更早版本的功能归属。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

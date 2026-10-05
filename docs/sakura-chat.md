@@ -1,6 +1,6 @@
 # Sakura Chat
 
-> Wiki 文档版本：`v1.2.2` · 更新日期：`2026-10-04`（Sakura Chat独立版本）
+> Wiki 文档版本：`v1.3.0` · 更新日期：`2026-10-05`（Sakura Chat独立版本，上游 Release `v1.1.0`）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![Sakura Chat](../assets/badges/sakura-chat.svg)](https://github.com/Guyao146/Sakura-Chat)
@@ -10,7 +10,7 @@
 
 ## 项目定位
 
-Sakura Chat 是一个仿微信的网页聊天应用：账号密码登录、好友/群聊、实时消息、加密传输 + 加密存储。Node.js 全栈（后端 Express + WebSocket + SQLite，前端原生 ES Module 单页应用，无构建步骤、无 CDN 依赖）。
+Sakura Chat 是一个仿微信的网页聊天应用：本地账号密码登录、可选第三方登录（SakuraID / Authentik）、好友/群聊、实时消息、加密传输 + 加密存储。Node.js 全栈（后端 Express + WebSocket + SQLite，前端原生 ES Module 单页应用，无构建步骤、无 CDN 依赖）。
 
 它不是 IM 云服务或 SaaS：所有数据落在本机 SQLite，主密钥由本机生成，部署后完全自有。聊天记录搜索、多端漫游等能力建立在「服务端可解密存储」的前提下，因此它不适合作为完全零信任的端到端加密工具。
 
@@ -43,13 +43,13 @@ docker compose up -d --build
 
 - 访问 <http://localhost:3000>，用 `HOST_PORT=8080 docker compose up -d` 可换宿主机端口。
 - 主密钥 `key.json` 与 SQLite 在 `sakura-data` 卷，上传文件在 `sakura-uploads` 卷；重建容器不丢数据，但请定期备份卷。
-- 已发布 GHCR 镜像 `ghcr.io/guyao146/sakura-chat`，可在 compose 中直接用 `image:` 替换本地构建。
+- 已发布 GHCR 镜像 `ghcr.io/guyao146/sakura-chat`，自 `v1.1.0` 起镜像按 git tag 打版本号标签（如 `:v1.1.0`），可在 compose 中直接用 `image:` 替换本地构建。
 
 ## 功能概览
 
 | 模块 | 功能 |
 | --- | --- |
-| 账号 | 用户名/密码注册登录、JWT 鉴权、密码 scrypt 哈希存储 |
+| 账号 | 用户名/密码注册登录、JWT 鉴权、密码 scrypt 哈希存储；**可选第三方登录（本地 / Sakura（SakuraID） / Authentik，标准 OIDC + PKCE，公开客户端推荐）**，已有本地账号可绑定/解绑第三方身份，纯影子账号不可解绑；**登录失败锁定与注册限频**（暴力破解防护） |
 | 好友 | 用户名/昵称搜索、好友请求（发送/同意/拒绝）、好友列表、删除好友、**文件传输助手**（内置系统账号，注册即自动互加好友，消息自动送达+已读，不可登录/搜索/删除） |
 | 单聊 | 实时收发、离线消息存储、**已发送 → 已送达 → 已读** 状态回执 |
 | 群聊 | 建群（群主）、邀请/移出成员、退群、解散群、群成员列表、**群公告**、**群昵称**、群主/管理员（管理员可发公告、移人） |
@@ -61,7 +61,8 @@ docker compose up -d --build
 | 会话管理 | **置顶**、**免打扰**、**全局搜索**（好友/群/消息/收藏四分组）、**消息收藏** |
 | 聊天记录 | 服务端加密存储、分页加载、会话内搜索 |
 | 资料 | 修改昵称、个性签名、上传头像 |
-| 界面 | Markdown 渲染、**移动端自适应**、侧边栏可拖拽调宽（宽度记忆）、**输入框默认占满剩余空间、高度可拖拽调节（拖到顶或双击把手恢复占满）** |
+| 界面 | Markdown 渲染、**移动端自适应**、侧边栏可拖拽调宽（宽度记忆）、**输入框默认占满剩余空间、高度可拖拽调节（拖到顶或双击把手恢复占满）**、**前端入场动画与「关于」入口** |
+| 安全 | 登录失败锁定与注册限频；上传 SVG 存储型 XSS 防护；OAuth 影子账号哈希异步化；群资料接口越权读取成员名单修复；反代信任白名单；长聊天记录与高并发下的性能退化修复；废弃音视频任务与媒体资源及时回收 |
 
 ## 架构与加密
 
@@ -163,21 +164,23 @@ GitHub Actions 在每次 push/PR 执行**语法检查 + 45 项 E2E + Docker 镜�
 | 项目 | 作用 |
 | --- | --- |
 | `Sakura-Chat` | 自有的网页聊天应用，加密传输 + 加密存储 |
-| [UniLink](unilink.md) | 手机与电脑互联；其扫码登录基于 Authentik，与 Sakura-Chat 的本地账号体系互相独立 |
+| [UniLink](unilink.md) | 手机与电脑互联；其扫码登录基于 Authentik，与 Sakura-Chat 的账号体系互相独立 |
+| [SakuraID（Sakura-Auth-Server）](sakura-auth-server.md) | `v1.1.0` 起 Chat 可作为标准 OIDC 客户端接入 SakuraID（或任意 Authentik 实例）实现第三方登录，接入是可选的 |
 | [Sakura-MCP-Server](sakura-mcp-server.md) | Agent 长期记忆，走 MCP 协议，与聊天应用互不经过 |
 
-Sakura-Chat 当前使用自建账号体系，不依赖 Authentik；可以与生态其他项目部署在同一台机器上，互不干扰。
+Sakura-Chat 默认使用自建本地账号体系，不依赖任何外部服务；可选启用第三方登录后，本地账号与第三方身份可互相绑定/解绑。可以与生态其他项目部署在同一台机器上，互不干扰。
 
 ## 版本记录
 
-此前扫描未发现 Release tag，`package.json` 为 `1.0.0`。以下按提交标识记录本页已覆盖的 master 快照，不把提交称作正式发布版本，也不声称代表当前分支最新状态。
+`v1.1.0` 之前的条目按提交标识记录本页已覆盖的 master 快照，不把提交称作正式发布版本。`v1.1.0` 是首个带 git tag 与版本化 GHCR 镜像的 Release。
 
 | 版本 | 要点 |
 | --- | --- |
 | master · `74de4f9` | 新增文件传输助手：内置系统账号，注册即互加好友，消息自动送达与已读 |
 | master · `92428c1` | 输入框随内容增长，支持顶部把手拖拽调节并记忆高度 |
 | master · `1831610` | 该快照将输入框默认设为占满剩余空间，并修复屏幕溢出与拖拽范围 |
+| `v1.1.0`（tag · `a9e85b0`） | 版本号升至 `1.1.0` 并成为首个 tag Release；前端动画美化与「关于」入口；GHCR 镜像按 git tag 打版本号标签；反代信任白名单、OAuth 浏览器绑定与限流加固；可选第三方登录（本地 / Sakura / Authentik，OIDC + PKCE）与真实 SakuraID 联调；登录失败锁定与注册限频；SVG 存储型 XSS 防护与群资料越权修复；长聊天记录性能与音视频资源回收修复 |
 
-来源：[文件传输助手](https://github.com/Guyao146/Sakura-Chat/commit/74de4f9)、[高度自适应](https://github.com/Guyao146/Sakura-Chat/commit/92428c1)、[剩余空间布局](https://github.com/Guyao146/Sakura-Chat/commit/1831610)。本轮只整理结构；更新到后续提交时需重新核对输入框行为和测试数量。
+来源：[文件传输助手](https://github.com/Guyao146/Sakura-Chat/commit/74de4f9)、[高度自适应](https://github.com/Guyao146/Sakura-Chat/commit/92428c1)、[剩余空间布局](https://github.com/Guyao146/Sakura-Chat/commit/1831610)、[Release `v1.1.0`](https://github.com/Guyao146/Sakura-Chat/releases/tag/v1.1.0)（[提交 `a9e85b0`](https://github.com/Guyao146/Sakura-Chat/commit/a9e85b0)）。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。
