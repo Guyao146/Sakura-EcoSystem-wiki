@@ -1,15 +1,17 @@
 # 运维、备份、升级与排障
 
-> Wiki 文档版本：`v1.0.2` · 更新日期：`2026-09-24`（Sakura-MCP-Server 运维与排障独立版本）
+> Wiki 文档版本：`v1.0.3` · 更新日期：`2026-10-05`（Sakura-MCP-Memory-Server 运维与排障独立版本）
 
-本页以 Sakura-MCP-Server 的 Docker Compose 部署为主，同时列出樱落生态通用运维原则。
+本页以 Sakura-MCP-Memory-Server 的 Docker Compose 部署为主，同时列出樱落生态通用运维原则。
 
 ## 日常检查
 
+> 本页当前命令使用新服务名 `sakura-mcp-memory`。未迁移旧版本时仍使用旧服务名；已有安装必须先按 [改名迁移指南](https://github.com/Guyao146/Sakura-MCP-Memory-Server/blob/main/docs/rename-migration.md) 复用原数据库/密钥卷，所有后续 Compose 管理命令都应带上部署实际使用的覆盖文件。下文旧物理卷名是兼容数据，不应直接重命名或删除。
+
 ```bash
-cd /opt/sakura-mcp-server
+cd /opt/sakura-mcp-memory-server
 docker compose ps
-docker compose logs --tail=100 sakura-mcp
+docker compose logs --tail=100 sakura-mcp-memory
 docker compose logs --tail=100 postgres
 curl -fsS https://mcp.example.com/health
 ```
@@ -41,7 +43,7 @@ worker.failed
 创建自定义格式备份：
 
 ```bash
-cd /opt/sakura-mcp-server
+cd /opt/sakura-mcp-memory-server
 mkdir -p backups
 chmod 700 backups
 docker compose exec -T postgres \
@@ -54,7 +56,7 @@ chmod 600 backups/*.dump
 
 ```text
 .env
-/etc/nginx/sites-available/sakura-mcp
+/etc/nginx/sites-available/sakura-mcp-memory
 CONFIG_ENCRYPTION_KEY 的离线副本
 Compose 命名卷 `sakura-mcp-server_runtime-secrets`（无 `.env` 部署）
 ```
@@ -86,7 +88,7 @@ docker volume ls | grep sakura-mcp-server
 恢复前先备份当前数据库。停止应用，保留 PostgreSQL：
 
 ```bash
-docker compose stop sakura-mcp
+docker compose stop sakura-mcp-memory
 ```
 
 重建数据库：
@@ -102,8 +104,8 @@ docker compose exec -T postgres \
 启动并验证：
 
 ```bash
-docker compose start sakura-mcp
-docker compose logs -f --tail=100 sakura-mcp
+docker compose start sakura-mcp-memory
+docker compose logs -f --tail=100 sakura-mcp-memory
 curl -fsS https://mcp.example.com/health
 ```
 
@@ -126,7 +128,7 @@ cp .env "backups/env-$(date +%F-%H%M)"
 # 下载目标版本的 docker-compose.yml；仓库部署则切换对应 tag
 docker compose pull
 docker compose up -d
-docker compose logs -f --tail=100 sakura-mcp
+docker compose logs -f --tail=100 sakura-mcp-memory
 ```
 
 验证：
@@ -155,7 +157,7 @@ docker compose ps
 
 ```bash
 # 备份数据库和 .env，见上文
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.2.28/docker-compose.yml
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Memory-Server/v0.2.28/docker-compose.yml
 docker compose pull
 docker compose up -d
 curl -fsS https://mcp.example.com/health
@@ -174,7 +176,7 @@ curl -fsS https://mcp.example.com/health
 
 ```bash
 # 备份数据库和 .env，见上文
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.3.3/docker-compose.yml
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Memory-Server/v0.3.3/docker-compose.yml
 docker compose pull
 docker compose up -d
 curl -fsS https://mcp.example.com/health   # 确认 version 为 0.3.3
@@ -186,7 +188,7 @@ curl -fsS https://mcp.example.com/health   # 确认 version 为 0.3.3
 
 ```bash
 # 备份数据库和 .env，见上文
-curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Server/v0.3.4/docker-compose.yml
+curl -fsSLO https://raw.githubusercontent.com/Guyao146/Sakura-MCP-Memory-Server/v0.3.4/docker-compose.yml
 docker compose pull
 docker compose up -d
 curl -fsS https://mcp.example.com/health   # 确认 version 为 0.3.4
@@ -199,7 +201,7 @@ curl -fsS https://mcp.example.com/health   # 确认 version 为 0.3.4
 
 当前生产容器来自 GHCR 版本镜像，内部使用 `node:24-bookworm-slim`，运行容器由 Debian `groupadd/useradd` 创建的非 root `mcp` 用户启动。Compose 使用 `pull_policy: always`，版本升级应执行 `docker compose pull && docker compose up -d`；本地源码构建才使用 `docker-compose.dev.yml`。
 
-生产 Compose 当前默认使用 `ghcr.io/guyao146/sakura-mcp-server:0.3.3` 多架构镜像。升级前先备份，再下载对应版本的 Compose/模板并执行 `docker compose pull && docker compose up -d`。管理后台会显示当前版本，并允许系统管理员检查 GitHub 最新 Release，但不会自动执行升级。本地源码构建应使用 `docker-compose.dev.yml`，不要用开发构建覆盖生产镜像。
+生产 Compose 当前默认使用 `ghcr.io/guyao146/sakura-mcp-memory-server:0.5.1` 多架构镜像。相比 `v0.5.0` 不新增迁移，但改名后必须先按迁移指南复用原数据/密钥卷，再启动新服务。更早的升级示例仅为历史版本说明。管理后台可以检查 GitHub 最新 Release，不会自动升级。本地源码构建使用 `docker-compose.dev.yml`。
 
 ## Worker 运维
 
@@ -263,7 +265,7 @@ chmod 700 data
 ```bash
 docker compose ps
 docker compose logs postgres
-docker compose logs sakura-mcp
+docker compose logs sakura-mcp-memory
 ```
 
 常见原因：
@@ -279,7 +281,7 @@ docker compose logs sakura-mcp
 检查 `/assets/setup.js` 和 `/api/setup/status` 是否被 Nginx 正确代理到 `127.0.0.1:3001`。修改 Compose 环境变量后需要执行：
 
 ```bash
-docker compose up -d --force-recreate sakura-mcp
+docker compose up -d --force-recreate sakura-mcp-memory
 ```
 
 ### Authentik callback 失败

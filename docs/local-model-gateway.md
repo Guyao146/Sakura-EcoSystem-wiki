@@ -243,7 +243,7 @@ npm.cmd test
 Local Model Gateway 处在模型调用链路的最前端，与生态其他项目没有强制依赖：
 
 - [DSH Better Model Thinking Control](dsh-better-model-thinking-control.md) 关注「在 DSH 里配置思考档位」，写入 DSH 原生设置；Local Model Gateway 关注「请求实际发往哪个上游」。两者都会读取中转站 `/models` 的能力元数据，但作用层次不同，可以叠加使用：DSH 把网关当作一个中转站，网关再向真实上游分流。
-- [Sakura-MCP-Server](sakura-mcp-server.md) 处理 Agent 的长期记忆，走 MCP 协议；网关处理模型请求转发，走 OpenAI/Anthropic 协议。两者互不经过对方。
+- [Sakura-MCP-Memory-Server](sakura-mcp-memory-server.md) 处理 Agent 的长期记忆，走 MCP 协议；网关处理模型请求转发，走 OpenAI/Anthropic 协议。两者互不经过对方。
 - 网关的用量统计只覆盖经过它的请求，不替代 [DSH Activity Tracker](dsh-activity-tracker.md) 的会话级统计。
 
 ## 版本记录

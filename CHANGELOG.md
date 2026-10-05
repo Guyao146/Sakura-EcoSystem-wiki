@@ -2,13 +2,21 @@
 
 本文件记录各项目 Wiki 页面自己的文档版本。每个项目独立维护版本号和更新日期，不等同于上游项目的 Release 版本；上游版本、迁移版本和部署 tag 仍以对应项目仓库为准。
 
+## 项目更名与 0.5.x 同步
+
+- Sakura-MCP-Memory-Server 项目页升至 Wiki `v1.3.0`，部署页升至 `v1.1.0`，运维页升至 `v1.0.3`；更新新仓库、GHCR、npm tarball、Compose 服务与迁移指南。
+- 补充上游 `v0.5.0` 工作区管理及 `v0.5.1` 改名说明。新项目页与部署页使用 `sakura-mcp-memory-*` 路径，保留旧页面及 Docsify alias 兼容收藏。
+- 生态总览、侧栏、Cline Sync 与其他项目交叉链接统一显示新名称；历史版本与旧数据卷物理名保留其语义，不删除历史镜像或重写授权。
+- 旧部署必须先停机、备份并以 external 卷复用原数据库/密钥；不能直接以新项目名启动空库。实际发布状态以新仓库 Actions 为准。
+
+
 ## 当前版本（2026-10-05 · 全项目同步扫描）
 
 对照本地各上游仓库逐一扫描，把 wiki 未覆盖的已发布变动补齐；同时新增此前未收录的 SakuraID（Sakura-Auth-Server）项目页。本次只补文档，不改任何上游代码。
 
 | 页面 | Wiki 文档版本 | 更新日期 | 内容 |
 | --- | --- | --- | --- |
-| [Sakura-MCP-Server](docs/sakura-mcp-server.md) | `v1.2.0` | 2026-10-05 | 上游 `v0.3.4` → `v0.4.1`：本地账号登录、账号安全管理台、可选 SakuraID 登录、管理台「关于」页、镜像随附许可文件、性能与安全修复、迁移 013–015 与升级注意 |
+| [Sakura-MCP-Memory-Server](docs/sakura-mcp-memory-server.md) | `v1.2.0` | 2026-10-05 | 上游 `v0.3.4` → `v0.4.1`：本地账号登录、账号安全管理台、可选 SakuraID 登录、管理台「关于」页、镜像随附许可文件、性能与安全修复、迁移 013–015 与升级注意 |
 | [Cline Sync 本地客户端](docs/cline-sync.md) | `v1.2.0` | 2026-10-05 | 源码 `0.1.0` → `0.2.0`：开机自启、运行历史持久化、失败熔断 |
 | [Local Model Gateway](docs/local-model-gateway.md) | `v1.1.0` | 2026-10-05 | 上游 `v2.2.0` → `v2.4.0`：模型权限/能力/模态互转（2.3.0）、网关本地账号认证（2.4.0）与「关于我们」页 |
 | [Life Dashboard](docs/life-dashboard.md) | `v1.3.0` | 2026-10-05 | 上游 `1.0.14` → `1.0.15`：设置页「关于我们」卡片；补录 `1.0.12`–`1.0.14` |
@@ -22,13 +30,13 @@
 
 ### 本次变更内容
 
-- **Sakura-MCP-Server 补到 `v0.4.1`**：`0.4.0` 带来服务器本地账号登录（scrypt、失败锁定递增）、账号安全管理台（本地账号 CRUD、自助改密、会话管理，迁移 `015_account_security.sql`）与可选 Sakura（SakuraID）浏览器登录（PKCE + RS256，身份按 `sakura:<sha256(issuer)>:<sub>` 隔离，迁移 `013/014`）；`0.4.1` 增加管理台「关于」页、镜像随附 `LICENSE`/`NOTICE.md` 与 Origin/Fetch Metadata 校验、`email_verified` 提权防护等安全修复。版本记录、升级注意、当前状态表与快速开始中的 tag 引用同步更新，并注明 `0.5.0` 管理增强正在 `main` 开发、未发布。
+- **Sakura-MCP-Memory-Server 补到 `v0.4.1`**：`0.4.0` 带来服务器本地账号登录（scrypt、失败锁定递增）、账号安全管理台（本地账号 CRUD、自助改密、会话管理，迁移 `015_account_security.sql`）与可选 Sakura（SakuraID）浏览器登录（PKCE + RS256，身份按 `sakura:<sha256(issuer)>:<sub>` 隔离，迁移 `013/014`）；`0.4.1` 增加管理台「关于」页、镜像随附 `LICENSE`/`NOTICE.md` 与 Origin/Fetch Metadata 校验、`email_verified` 提权防护等安全修复。版本记录、升级注意、当前状态表与快速开始中的 tag 引用同步更新，并注明 `0.5.0` 管理增强正在 `main` 开发、未发布。
 - **Cline Sync 补到 `0.2.0`**：`508e767` 起客户端支持开机自启、运行历史持久化与失败熔断；「已知限制」中相应去掉「不提供开机自启」，保留「无安装器/签名发行版/自动更新」。
 - **Local Model Gateway 补到 `v2.4.0`**：`2.3.0` 按模型能力与模态做互转翻译并可单独限制模态；`2.4.0` 新增网关本地账号认证与可选仅回环免认证模式，管理后台不再强制依赖外部 OIDC；全局设置新增「关于我们」标签页。
 - **Sakura Chat 补到 Release `v1.1.0`**：此前的 master 快照记录保留，新增首个 tag Release 行——可选第三方登录（本地/Sakura/Authentik，OIDC + PKCE）、登录失败锁定与注册限频、SVG 存储型 XSS 防护、群资料越权修复、性能与音视频资源回收修复、GHCR 镜像按 tag 打版本号标签。
 - **Sakura AI Cut 补到 tag `v1.0.0`**：补录 `0.2.1` 之后的画布大扩展（节点内 AI 生成、片段重拍与多参创作、节点拖拽缩放持久化等）与 `1.0.0` 的看板主页、设置页/关于我们、本地管理员登录与可选 Sakura/通用 OIDC、`/api/open/*` 开放 API（`X-API-Key`）；快速开始改为先设本地管理员密码。
 - **UniLink 补 README 之后的提交**：扫码登录配套 auth-server 改为网页向导 + Web 管理面板，面板配置覆盖环境变量；`/healthz` setup 崩溃修复；认证请求取消、共享 OkHttpClient 与 Docker 下有界认证工作；暗色主题改为中性石墨色系。
-- **新增 SakuraID（Sakura-Auth-Server）项目页**：此前 wiki 未收录该生态 IdP。它是 Sakura-MCP-Server `0.4.0` 与 Sakura Chat `v1.1.0` 第三方登录的提供方，依照其 README 整理定位、快速开始、功能概览（OAuth2/OIDC、Passkey、应用门户、审计、品牌定制等）与版本记录（`v1.2.0`–`v1.5.1`），并加入 README 项目表与侧栏。
+- **新增 SakuraID（Sakura-Auth-Server）项目页**：此前 wiki 未收录该生态 IdP。它是 Sakura-MCP-Memory-Server `0.4.0` 与 Sakura Chat `v1.1.0` 第三方登录的提供方，依照其 README 整理定位、快速开始、功能概览（OAuth2/OIDC、Passkey、应用门户、审计、品牌定制等）与版本记录（`v1.2.0`–`v1.5.1`），并加入 README 项目表与侧栏。
 - **无变动项目**：DSH Activity Tracker（`1.7.0`）、DSH Better Model Thinking Control（`0.2.9`，最近提交在 wiki 记录之前）、DSH Windows Tool Fix（`v0.2.1`）、AI 简历自动填充助手（manifest `1.0.0`）核对后均无新增变动，版本号不变。
 
 ## 历史版本（2026-10-05 · Wiki 主题布局修复）
@@ -101,7 +109,7 @@ Life Dashboard（上游 `1.0.14`）由版权人明确采用 Sakura-License v1.2 
 | [贡献与维护](docs/contributing.md) | `v1.1.1` | 2026-10-04 | 许可证段落去掉审阅稿表述 |
 | [生态总览](README.md) | `v1.1.5` | 2026-10-04 | 许可证段落改为正式版，补 Local Model Gateway |
 | [Sakura Chat](docs/sakura-chat.md) | `v1.2.1` | 2026-10-04 | 许可证标注与链接改为 v1.2 固定正文 |
-| [Sakura-MCP-Server](docs/sakura-mcp-server.md) | `v1.1.1` | 2026-10-04 | 许可证标注与链接改为 v1.2 固定正文 |
+| [Sakura-MCP-Memory-Server](docs/sakura-mcp-memory-server.md) | `v1.1.1` | 2026-10-04 | 许可证标注与链接改为 v1.2 固定正文 |
 | [Local Model Gateway](docs/local-model-gateway.md) | `v1.0.4` | 2026-10-04 | 许可证标注改为 v1.2 |
 
 ### 本次变更内容
@@ -109,7 +117,7 @@ Life Dashboard（上游 `1.0.14`）由版权人明确采用 Sakura-License v1.2 
 - **发布固定正文**：新增 [licenses/Sakura-License-1.2.md](licenses/Sakura-License-1.2.md)，第 1 至 14 条与审阅稿修订 3 逐字一致，仅标题、文本标识、前言与第 15 条改为固定版本状态；许可证徽章去掉 draft 标注。
 - **审阅稿存档**：licenses/Sakura-License-1.2-draft.md 加历史存档说明，指向正式固定正文；条文与修订记录未改动。
 - **导读与采用指引转正**：采用流程从“完成审查后另行发布固定文本”改为“基于已发布固定正文作采用声明”；状态说明、徽章链接与版本记录表同步更新，保留 GPL-3.0 根 LICENSE 冲突待迁移的表述。
-- **已采用项目标注**：Sakura-MCP-Server、Sakura-Chat、Local-Model-Gateway 项目页许可证标注由“v1.2 审阅稿”改为“v1.2”；条文未变，已授予的权利不受正式版发布影响。
+- **已采用项目标注**：Sakura-MCP-Memory-Server、Sakura-Chat、Local-Model-Gateway 项目页许可证标注由“v1.2 审阅稿”改为“v1.2”；条文未变，已授予的权利不受正式版发布影响。
 - 不替换 Wiki 根 GPL-3.0 LICENSE，不迁移其余上游项目，不追溯修改旧授权；项目正式采用仍须按采用指引完成权属核查与采用声明，文档与链接检查不证明法律有效性。
 
 
@@ -214,10 +222,10 @@ Sakura-Chat 仓库由版权人明确采用 Sakura-License v1.2 审阅稿固定�
 | --- | --- | --- | --- | --- |
 | 生态总览 | `v1.1.2` | 2026-10-02 | — | [README](README.md) |
 | 项目关系 | `v1.0.3` | 2026-09-24 | — | [项目关系](docs/ecosystem.md) |
-| Sakura-MCP-Server | `v1.1.0` | 2026-09-24 | `v0.3.4` | [项目页](docs/sakura-mcp-server.md) |
+| Sakura-MCP-Memory-Server | `v1.1.0` | 2026-09-24 | `v0.3.4` | [项目页](docs/sakura-mcp-memory-server.md) |
 | Cline Sync 本地客户端 | `v1.1.0` | 2026-09-24 | 源码 `0.1.0`，无独立 Release | [客户端页](docs/cline-sync.md) |
-| Sakura-MCP-Server 生产部署 | `v1.0.2` | 2026-09-24 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-deployment.md) |
-| Sakura-MCP-Server 运维与排障 | `v1.0.2` | 2026-09-24 | — | [运维页](docs/operations.md) |
+| Sakura-MCP-Memory-Server 生产部署 | `v1.0.2` | 2026-09-24 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-memory-deployment.md) |
+| Sakura-MCP-Memory-Server 运维与排障 | `v1.0.2` | 2026-09-24 | — | [运维页](docs/operations.md) |
 | DSH Activity Tracker | `v1.1.0` | 2026-09-24 | `v1.7.0` | [项目页](docs/dsh-activity-tracker.md) |
 | DSH Better Model Thinking Control | `v1.1.0` | 2026-09-24 | `0.2.9` | [项目页](docs/dsh-better-model-thinking-control.md) |
 | DSH Windows Tool Fix | `v1.1.0` | 2026-09-24 | `v0.2.1` | [项目页](docs/dsh-windows-tool-fix.md) |
@@ -259,10 +267,10 @@ Sakura-Chat 仓库由版权人明确采用 Sakura-License v1.2 审阅稿固定�
 | --- | --- | --- | --- | --- |
 | 生态总览 | `v1.1.1` | 2026-10-02 | — | [README](README.md) |
 | 项目关系 | `v1.0.3` | 2026-09-24 | — | [项目关系](docs/ecosystem.md) |
-| Sakura-MCP-Server | `v1.1.0` | 2026-09-24 | `v0.3.4` | [项目页](docs/sakura-mcp-server.md) |
+| Sakura-MCP-Memory-Server | `v1.1.0` | 2026-09-24 | `v0.3.4` | [项目页](docs/sakura-mcp-memory-server.md) |
 | Cline Sync 本地客户端 | `v1.1.0` | 2026-09-24 | 源码 `0.1.0`，无独立 Release | [客户端页](docs/cline-sync.md) |
-| Sakura-MCP-Server 生产部署 | `v1.0.2` | 2026-09-24 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-deployment.md) |
-| Sakura-MCP-Server 运维与排障 | `v1.0.2` | 2026-09-24 | — | [运维页](docs/operations.md) |
+| Sakura-MCP-Memory-Server 生产部署 | `v1.0.2` | 2026-09-24 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-memory-deployment.md) |
+| Sakura-MCP-Memory-Server 运维与排障 | `v1.0.2` | 2026-09-24 | — | [运维页](docs/operations.md) |
 | DSH Activity Tracker | `v1.1.0` | 2026-09-24 | `v1.7.0` | [项目页](docs/dsh-activity-tracker.md) |
 | DSH Better Model Thinking Control | `v1.1.0` | 2026-09-24 | `0.2.9` | [项目页](docs/dsh-better-model-thinking-control.md) |
 | DSH Windows Tool Fix | `v1.1.0` | 2026-09-24 | `v0.2.1` | [项目页](docs/dsh-windows-tool-fix.md) |
@@ -295,10 +303,10 @@ Sakura-Chat 仓库由版权人明确采用 Sakura-License v1.2 审阅稿固定�
 | --- | --- | --- | --- | --- |
 | 生态总览 | `v1.1.0` | 2026-09-24 | — | [README](README.md) |
 | 项目关系 | `v1.0.3` | 2026-09-24 | — | [项目关系](docs/ecosystem.md) |
-| Sakura-MCP-Server | `v1.1.0` | 2026-09-24 | `v0.3.4` | [项目页](docs/sakura-mcp-server.md) |
+| Sakura-MCP-Memory-Server | `v1.1.0` | 2026-09-24 | `v0.3.4` | [项目页](docs/sakura-mcp-memory-server.md) |
 | Cline Sync 本地客户端 | `v1.1.0` | 2026-09-24 | 源码 `0.1.0`，无独立 Release | [客户端页](docs/cline-sync.md) |
-| Sakura-MCP-Server 生产部署 | `v1.0.2` | 2026-09-24 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-deployment.md) |
-| Sakura-MCP-Server 运维与排障 | `v1.0.2` | 2026-09-24 | — | [运维页](docs/operations.md) |
+| Sakura-MCP-Memory-Server 生产部署 | `v1.0.2` | 2026-09-24 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-memory-deployment.md) |
+| Sakura-MCP-Memory-Server 运维与排障 | `v1.0.2` | 2026-09-24 | — | [运维页](docs/operations.md) |
 | DSH Activity Tracker | `v1.1.0` | 2026-09-24 | `v1.7.0` | [项目页](docs/dsh-activity-tracker.md) |
 | DSH Better Model Thinking Control | `v1.1.0` | 2026-09-24 | `0.2.9` | [项目页](docs/dsh-better-model-thinking-control.md) |
 | DSH Windows Tool Fix | `v1.1.0` | 2026-09-24 | `v0.2.1` | [项目页](docs/dsh-windows-tool-fix.md) |
@@ -317,10 +325,10 @@ Sakura-Chat 仓库由版权人明确采用 Sakura-License v1.2 审阅稿固定�
 
 - **徽章本地化**：新增 9 个项目徽章 SVG 到 `assets/badges/`，按项目类型配色（MCP 紫、DSH 插件蓝、本地网关/聊天绿、Life Dashboard 青绿、AiCut 深灰）。全部项目页改用 `../assets/badges/*.svg`，不再引用 `img.shields.io` 等外链图床；Cline Sync 补齐整行徽章，Life Dashboard 补项目徽章。
 - **徽章行顺序统一**：生态成员徽章指向 `../README.md`、项目徽章指向上游仓库、已编写Wiki 徽章指向本页；仓库信息行统一移到徽章行之后。
-- **版本记录补齐**：为 8 个缺版本记录的页面新增「## 版本记录」。Sakura-MCP-Server 与 Local Model Gateway 原有内容改标题归并；Sakura Chat 改用 master 提交标识（`74de4f9` / `92428c1` / `1831610`）并声明不当作正式版本；UniLink 与 Resume 助手注明版本来自 README 自述或 manifest，不推定发布历史；Life Dashboard 摘录 `1.0.7`–`1.0.11` 登录相关变更；DSH Better Model Thinking Control 把原「客户端版本演进」归并为版本表。
+- **版本记录补齐**：为 8 个缺版本记录的页面新增「## 版本记录」。Sakura-MCP-Memory-Server 与 Local Model Gateway 原有内容改标题归并；Sakura Chat 改用 master 提交标识（`74de4f9` / `92428c1` / `1831610`）并声明不当作正式版本；UniLink 与 Resume 助手注明版本来自 README 自述或 manifest，不推定发布历史；Life Dashboard 摘录 `1.0.7`–`1.0.11` 登录相关变更；DSH Better Model Thinking Control 把原「客户端版本演进」归并为版本表。
 - **页尾顺序统一**：全部项目页调整为「与生态其他项目的关系 → 版本记录 → 结尾声明」，许可证、测试与项目内文档等正文章节前移。
 - **渲染破损修复**：Sakura Chat 接口表表头与内容分离问题修复，整表回到「接口」章节内；UniLink 目录代码块补闭合，被吞掉的「通知回复」「安全模型」「常见问题」等章节恢复。
-- **状态列规范化**：UniLink 功能表把 `✅` / `—` 改为「已实现」「不适用」；Sakura-MCP-Server 与 Local Model Gateway 两处名不副实的「状态」表头改名为「说明」。
+- **状态列规范化**：UniLink 功能表把 `✅` / `—` 改为「已实现」「不适用」；Sakura-MCP-Memory-Server 与 Local Model Gateway 两处名不副实的「状态」表头改名为「说明」。
 - **README 索引同步**：项目表补 Cline Sync 与 AI 简历自动填充助手两行，版本列改为新的 Wiki 版本与上游来源标注。
 - **专题页结尾声明补齐**：项目关系、生产部署、运维与排障、配置与密钥规范、贡献与维护、设计规范、十站一章 7 个专题页按设计规范要求补上固定结尾声明，各升补丁版本。
 - 未改动内容的页面不升版本。
@@ -333,10 +341,10 @@ Sakura-Chat 仓库由版权人明确采用 Sakura-License v1.2 审阅稿固定�
 | --- | --- | --- | --- | --- |
 | 生态总览 | `v1.0.3` | 2026-09-23 | — | [README](README.md) |
 | 项目关系 | `v1.0.2` | 2026-09-23 | — | [项目关系](docs/ecosystem.md) |
-| Sakura-MCP-Server | `v1.0.3` | 2026-09-23 | `v0.3.4` | [项目页](docs/sakura-mcp-server.md) |
+| Sakura-MCP-Memory-Server | `v1.0.3` | 2026-09-23 | `v0.3.4` | [项目页](docs/sakura-mcp-memory-server.md) |
 | Cline Sync 本地客户端 | `v1.0.2` | 2026-09-23 | 随 Sakura 仓库 | [客户端页](docs/cline-sync.md) |
-| Sakura-MCP-Server 生产部署 | `v1.0.1` | 2026-09-20 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-deployment.md) |
-| Sakura-MCP-Server 运维与排障 | `v1.0.1` | 2026-09-20 | — | [运维页](docs/operations.md) |
+| Sakura-MCP-Memory-Server 生产部署 | `v1.0.1` | 2026-09-20 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-memory-deployment.md) |
+| Sakura-MCP-Memory-Server 运维与排障 | `v1.0.1` | 2026-09-20 | — | [运维页](docs/operations.md) |
 | DSH Activity Tracker | `v1.0.2` | 2026-09-23 | `v1.7.0` | [项目页](docs/dsh-activity-tracker.md) |
 | DSH Better Model Thinking Control | `v1.0.2` | 2026-09-23 | `0.2.9` | [项目页](docs/dsh-better-model-thinking-control.md) |
 | DSH Windows Tool Fix | `v1.0.1` | 2026-09-20 | `v0.2.1` | [项目页](docs/dsh-windows-tool-fix.md) |
@@ -367,10 +375,10 @@ Sakura-Chat 仓库由版权人明确采用 Sakura-License v1.2 审阅稿固定�
 | --- | --- | --- | --- | --- |
 | 生态总览 | `v1.0.3` | 2026-09-23 | — | [README](README.md) |
 | 项目关系 | `v1.0.2` | 2026-09-23 | — | [项目关系](docs/ecosystem.md) |
-| Sakura-MCP-Server | `v1.0.2` | 2026-09-20 | `v0.3.4` | [项目页](docs/sakura-mcp-server.md) |
+| Sakura-MCP-Memory-Server | `v1.0.2` | 2026-09-20 | `v0.3.4` | [项目页](docs/sakura-mcp-memory-server.md) |
 | Cline Sync 本地客户端 | `v1.0.1` | 2026-09-20 | 随 Sakura 仓库 | [客户端页](docs/cline-sync.md) |
-| Sakura-MCP-Server 生产部署 | `v1.0.1` | 2026-09-20 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-deployment.md) |
-| Sakura-MCP-Server 运维与排障 | `v1.0.1` | 2026-09-20 | — | [运维页](docs/operations.md) |
+| Sakura-MCP-Memory-Server 生产部署 | `v1.0.1` | 2026-09-20 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-memory-deployment.md) |
+| Sakura-MCP-Memory-Server 运维与排障 | `v1.0.1` | 2026-09-20 | — | [运维页](docs/operations.md) |
 | DSH Activity Tracker | `v1.0.1` | 2026-09-20 | `v1.7.0` | [项目页](docs/dsh-activity-tracker.md) |
 | DSH Better Model Thinking Control | `v1.0.1` | 2026-09-20 | `0.2.9` | [项目页](docs/dsh-better-model-thinking-control.md) |
 | DSH Windows Tool Fix | `v1.0.1` | 2026-09-20 | `v0.2.1` | [项目页](docs/dsh-windows-tool-fix.md) |
@@ -388,7 +396,7 @@ Sakura-Chat 仓库由版权人明确采用 Sakura-License v1.2 审阅稿固定�
 
 - **Local Model Gateway**：上游从 `2.0.10` 推进到 `v2.2.0`，共 5 个版本。`v2.2.0` 新增「每个上游重试次数」（0–10，默认 0），连接失败/超时/429/5xx 先原地重试同一上游再切换备用；`v2.1.0` 统一了 JSON 与 SSE 的错误码和请求 ID 格式；`v2.0.10` 修复 Responses 转 Chat 的工具调用 ID 关联。Wiki 已补版本记录表与可靠性设置说明。
 - **Sakura Chat**：master 新增 2 个提交——输入框高度随内容自适应增长、顶部把手可拖拽调节并记忆，并修复溢出屏幕问题。Wiki 功能表与「近期更新」已同步。
-- **未变动**：Sakura-MCP-Server（`v0.3.4`）、DSH Activity Tracker（`v1.7.0`）、DSH Better Model Thinking Control（`0.2.9`）、DSH Windows Tool Fix（`v0.2.1`）、Life Dashboard（`1.0.11`）、Sakura AI Cut（`0.2.1`）、UniLink（`v1.2`）、Resume-Smart-Filler-Assistant 的 HEAD 与 tag 均与上次扫描一致。
+- **未变动**：Sakura-MCP-Memory-Server（`v0.3.4`）、DSH Activity Tracker（`v1.7.0`）、DSH Better Model Thinking Control（`0.2.9`）、DSH Windows Tool Fix（`v0.2.1`）、Life Dashboard（`1.0.11`）、Sakura AI Cut（`0.2.1`）、UniLink（`v1.2`）、Resume-Smart-Filler-Assistant 的 HEAD 与 tag 均与上次扫描一致。
 
 ## 历史版本（2026-09-20）
 
@@ -398,10 +406,10 @@ Sakura-Chat 仓库由版权人明确采用 Sakura-License v1.2 审阅稿固定�
 | --- | --- | --- | --- | --- |
 | 生态总览 | `v1.0.2` | 2026-09-20 | — | [README](README.md) |
 | 项目关系 | `v1.0.1` | 2026-09-20 | — | [项目关系](docs/ecosystem.md) |
-| Sakura-MCP-Server | `v1.0.2` | 2026-09-20 | `v0.3.4` | [项目页](docs/sakura-mcp-server.md) |
+| Sakura-MCP-Memory-Server | `v1.0.2` | 2026-09-20 | `v0.3.4` | [项目页](docs/sakura-mcp-memory-server.md) |
 | Cline Sync 本地客户端 | `v1.0.1` | 2026-09-20 | 随 Sakura 仓库 | [客户端页](docs/cline-sync.md) |
-| Sakura-MCP-Server 生产部署 | `v1.0.1` | 2026-09-20 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-deployment.md) |
-| Sakura-MCP-Server 运维与排障 | `v1.0.1` | 2026-09-20 | — | [运维页](docs/operations.md) |
+| Sakura-MCP-Memory-Server 生产部署 | `v1.0.1` | 2026-09-20 | `v0.3.4` 固定 tag 建议 | [部署页](docs/sakura-mcp-memory-deployment.md) |
+| Sakura-MCP-Memory-Server 运维与排障 | `v1.0.1` | 2026-09-20 | — | [运维页](docs/operations.md) |
 | DSH Activity Tracker | `v1.0.1` | 2026-09-20 | `v1.7.0` | [项目页](docs/dsh-activity-tracker.md) |
 | DSH Better Model Thinking Control | `v1.0.1` | 2026-09-20 | `0.2.9` | [项目页](docs/dsh-better-model-thinking-control.md) |
 | DSH Windows Tool Fix | `v1.0.1` | 2026-09-20 | `v0.2.1` | [项目页](docs/dsh-windows-tool-fix.md) |
@@ -418,7 +426,7 @@ Sakura-Chat 仓库由版权人明确采用 Sakura-License v1.2 审阅稿固定�
 ### 本次扫描结论
 
 - **新增项目**：Sakura Chat（仿微信网页聊天，Node.js 全栈 + SQLite 加密存储）、Sakura AI Cut（无限画布 AI 短剧生成，Next.js 16 + pnpm monorepo，`package.json` `0.2.1`）、UniLink（手机⇄电脑互联，`v1.2`，含 Authentik 扫码登录）。三者均已补「快速开始」并纳入首页项目表与侧栏。
-- **Sakura-MCP-Server**：上游已发布 `v0.3.4`（移除登录页对失效共享字体的依赖，改用系统字体，消除 `api.mcylyr.cn` 的 `.woff2` 404）。Wiki 此前记录为 `v0.3.3`，已全部更新，包括镜像 tag `ghcr.io/guyao146/sakura-mcp-server:0.3.4`。
+- **Sakura-MCP-Memory-Server**：上游已发布 `v0.3.4`（移除登录页对失效共享字体的依赖，改用系统字体，消除 `api.mcylyr.cn` 的 `.woff2` 404）。Wiki 此前记录为 `v0.3.3`，已全部更新，包括镜像 tag `ghcr.io/guyao146/sakura-mcp-server:0.3.4`。
 - **Life Dashboard**：上游 `version.js` 已到 `1.0.11`（`2026-09-08`），Wiki 此前只记录到 `1.0.8`；补齐 `1.0.9` 登录页视觉重做、`1.0.10` 静默探测局部加载和 `1.0.11` 登录操作按钮间距。
 - **Local Model Gateway**：`package.json` 为 `2.0.10`，最新 Release tag 为 `v2.0.9`；Wiki 此前未记录版本，已在状态表补齐。
 - **许可证提示**：Sakura Chat 与 UniLink 仓库当前**没有 LICENSE 文件**，两篇 Wiki 均按 GitHub 默认规则记录并提示发布前补齐；Sakura AI Cut 为 `LGPL-2.1`。
@@ -430,10 +438,10 @@ Sakura-Chat 仓库由版权人明确采用 Sakura-License v1.2 审阅稿固定�
 | --- | --- | --- | --- |
 | 生态总览 | `v1.0.0` | 2026-09-08 | [README](README.md) |
 | 项目关系 | `v1.0.0` | 2026-09-08 | [项目关系](docs/ecosystem.md) |
-| Sakura-MCP-Server | `v1.0.1` | 2026-09-08 | [项目页](docs/sakura-mcp-server.md) |
+| Sakura-MCP-Memory-Server | `v1.0.1` | 2026-09-08 | [项目页](docs/sakura-mcp-memory-server.md) |
 | Cline Sync 本地客户端 | `v1.0.0` | 2026-09-08 | [客户端页](docs/cline-sync.md) |
-| Sakura-MCP-Server 生产部署 | `v1.0.0` | 2026-09-08 | [部署页](docs/sakura-mcp-deployment.md) |
-| Sakura-MCP-Server 运维与排障 | `v1.0.0` | 2026-09-08 | [运维页](docs/operations.md) |
+| Sakura-MCP-Memory-Server 生产部署 | `v1.0.0` | 2026-09-08 | [部署页](docs/sakura-mcp-memory-deployment.md) |
+| Sakura-MCP-Memory-Server 运维与排障 | `v1.0.0` | 2026-09-08 | [运维页](docs/operations.md) |
 | DSH Activity Tracker | `v1.0.0` | 2026-09-08 | [项目页](docs/dsh-activity-tracker.md) |
 | DSH Better Model Thinking Control | `v1.0.0` | 2026-09-08 | [项目页](docs/dsh-better-model-thinking-control.md) |
 | DSH Windows Tool Fix | `v1.0.0` | 2026-09-08 | [项目页](docs/dsh-windows-tool-fix.md) |

@@ -190,7 +190,7 @@ README 结尾注明"仅供学习与个人使用"。正式发布或让他人部�
 | 项目 | 作用 |
 | --- | --- |
 | `UniLink` | 手机与电脑互联；扫码登录是生态所有 Authentik 项目的统一移动端入口 |
-| [Sakura-MCP-Server](sakura-mcp-server.md) | 扫码登录直接作用于它的 `/auth/login`，免输入即完成 OIDC 授权 |
+| [Sakura-MCP-Memory-Server](sakura-mcp-memory-server.md) | 扫码登录直接作用于它的 `/auth/login`，免输入即完成 OIDC 授权 |
 | [Life Dashboard](life-dashboard.md) | 同样走 Authentik OIDC，可同样享受扫码登录 |
 | [Sakura-Chat](sakura-chat.md) | 当前使用自建账号体系，与 UniLink 的账号链路互相独立 |
 

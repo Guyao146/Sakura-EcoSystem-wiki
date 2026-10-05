@@ -11,7 +11,7 @@
 
 SakuraID 是一个自托管的统一身份认证服务（IdP）：业务系统统一跳转到这里登录，通过 OAuth 2.0 / OpenID Connect 拿回令牌访问各自的接口。定位对标 authentik 的核心子集——不过超大而全，只把「发令牌」这一件事做对。零 npm 依赖，Node.js ≥ 22.5，SQLite 存储。
 
-它不是业务系统，也不托管业务数据：只负责用户、应用、授权、令牌与审计。生态内的 [Sakura-MCP-Server](sakura-mcp-server.md)（`0.4.0` 起）与 [Sakura Chat](sakura-chat.md)（`v1.1.0` 起）都已把它作为可选的标准 OIDC 登录提供方。
+它不是业务系统，也不托管业务数据：只负责用户、应用、授权、令牌与审计。生态内的 [Sakura-MCP-Memory-Server](sakura-mcp-memory-server.md)（`0.4.0` 起）与 [Sakura Chat](sakura-chat.md)（`v1.1.0` 起）都已把它作为可选的标准 OIDC 登录提供方。
 
 ## 快速开始
 
@@ -50,7 +50,7 @@ node server.js
 
 ## 与生态其他项目的关系
 
-- [Sakura-MCP-Server](sakura-mcp-server.md) 自 `0.4.0` 起内置 Sakura 浏览器登录提供方，即本服务：授权码 + PKCE、RS256 ID Token 与 `/jwks.json`，身份以 `sakura:<sha256(issuer)>:<sub>` 隔离。
+- [Sakura-MCP-Memory-Server](sakura-mcp-memory-server.md) 自 `0.4.0` 起内置 Sakura 浏览器登录提供方，即本服务：授权码 + PKCE、RS256 ID Token 与 `/jwks.json`，身份以 `sakura:<sha256(issuer)>:<sub>` 隔离。
 - [Sakura Chat](sakura-chat.md) 自 `v1.1.0` 起可作为标准 OIDC 客户端接入本服务（公开客户端推荐，仅 PKCE），本地账号与第三方身份可互相绑定/解绑。
 - [UniLink](unilink.md) 的手机扫码登录面向 authentik OIDC 项目，与本服务并列；两者可共存于同一部署。
 - 各项目接入本服务时，统一在管理端「应用 → 新建应用」登记回调地址（如 `https://<站点>/api/auth/oauth/sakura/callback`），`openid profile` 即可满足绝大多数场景。

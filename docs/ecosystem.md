@@ -4,7 +4,7 @@
 
 ## 各项目分别解决什么问题
 
-`Sakura-MCP-Server` 关注“不同 AI 如何记住同一批长期信息”：它通过标准 MCP Streamable HTTP 为 Claude、Cline、Cursor 等 Agent 提供多用户记忆、个人/共享空间、版本、来源、权限和检索；PostgreSQL + pgvector 保存结构化记忆与语义向量，Authentik 负责用户身份。
+`Sakura-MCP-Memory-Server` 关注“不同 AI 如何记住同一批长期信息”：它通过标准 MCP Streamable HTTP 为 Claude、Cline、Cursor 等 Agent 提供多用户记忆、个人/共享空间、版本、来源、权限和检索；PostgreSQL + pgvector 保存结构化记忆与语义向量，Authentik 负责用户身份。
 
 `dsh-activity-tracker` 关注“开发工作发生了什么”：从 DSH 压缩 JSONL 会话文件中提取用户输入、工具调用、Token 使用、项目、日期和小时等摘要，并在 DSH Web 中展示。
 
@@ -24,7 +24,7 @@
 
 `SakuraID（Sakura-Auth-Server）` 关注“令牌由谁签发”：它是自托管 OAuth 2.0 / OIDC 身份认证服务，只做“发令牌”这一件事，为生态各项目提供可选的统一登录入口。它不持有业务数据，也不强制任何项目接入。
 
-`Sakura-MCP-Server` 当前为 `v0.4.1`，已落地本地账号与账号安全管理台、可选 SakuraID / Authentik 浏览器登录、管理台「关于」页与镜像许可文件；`Life Dashboard` 当前为 `1.0.15`，已落地静默 SSO、续期诊断、登录页视觉重做、许可证迁移（Sakura-License v1.2）与设置页「关于我们」；`Local Model Gateway` 当前为 `v2.4.0`，提供 Windows 桌面客户端、用量导出、每上游可配置重试、模型权限与模态互转、网关本地账号认证和统一错误码；`Sakura-AiCut` 当前为 `v1.0.0`（首个 Release tag），主页看板化并补齐登录体系与开放 API；`UniLink` 当前为 `v1.2`（README 清单）及之后的 auth-server 网页化配置提交；`Sakura-Chat` 当前为 Release `v1.1.0`，支持可选第三方登录与版本化 GHCR 镜像。各项目可独立部署，组合使用时不互相耦合。
+`Sakura-MCP-Memory-Server` 当前为 `v0.4.1`，已落地本地账号与账号安全管理台、可选 SakuraID / Authentik 浏览器登录、管理台「关于」页与镜像许可文件；`Life Dashboard` 当前为 `1.0.15`，已落地静默 SSO、续期诊断、登录页视觉重做、许可证迁移（Sakura-License v1.2）与设置页「关于我们」；`Local Model Gateway` 当前为 `v2.4.0`，提供 Windows 桌面客户端、用量导出、每上游可配置重试、模型权限与模态互转、网关本地账号认证和统一错误码；`Sakura-AiCut` 当前为 `v1.0.0`（首个 Release tag），主页看板化并补齐登录体系与开放 API；`UniLink` 当前为 `v1.2`（README 清单）及之后的 auth-server 网页化配置提交；`Sakura-Chat` 当前为 Release `v1.1.0`，支持可选第三方登录与版本化 GHCR 镜像。各项目可独立部署，组合使用时不互相耦合。
 
 ## 集成链路
 
@@ -36,11 +36,11 @@
 
 NAT 后无需向本地开发机开放端口，因为连接方向是本地插件主动访问远端服务器。
 
-Sakura-MCP-Server 与现有 DSH、Life Dashboard 链路没有强制依赖。它是可独立部署的通用记忆服务：Agent 推荐直接连接公网根域名，旧客户端仍可使用 `/mcp`；未来 DSH、Life Dashboard 或其他项目可以作为 Connector，把经过用户授权的摘要转换为统一记忆，而不是让记忆核心反向持有各业务系统的全部权限。
+Sakura-MCP-Memory-Server 与现有 DSH、Life Dashboard 链路没有强制依赖。它是可独立部署的通用记忆服务：Agent 推荐直接连接公网根域名，旧客户端仍可使用 `/mcp`；未来 DSH、Life Dashboard 或其他项目可以作为 Connector，把经过用户授权的摘要转换为统一记忆，而不是让记忆核心反向持有各业务系统的全部权限。
 
 ## 通用记忆链路
 
-1. 用户通过 Authentik 进入 Sakura-MCP-Server，获得个人空间或加入共享空间。
+1. 用户通过 Authentik 进入 Sakura-MCP-Memory-Server，获得个人空间或加入共享空间。
 2. 用户为不同 Agent 创建独立凭据，并限制 scope 与空间。
 3. Agent 调用 `memory_remember` 写入带来源的记忆。
 4. 服务执行权限、结构和有效期校验，保存来源与版本，并按空间 Provider 生成向量。
@@ -66,16 +66,16 @@ Sakura-MCP-Server 与现有 DSH、Life Dashboard 链路没有强制依赖。它�
 | AI 短剧生成与剪辑 | Sakura-AiCut | 项目数据在本机 SQLite；模型调用走用户自配的外部 API |
 | 手机通知镜像 | UniLink / Android NotificationListenerService | 状态栏通知全文，端到端 AES-256-GCM，中继只转发密文 |
 | 扫码登录 | UniLink / Authentik | auth-server 只中转身份，授权码只交给发起登录的浏览器 |
-| 跨 Agent 长期记忆 | Sakura-MCP-Server | 当前用户有权访问的个人或共享空间 |
-| 语义与全文检索 | Sakura-MCP-Server / PostgreSQL + pgvector | 记忆正文、摘要、标签与向量，不包含其他租户数据 |
-| 自动记忆提取 | Sakura-MCP-Server / OpenAI-compatible 或 Ollama | 按空间策略启用，模型结果必须通过结构校验 |
-| 冲突治理 | Sakura-MCP-Server | 重复、关系、反馈、潜在冲突与人工确认 |
-| 数据迁移 | Sakura-MCP-Server | JSON/Markdown 导入导出，不包含密钥和会话 |
-| 后台任务 | Sakura-MCP-Server / PostgreSQL | 向量重建、取消、重试与崩溃恢复 |
+| 跨 Agent 长期记忆 | Sakura-MCP-Memory-Server | 当前用户有权访问的个人或共享空间 |
+| 语义与全文检索 | Sakura-MCP-Memory-Server / PostgreSQL + pgvector | 记忆正文、摘要、标签与向量，不包含其他租户数据 |
+| 自动记忆提取 | Sakura-MCP-Memory-Server / OpenAI-compatible 或 Ollama | 按空间策略启用，模型结果必须通过结构校验 |
+| 冲突治理 | Sakura-MCP-Memory-Server | 重复、关系、反馈、潜在冲突与人工确认 |
+| 数据迁移 | Sakura-MCP-Memory-Server | JSON/Markdown 导入导出，不包含密钥和会话 |
+| 后台任务 | Sakura-MCP-Memory-Server / PostgreSQL | 向量重建、取消、重试与崩溃恢复 |
 
 ## 边界原则
 
-- Sakura-MCP-Server 不直接成为 Home Assistant、DSH 或 Life Dashboard 的万能控制器。
+- Sakura-MCP-Memory-Server 不直接成为 Home Assistant、DSH 或 Life Dashboard 的万能控制器。
 - Connector 只提交用户明确授权的数据范围，并记录来源系统与来源 URI。
 - MCP 用户 Token 不透传给下游模型或业务系统；每个服务使用自己的最小权限凭据。
 - 向量只是检索索引，不能替代原文、来源、版本和访问控制。

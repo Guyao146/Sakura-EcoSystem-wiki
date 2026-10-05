@@ -3,23 +3,23 @@
 > Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-05`（Cline Sync 本地客户端独立版本，源码 `0.2.0`）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
-[![Cline Sync](../assets/badges/cline-sync.svg)](https://github.com/Guyao146/Sakura-MCP-Server/tree/main/tools/cline-sync)
+[![Cline Sync](../assets/badges/cline-sync.svg)](https://github.com/Guyao146/Sakura-MCP-Memory-Server/tree/main/tools/cline-sync)
 [![已编写Wiki](../assets/sakura-wiki.svg)](cline-sync.md)
 
-源码：[Sakura-MCP-Server/tools/cline-sync](https://github.com/Guyao146/Sakura-MCP-Server/tree/main/tools/cline-sync)
+源码：[Sakura-MCP-Memory-Server/tools/cline-sync](https://github.com/Guyao146/Sakura-MCP-Memory-Server/tree/main/tools/cline-sync)
 
 ## 工具定位
 
-Cline Sync 是 Sakura-MCP-Server 的配套本地工具。它定时读取 Cline 已经写入磁盘的任务历史，找出尚未处理的文本消息，再调用服务端 `memory_extract_and_remember`，把适合长期保留的信息抽取到 Sakura 记忆库。
+Cline Sync 是 Sakura-MCP-Memory-Server 的配套本地工具。它定时读取 Cline 已经写入磁盘的任务历史，找出尚未处理的文本消息，再调用服务端 `memory_extract_and_remember`，把适合长期保留的信息抽取到 Sakura 记忆库。
 
-它不是 MCP Server、Cline 插件或实时监听器。Sakura-MCP-Server 无法被动看到本地 Cline 会话；只有运行 Cline Sync 并明确配置 Agent Key 后，本地历史才会按配置发送到服务端。
+它不是 MCP Server、Cline 插件或实时监听器。Sakura-MCP-Memory-Server 无法被动看到本地 Cline 会话；只有运行 Cline Sync 并明确配置 Agent Key 后，本地历史才会按配置发送到服务端。
 
 ## 快速开始
 
 ```bash
-# 前置：已部署 Sakura-MCP-Server，并创建了具备 memory:write 权限的 Agent Key
-git clone https://github.com/Guyao146/Sakura-MCP-Server.git
-cd Sakura-MCP-Server/tools/cline-sync
+# 前置：已部署 Sakura-MCP-Memory-Server，并创建了具备 memory:write 权限的 Agent Key
+git clone https://github.com/Guyao146/Sakura-MCP-Memory-Server.git
+cd Sakura-MCP-Memory-Server/tools/cline-sync
 npm install
 npm run build
 node dist/main.js
@@ -54,11 +54,11 @@ Cline 本地任务目录
 - 成功后推进游标，失败时保留原位置，修复问题后可以重试。
 
 > [!WARNING]
-> 对话文本会发送给 Sakura-MCP-Server 配置的 Chat Provider。启用前应确认内容、服务端和模型 Provider 均符合你的隐私要求。
+> 对话文本会发送给 Sakura-MCP-Memory-Server 配置的 Chat Provider。启用前应确认内容、服务端和模型 Provider 均符合你的隐私要求。
 
 ## 前置条件
 
-1. 已部署并可从本机访问 [Sakura-MCP-Server](sakura-mcp-server.md)。
+1. 已部署并可从本机访问 [Sakura-MCP-Memory-Server](sakura-mcp-memory-server.md)。
 2. 目标服务器已经配置可用的 Chat Provider。
 3. 为客户端创建独立 Agent Key，不与其他客户端共用。
 4. Agent 具有全局 `memory:write` scope，并获得目标空间的 `memory:write` grant。
@@ -79,8 +79,8 @@ VS Code Insiders、VSCodium、便携版或修改过扩展数据目录的环境�
 ## 源码运行
 
 ```bash
-git clone https://github.com/Guyao146/Sakura-MCP-Server.git
-cd Sakura-MCP-Server/tools/cline-sync
+git clone https://github.com/Guyao146/Sakura-MCP-Memory-Server.git
+cd Sakura-MCP-Memory-Server/tools/cline-sync
 npm install
 npm run build
 node dist/main.js
@@ -97,7 +97,7 @@ npm run dev
 ## Windows 单文件构建
 
 ```powershell
-cd Sakura-MCP-Server\tools\cline-sync
+cd Sakura-MCP-Memory-Server\tools\cline-sync
 npm install
 npm run package
 ```
@@ -110,7 +110,7 @@ npm run package
 
 | 配置 | 说明 |
 | --- | --- |
-| MCP URL | Sakura-MCP-Server 的 Streamable HTTP 地址，推荐生产环境使用 HTTPS |
+| MCP URL | Sakura-MCP-Memory-Server 的 Streamable HTTP 地址，推荐生产环境使用 HTTPS |
 | Agent Key | `sk_sakura_...` Bearer Key，必须具备写入权限 |
 | Cline 任务目录 | Cline 本地 `tasks` 目录 |
 | 扫描间隔 | 1–1440 分钟，默认 10 分钟 |
@@ -186,7 +186,7 @@ Agent Key 未被删除
 
 ### 返回 429
 
-服务端正在限流。增加扫描间隔、减少同步任务，或检查 Sakura-MCP-Server 的 Agent 和接口速率限制。
+服务端正在限流。增加扫描间隔、减少同步任务，或检查 Sakura-MCP-Memory-Server 的 Agent 和接口速率限制。
 
 ### 连接关闭或超时
 
@@ -213,23 +213,23 @@ Agent Key 未被删除
 - 脱敏无法覆盖所有秘密、个人信息和业务数据；
 - CI 当前只检查类型和测试，不代表单文件打包、签名或跨平台发行已经验证。
 
-> 工具行为以 Sakura-MCP-Server 仓库中 `tools/cline-sync` 的源码、README 和 CI 为最终依据。
+> 工具行为以 Sakura-MCP-Memory-Server 仓库中 `tools/cline-sync` 的源码、README 和 CI 为最终依据。
 
 
 ## 与生态其他项目的关系
 
-- [Sakura-MCP-Server](sakura-mcp-server.md) 提供记忆抽取、存储和权限校验；Cline Sync 只是主动发送本地文本的客户端，必须连接可用的服务端。
+- [Sakura-MCP-Memory-Server](sakura-mcp-memory-server.md) 提供记忆抽取、存储和权限校验；Cline Sync 只是主动发送本地文本的客户端，必须连接可用的服务端。
 - [DSH Activity Tracker](dsh-activity-tracker.md) 读取 DSH 会话做统计；Cline Sync 读取 Cline 任务历史写入长期记忆，两者不共享会话目录或游标。
 
 ## 版本记录
 
-以下是客户端源码版本，不是 Sakura-MCP-Server 的服务端版本，也不是独立客户端 Release。
+以下是客户端源码版本，不是 Sakura-MCP-Memory-Server 的服务端版本，也不是独立客户端 Release。
 
 | 版本 | 要点 |
 | --- | --- |
 | `0.1.0`（源码） | 定时扫描 Cline 文本历史、按任务保存增量游标，提供托盘、配置窗口、单次同步与 dry-run；可自行构建 Windows 单文件程序 |
 | `0.2.0`（源码） | 开机自启动；同步运行结果持久化为可翻阅的运行历史；连续失败触发熔断自动暂停，避免持续向服务端施压 |
 
-来源：[服务端 `v0.4.1` 中的客户端 package.json](https://github.com/Guyao146/Sakura-MCP-Server/blob/v0.4.1/tools/cline-sync/package.json) 与 [客户端说明](https://github.com/Guyao146/Sakura-MCP-Server/tree/v0.4.1/tools/cline-sync)。未确认独立客户端 Release，不把服务端 tag 当作客户端版本。
+来源：[服务端 `v0.4.1` 中的客户端 package.json](https://github.com/Guyao146/Sakura-MCP-Memory-Server/blob/v0.4.1/tools/cline-sync/package.json) 与 [客户端说明](https://github.com/Guyao146/Sakura-MCP-Memory-Server/tree/v0.4.1/tools/cline-sync)。未确认独立客户端 Release，不把服务端 tag 当作客户端版本。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

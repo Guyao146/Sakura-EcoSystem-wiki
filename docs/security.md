@@ -8,7 +8,7 @@ DSH Activity Tracker 的默认能力是本地统计。启用远端工作区动�
 
 Life Dashboard 的私密配置通过服务器权限网关下发。普通用户、本地浏览器登录和未登录请求都不应获得 Home Assistant Token。
 
-## Sakura-MCP-Server
+## Sakura-MCP-Memory-Server
 
 - 每条记忆必须属于空间；每次读取、检索、更新和删除都重新验证当前用户的空间成员关系。
 - Agent scope 与空间角色取交集，`memory_id`、`space_id` 和邀请 ID 都不是访问凭证。

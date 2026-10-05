@@ -166,7 +166,7 @@ GitHub Actions 在每次 push/PR 执行**语法检查 + 45 项 E2E + Docker 镜�
 | `Sakura-Chat` | 自有的网页聊天应用，加密传输 + 加密存储 |
 | [UniLink](unilink.md) | 手机与电脑互联；其扫码登录基于 Authentik，与 Sakura-Chat 的账号体系互相独立 |
 | [SakuraID（Sakura-Auth-Server）](sakura-auth-server.md) | `v1.1.0` 起 Chat 可作为标准 OIDC 客户端接入 SakuraID（或任意 Authentik 实例）实现第三方登录，接入是可选的 |
-| [Sakura-MCP-Server](sakura-mcp-server.md) | Agent 长期记忆，走 MCP 协议，与聊天应用互不经过 |
+| [Sakura-MCP-Memory-Server](sakura-mcp-memory-server.md) | Agent 长期记忆，走 MCP 协议，与聊天应用互不经过 |
 
 Sakura-Chat 默认使用自建本地账号体系，不依赖任何外部服务；可选启用第三方登录后，本地账号与第三方身份可互相绑定/解绑。可以与生态其他项目部署在同一台机器上，互不干扰。
 

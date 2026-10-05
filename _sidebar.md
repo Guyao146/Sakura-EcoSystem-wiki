@@ -3,9 +3,9 @@
   - [Wiki 版本记录](CHANGELOG.md)
   - [项目关系](docs/ecosystem.md)
 - **项目文档**
-  - [Sakura-MCP-Server](docs/sakura-mcp-server.md)
+  - [Sakura-MCP-Memory-Server](docs/sakura-mcp-memory-server.md)
     - [Cline Sync 本地客户端](docs/cline-sync.md)
-    - [生产部署](docs/sakura-mcp-deployment.md)
+    - [生产部署](docs/sakura-mcp-memory-deployment.md)
     - [运维与排障](docs/operations.md)
   - [DSH Activity Tracker](docs/dsh-activity-tracker.md)
   - [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md)

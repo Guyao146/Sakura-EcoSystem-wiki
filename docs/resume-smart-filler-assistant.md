@@ -262,7 +262,7 @@ README 顶部的 AGPL v3 徽章与实际 `LICENSE` 文件不一致。本 Wiki �
 
 ## 与生态其他项目的关系
 
-- 本扩展独立运行在 Chrome/Edge 中，不依赖 [Life Dashboard](life-dashboard.md) 或 [Sakura-MCP-Server](sakura-mcp-server.md)，也不会默认同步简历到生态其他服务。
+- 本扩展独立运行在 Chrome/Edge 中，不依赖 [Life Dashboard](life-dashboard.md) 或 [Sakura-MCP-Memory-Server](sakura-mcp-memory-server.md)，也不会默认同步简历到生态其他服务。
 - [Local Model Gateway](local-model-gateway.md) 提供 OpenAI 兼容转发，可作为自定义模型端点的候选；需自行核对完整请求地址、Key 和浏览器扩展访问条件，不代表已有专用集成。
 
 ## 版本记录

@@ -208,7 +208,7 @@ nginx-life-dashboard.conf.example  # Nginx 安全规则示例
 
 - [DSH Activity Tracker](dsh-activity-tracker.md) 经配对后推送工作区摘要；看板负责展示，并按管理员权限与工作区授权开放详情和消息操作。
 - [UniLink](unilink.md) 的扫码登录可作为 Authentik 登录链路的可选入口，不替代看板自身的管理员白名单。
-- [Sakura-MCP-Server](sakura-mcp-server.md) 提供 Agent 长期记忆；看板不依赖该服务，也不会默认把家庭或工作区数据写入记忆库。
+- [Sakura-MCP-Memory-Server](sakura-mcp-memory-server.md) 提供 Agent 长期记忆；看板不依赖该服务，也不会默认把家庭或工作区数据写入记忆库。
 
 ## 许可证
 

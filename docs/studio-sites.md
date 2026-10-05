@@ -35,7 +35,7 @@ LHYY 是站群中面向外部访问者的品牌与内容入口，承载工作室
 
 统一认证站点是站群的身份基础设施。其他需要登录的服务可以通过它完成统一身份验证，避免每个站点各自维护一套账号体系。Life Dashboard 的管理员权限也依赖 Authentik/OIDC 认证链路。
 
-该站点由自研的 [SakuraID（Sakura-Auth-Server）](sakura-auth-server.md) 提供服务：标准 OAuth 2.0 / OIDC 发令牌，支持 Passkey 无密码登录、应用门户、两步验证、审计与品牌定制（详见项目页）。Sakura-MCP-Server（`0.4.0` 起）与 Sakura Chat（`v1.1.0` 起）都可把它作为可选登录提供方。
+该站点由自研的 [SakuraID（Sakura-Auth-Server）](sakura-auth-server.md) 提供服务：标准 OAuth 2.0 / OIDC 发令牌，支持 Passkey 无密码登录、应用门户、两步验证、审计与品牌定制（详见项目页）。Sakura-MCP-Memory-Server（`0.4.0` 起）与 Sakura Chat（`v1.1.0` 起）都可把它作为可选登录提供方。
 
 ## ACT 02 · 游乐
 
