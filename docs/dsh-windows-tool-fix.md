@@ -1,12 +1,14 @@
 # DSH Windows Tool Fix
 
-> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（DSH Windows Tool Fix独立版本，上游 `v0.2.1`）
+> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-04`（DSH Windows Tool Fix独立版本，上游 `v0.2.2`）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![DSH Plugin](../assets/badges/dsh-plugin.svg)](https://github.com/Guyao146/dsh-windows-tool-fix)
 [![已编写Wiki](../assets/sakura-wiki.svg)](dsh-windows-tool-fix.md)
 
-仓库：[Guyao146/dsh-windows-tool-fix](https://github.com/Guyao146/dsh-windows-tool-fix) · 许可证 `LGPL-2.1-or-later`
+仓库：[Guyao146/dsh-windows-tool-fix](https://github.com/Guyao146/dsh-windows-tool-fix) · 许可证 [`Sakura-License v1.2`](../licenses/Sakura-License-1.2.md)
+
+`v0.2.2` 为许可证发布：随插件包提供 LICENSE 与 NOTICE.md，自有内容采用 Sakura-License v1.2（源码可用，特定商用须书面授权）。此前 LGPL-2.1-or-later 及第三方依赖的既有授权保持不变。
 
 ## 项目定位
 

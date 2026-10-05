@@ -1,12 +1,12 @@
 # AI 简历自动填充助手
 
-> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（AI 简历自动填充助手独立版本）
+> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-04`（AI 简历自动填充助手独立版本）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![Resume Filler](../assets/badges/resume-filler.svg)](https://github.com/Guyao146/Resume-Smart-Filler-Assistant)
 [![已编写Wiki](../assets/sakura-wiki.svg)](resume-smart-filler-assistant.md)
 
-仓库：[Guyao146/Resume-Smart-Filler-Assistant](https://github.com/Guyao146/Resume-Smart-Filler-Assistant) · 许可证见下方说明
+仓库：[Guyao146/Resume-Smart-Filler-Assistant](https://github.com/Guyao146/Resume-Smart-Filler-Assistant) · 许可证 [`Sakura-License v1.2`](../licenses/Sakura-License-1.2.md)
 
 ## 项目定位
 
@@ -232,17 +232,13 @@ lib/pdf.worker.js      # PDF.js Worker
 icons/                 # 16/32/48/128 像素扩展图标
 ```
 
-项目根目录 `LICENSE` 的实际内容是 **GNU Lesser General Public License, Version 2.1（LGPL-2.1）**，GitHub 仓库页识别的许可证也是 `LGPL-2.1`。
+项目采用 **Sakura-License v1.2**（固定文本标识 `Sakura-License-1.2`，2026-10-04 发布）：根目录 `LICENSE` 为许可正文，`NOTICE.md` 为采用声明（许可人、适用文件、排除项与首次适用提交）。
 
-但仓库中存在三处互相矛盾的声明：
+它是源码可用（source-available）许可证，限制特定商业利用，不是 OSI 批准的开源许可证；商用须按第 4 条事先取得书面授权。对外分发或提供受覆盖作品时须保留署名并同步公开对应源码；扩展通过浏览器与网页表单交互，不因填充网页而触发本许可共享义务。
 
-| 位置 | 声明 |
-| --- | --- |
-| `LICENSE` 文件正文 | GNU LESSER GENERAL PUBLIC LICENSE Version 2.1 |
-| GitHub 仓库许可证识别 | `LGPL-2.1` |
-| README 徽章 | `License: AGPL v3` |
+历史提交 `e3d73c5` 使用 AGPL-3.0，`2433c53` 将根 LICENSE 改为 LGPL-2.1；`1.0.1` 起采用 Sakura-License v1.2。两段历史授权均保留，不能把旧副本一概认定为 AGPL。捆绑的 `lib/pdf.js` 与 `lib/pdf.worker.js` 保持 Apache-2.0，完整副本随包提供。
 
-README 顶部的 AGPL v3 徽章与实际 `LICENSE` 文件不一致。本 Wiki 按实际许可证文件记录为 LGPL-2.1；发布或再分发前应先在仓库中统一这三处声明，并以最终的 `LICENSE` 及版权声明为准。
+`v1.0.1` 同时修复后台提示词模板重复尾部的语法错误，并恢复被截断的同版本 PDF.js 3.11.174 worker。全部 JavaScript 语法检查与新增的 2 项后台回归测试通过；Release ZIP 可解压后通过浏览器“加载已解压的扩展程序”安装。
 
 修改扩展并重新加载时，打开 `chrome://extensions/` 或 `edge://extensions/`，点击扩展卡片上的“重新加载”；网页中的 Content Script 通常需要刷新后才会获得新版本。
 

@@ -2,6 +2,13 @@
 
 本文件记录各项目 Wiki 页面自己的文档版本。每个项目独立维护版本号和更新日期，不等同于上游项目的 Release 版本；上游版本、迁移版本和部署 tag 仍以对应项目仓库为准。
 
+## 版本化发布与许可证采用
+
+- 生态总览 Wiki v1.2.1：同步 UniLink v1.3 / Android 23、SakuraID v1.6.0、Activity Tracker v1.7.1、Windows Tool Fix v0.2.2、Better Model Thinking Control v0.2.10、简历扩展 v1.0.1。
+- 发布包随附固定 LICENSE 与采用声明；修复 Activity Tracker 打包清单与许可全文哈希检查。
+- 简历扩展保留 AGPL → LGPL 历史记录及 PDF.js Apache-2.0；不单方面撤销 Better Model 的历史 MIT 声明。
+- 保留上游已有的 MCP Memory Server 更名与所有并行文档更新；不更改 Wiki 根许可证。
+
 ## 项目更名与 0.5.x 同步
 
 - Sakura-MCP-Memory-Server 项目页升至 Wiki `v1.3.0`，部署页升至 `v1.1.0`，运维页升至 `v1.0.3`；更新新仓库、GHCR、npm tarball、Compose 服务与迁移指南。

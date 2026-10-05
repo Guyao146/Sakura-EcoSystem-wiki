@@ -1,12 +1,12 @@
 # DSH Better Model Thinking Control
 
-> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（DSH Better Model Thinking Control独立版本，上游 `0.2.9`）
+> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-04`（DSH Better Model Thinking Control独立版本，上游 `0.2.10`）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![DSH Plugin](../assets/badges/dsh-plugin.svg)](https://github.com/Guyao146/dsh-better-model-thinking-control)
 [![已编写Wiki](../assets/sakura-wiki.svg)](dsh-better-model-thinking-control.md)
 
-仓库：[Guyao146/dsh-better-model-thinking-control](https://github.com/Guyao146/dsh-better-model-thinking-control) · 许可证见下方说明
+仓库：[Guyao146/dsh-better-model-thinking-control](https://github.com/Guyao146/dsh-better-model-thinking-control) · 许可证 [`Sakura-License v1.2`](../licenses/Sakura-License-1.2.md)
 
 `dsh-better-model-thinking-control` 是樱落生态中的 DSH Web 插件，用于按中转站和模型配置思考强度（Reasoning Effort）。它读取 OpenAI 兼容中转站公开的模型能力，并把结果写入 DSH 原生 `llm-pi-ai` 设置，让 DSH 自己的模型选择器和思考档位机制继续负责实际请求。
 
@@ -19,7 +19,7 @@ cd dsh-better-model-thinking-control
 npm pack
 
 # 2. 安装到实际运行的 profile
-dsh plugin --profile web add "file:./dsh-better-model-thinking-control-0.2.9.tgz"
+dsh plugin --profile web add "file:./dsh-better-model-thinking-control-0.2.10.tgz"
 ```
 
 3. **完全重启 DSH**，打开 **设置 → 模型思考强度**。
@@ -87,7 +87,7 @@ reasoningEfforts:
 
 ```bash
 npm pack
-dsh plugin --profile web add "file:./dsh-better-model-thinking-control-0.2.9.tgz"
+dsh plugin --profile web add "file:./dsh-better-model-thinking-control-0.2.10.tgz"
 ```
 
 安装后重启 DSH Web，入口位于：
@@ -391,5 +391,13 @@ GitHub Actions 在推送 `main` 后会使用 Node.js 22 执行测试、`npm pack
 | `0.2.9` | 恢复紧凑布局，非推理模型纳入档位菜单，两个下拉菜单互斥 |
 
 来源：[截至 `321244e` 的提交历史](https://github.com/Guyao146/dsh-better-model-thinking-control/commits/321244e/) 与 [package.json](https://github.com/Guyao146/dsh-better-model-thinking-control/blob/321244e/package.json)。
+
+## 许可证
+
+项目采用 **Sakura-License v1.2**（固定文本标识 `Sakura-License-1.2`，2026-10-04 发布）：根目录 `LICENSE` 为许可正文，`NOTICE.md` 为采用声明（许可人、适用文件、排除项与首次适用提交），`package.json` 元数据写作 `SEE LICENSE IN LICENSE`。
+
+它是源码可用（source-available）许可证，限制特定商业利用，不是 OSI 批准的开源许可证；商用须按第 4 条事先取得书面授权。对外分发或提供受覆盖作品时须保留署名并同步公开对应源码；通过公开 API / HTTP 等协议独立调用运行实例，不因此构成商用或触发共享义务。
+
+历史根 LICENSE 为 LGPL-2.1，package.json 同时存在 MIT 声明。`0.2.10` 起统一后续版本声明，不追溯否定此前依法取得的 LGPL、MIT 或其他有效权利，详见仓库 NOTICE.md。
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。

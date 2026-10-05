@@ -1,12 +1,12 @@
 # DSH Activity Tracker
 
-> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-09-24`（DSH Activity Tracker独立版本，上游 `v1.7.0`）
+> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-04`（DSH Activity Tracker独立版本，上游 `v1.7.1`）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![DSH Plugin](../assets/badges/dsh-plugin.svg)](https://github.com/Guyao146/dsh-activity-tracker)
 [![已编写Wiki](../assets/sakura-wiki.svg)](dsh-activity-tracker.md)
 
-仓库：[Guyao146/dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker) · 许可证 `LGPL-2.1-only`
+仓库：[Guyao146/dsh-activity-tracker](https://github.com/Guyao146/dsh-activity-tracker) · 许可证 [`Sakura-License v1.2`](../licenses/Sakura-License-1.2.md)
 
 ## 项目定位
 
@@ -78,7 +78,7 @@ npm pack
 dsh plugin --profile web add "file:./dsh-activity-tracker-1.7.0.tgz"
 ```
 
-项目是直接打包的 JavaScript 插件，不需要构建步骤。`cordis.patch.yml` 在 DSH bundle 安装时注册 `activity-tracker`；发布包只包含 `lib/`、`cordis.patch.yml`、`README.md`、`LICENSE` 和 `package.json`。
+项目是直接打包的 JavaScript 插件，不需要构建步骤。`cordis.patch.yml` 在 DSH bundle 安装时注册 `activity-tracker`；发布包只包含 `lib/`、`cordis.patch.yml`、`README.md`、`LICENSE`、`NOTICE.md` 和 `package.json`。
 
 ## 统计内容
 
@@ -219,7 +219,11 @@ cordis.patch.yml
 .github/workflows/release.yml
 ```
 
-项目使用 GNU Lesser General Public License v2.1 only（`LGPL-2.1-only`）。
+项目采用 **Sakura-License v1.2**（固定文本标识 `Sakura-License-1.2`，2026-10-04 发布）：根目录 `LICENSE` 为许可正文，`NOTICE.md` 为采用声明（许可人、适用文件、排除项与首次适用提交），`package.json` 元数据写作 `SEE LICENSE IN LICENSE`。
+
+它是源码可用（source-available）许可证，限制特定商业利用，不是 OSI 批准的开源许可证；商用须按第 4 条事先取得书面授权。对外分发或提供受覆盖作品时须保留署名并同步公开对应源码；通过公开 API / HTTP 等协议独立调用运行实例，不因此构成商用或触发共享义务。
+
+历史授权保留：`v1.7.0` 及之前按其发布时适用的 `LGPL-2.1-only` 授权，已取得副本者的权利不因更换而撤销（Sakura-License 第 10 条第 3 款）。
 
 
 ## 与生态其他项目的关系

@@ -1,6 +1,6 @@
 # 樱落生态Wiki · 连接云，人，家
 
-> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-05`（生态总览独立版本）
+> Wiki 文档版本：`v1.2.1` · 更新日期：`2026-10-05`（生态总览独立版本）
 
 > 🌸 Sakura EcoSystem · Connect Cloud, People and Home.
 
@@ -14,18 +14,20 @@
 | --- | --- | --- | --- |
 | [Sakura-MCP-Memory-Server](docs/sakura-mcp-memory-server.md) | 面向所有兼容 MCP Agent 的多用户长期记忆平台 | MCP、Authentik、SakuraID、本地账号、pgvector、Provider、Worker、审计和 Web 管理 | Wiki `v1.3.0` · 上游 `v0.5.1` |
 | [Cline Sync 本地客户端](docs/cline-sync.md) | Cline 历史到长期记忆的主动同步工具 | 读取本地任务文本，经 Agent Key 调用 Sakura-MCP-Memory-Server | Wiki `v1.2.0` · 源码 `0.2.0` |
-| [DSH Activity Tracker](docs/dsh-activity-tracker.md) | DeepSeek Harness 的本地活动统计与归档恢复插件 | 扫描本地 DSH 会话、查看/恢复归档，并可向 Life Dashboard 推送快照 | Wiki `v1.1.0` · 上游 `v1.7.0` |
-| [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md) | DSH 中转站模型思考强度配置与能力识别 | 读取 OpenAI 兼容 `/models`，写入 DSH 原生 `llm-pi-ai` 设置 | Wiki `v1.1.0` · 上游 `0.2.9` |
-| [DSH Windows Tool Fix](docs/dsh-windows-tool-fix.md) | Windows 上 DSH Desktop 的默认 Git Bash preset 修复插件 | DSH profile patch，把 `minimal-gitbash` 设为默认 Agent preset | Wiki `v1.1.0` · 上游 `v0.2.1` |
+| [DSH Activity Tracker](docs/dsh-activity-tracker.md) | DeepSeek Harness 的本地活动统计与归档恢复插件 | 扫描本地 DSH 会话、查看/恢复归档，并可向 Life Dashboard 推送快照 | Wiki `v1.2.0` · 上游 `v1.7.1` |
+| [DSH Better Model Thinking Control](docs/dsh-better-model-thinking-control.md) | DSH 中转站模型思考强度配置与能力识别 | 读取 OpenAI 兼容 `/models`，写入 DSH 原生 `llm-pi-ai` 设置 | Wiki `v1.2.0` · 上游 `0.2.10` |
+| [DSH Windows Tool Fix](docs/dsh-windows-tool-fix.md) | Windows 上 DSH Desktop 的默认 Git Bash preset 修复插件 | DSH profile patch，把 `minimal-gitbash` 设为默认 Agent preset | Wiki `v1.2.0` · 上游 `v0.2.2` |
 | [Local Model Gateway](docs/local-model-gateway.md) | 本机多上游模型聚合网关 | OpenAI/Anthropic/Responses 协议互转、路由轮询、熔断限流与用量统计 | Wiki `v1.1.0` · 上游 `v2.4.0` |
 | [Life Dashboard](docs/life-dashboard.md) | 个人生活中枢与可视化看板 | Authentik、Home Assistant、天气、To Do、AI 与 DSH | Wiki `v1.3.0` · 上游 `1.0.15` |
 | [Sakura Chat](docs/sakura-chat.md) | 仿微信的网页聊天应用 | 好友/群聊、实时消息、音视频通话、加密传输+加密存储，可选 SakuraID/Authentik 登录 | Wiki `v1.3.0` · 上游 `v1.1.0` |
 | [Sakura AI Cut](docs/sakura-aicut.md) | 无限画布式 AI 短剧生成与在线剪辑 | 五步工作台、资产生成、运镜模板、自动规划 Agent | Wiki `v1.3.0` · 源码 `1.0.0`（tag `v1.0.0`） |
-| [UniLink](docs/unilink.md) | 手机与电脑互联助手 | 通知镜像、剪贴板同步、文件互传、Authentik 扫码登录 | Wiki `v1.2.0` · README `v1.2` |
-| [SakuraID（Sakura-Auth-Server）](docs/sakura-auth-server.md) | 自托管统一身份认证服务（IdP） | OAuth2/OIDC 发令牌、Passkey、应用门户、审计与品牌定制 | Wiki `v1.0.0` · 上游 `v1.5.1` |
-| [AI 简历自动填充助手](docs/resume-smart-filler-assistant.md) | Chrome/Edge 简历表单填充扩展 | 本地规则与 AI 两阶段匹配，填充后由用户检查并提交 | Wiki `v1.1.0` · manifest `1.0.0` |
+| [UniLink](docs/unilink.md) | 手机与电脑互联助手 | 通知镜像、剪贴板同步、文件互传、Authentik 扫码登录 | Wiki `v1.3.0` · 上游 `v1.3` |
+| [SakuraID（Sakura-Auth-Server）](docs/sakura-auth-server.md) | 自托管统一身份认证服务（IdP） | OAuth2/OIDC 发令牌、Passkey、应用门户、审计与品牌定制 | Wiki `v1.1.0` · 上游 `v1.6.0` |
+| [AI 简历自动填充助手](docs/resume-smart-filler-assistant.md) | Chrome/Edge 简历表单填充扩展 | 本地规则与 AI 两阶段匹配，填充后由用户检查并提交 | Wiki `v1.2.0` · 上游 `1.0.1` |
 
 许可证见 [Sakura-License v1.2 导读](docs/sakura-license.md) 与 [采用及授权指引](docs/sakura-license-adoption.md)。Sakura-MCP-Memory-Server、Sakura-Chat、Local-Model-Gateway、Life Dashboard 与 Sakura AI Cut 已分别在仓库根 `LICENSE` 采用 Sakura-License v1.2（正式固定正文已于 2026-10-04 发布，条文与采用的审阅稿逐字一致），并以 `NOTICE` 或 `LICENSING.md` 作出采用声明（见 [Sakura-MCP-Memory-Server](docs/sakura-mcp-memory-server.md)、[Sakura Chat](docs/sakura-chat.md)、[Local Model Gateway](docs/local-model-gateway.md)、[Life Dashboard](docs/life-dashboard.md) 与 [Sakura AI Cut](docs/sakura-aicut.md) 项目页）；正式版发布不撤销已合法取得的授权，Life Dashboard 的 `1.0.13` 及更早版本、Sakura AI Cut 的提交 `88600c5` 之前版本仍按 LGPL-2.1 授权。本 Wiki 仓库根 [LICENSE](LICENSE) 仍是 GPL-3.0，仅约束 Wiki 仓库自身，不代表各上游项目；其他项目继续按各自有效许可与声明判断。
+
+本次版本化采用：UniLink `v1.3`、DSH Activity Tracker `v1.7.1`、DSH Better Model Thinking Control `v0.2.10`、DSH Windows Tool Fix `v0.2.2`、AI 简历自动填充助手 `v1.0.1` 的自有内容统一采用 Sakura-License v1.2。SakuraID `v1.6.0` 已完成 CI 与 GHCR 发布。各仓库 NOTICE.md / README 记录采用边界；第三方及既有合法授权保留，Wiki 自身根 LICENSE 本次不变。
 
 ## 工作室网站群
 

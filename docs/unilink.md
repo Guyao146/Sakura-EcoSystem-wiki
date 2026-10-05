@@ -1,12 +1,12 @@
 # UniLink
 
-> Wiki 文档版本：`v1.2.0` · 更新日期：`2026-10-05`（UniLink独立版本）
+> Wiki 文档版本：`v1.3.0` · 更新日期：`2026-10-05`（UniLink独立版本）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![UniLink](../assets/badges/unilink.svg)](https://github.com/Guyao146/UniLink)
 [![已编写Wiki](../assets/sakura-wiki.svg)](unilink.md)
 
-仓库：[Guyao146/UniLink](https://github.com/Guyao146/UniLink) · 当前版本 `v1.2`（协议 v1） · 许可证见下方说明
+仓库：[Guyao146/UniLink](https://github.com/Guyao146/UniLink) · 当前版本 `v1.3`（Android versionCode 23，协议 v1） · 许可证 [Sakura-License v1.2](../licenses/Sakura-License-1.2.md)
 
 ## 项目定位
 
@@ -181,9 +181,14 @@ PC 点「回复通知…」选中一条手机通知并输入内容后：
 
 ## 许可证
 
-仓库当前**没有 LICENSE 文件**，README 也未声明许可证。按 GitHub 默认规则，代码在无许可证声明时保留所有权利，他人不具备使用、修改或再分发的默认授权。
+自 `v1.3` 起采用 [Sakura-License v1.2](../licenses/Sakura-License-1.2.md)，完整正文与采用声明见仓库 LICENSE / NOTICE.md。它是源码可用许可证，特定商用须事先书面授权；历史及第三方授权保持不变。
 
-README 结尾注明"仅供学习与个人使用"。正式发布或让他人部署前，应先在仓库添加明确的许可证，本 Wiki 页面以仓库最终声明为准。
+## v1.3 发布
+
+- Android 1.3 / versionCode 23：玻璃确认弹层、脉冲等待、登录状态反馈。
+- authentik / SakuraID 可配置身份服务与双向扫码登录；OIDC、PKCE、初始化并发及页面安全加固。
+- 镜像：`ghcr.io/guyao146/unilink-auth:v1.3`（amd64 / arm64）；更新前备份配置与持久卷。
+- APK 为 CI debug 构建，覆盖安装需要签名一致，不是商店正式签名发行版。
 
 ## 与生态其他项目的关系
 
@@ -198,7 +203,7 @@ UniLink 的扫码登录设计为对下游项目零侵入：只要项目接入 au
 
 ## 版本记录
 
-版本名来自 README 的已完成清单；此前扫描未发现 Release tag，不能把下表当作安装包发布列表。协议版本仍为 v1。
+历史版本名来自 README；本次正式创建 `v1.3` tag。协议版本仍为 v1，发布资产以 GitHub Release 为准。
 
 | 版本 | 要点 |
 | --- | --- |

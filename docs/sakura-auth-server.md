@@ -1,11 +1,11 @@
 # SakuraID（Sakura-Auth-Server）
 
-> Wiki 文档版本：`v1.0.0` · 更新日期：`2026-10-05`（Sakura-Auth-Server独立版本，上游 `v1.5.1`）
+> Wiki 文档版本：`v1.1.0` · 更新日期：`2026-10-05`（Sakura-Auth-Server独立版本，上游 `v1.6.0`）
 
 [![樱落生态成员](../assets/ConnectEcoSystem.svg)](../README.md)
 [![已编写Wiki](../assets/sakura-wiki.svg)](sakura-auth-server.md)
 
-仓库：[Guyao146/Sakura-Auth-Server](https://github.com/Guyao146/Sakura-Auth-Server) · 许可证 `Sakura-License-1.2`（源码可用、限制商用） · `package.json` `1.5.1`（README 另有 `v0.7.0` 标注，以仓库 `package.json` 为准）
+仓库：[Guyao146/Sakura-Auth-Server](https://github.com/Guyao146/Sakura-Auth-Server) · 许可证 `Sakura-License-1.2`（源码可用、限制商用） · 当前版本 `v1.6.0`（提交 `a16840b`）
 
 ## 项目定位
 
@@ -52,12 +52,12 @@ node server.js
 
 - [Sakura-MCP-Memory-Server](sakura-mcp-memory-server.md) 自 `0.4.0` 起内置 Sakura 浏览器登录提供方，即本服务：授权码 + PKCE、RS256 ID Token 与 `/jwks.json`，身份以 `sakura:<sha256(issuer)>:<sub>` 隔离。
 - [Sakura Chat](sakura-chat.md) 自 `v1.1.0` 起可作为标准 OIDC 客户端接入本服务（公开客户端推荐，仅 PKCE），本地账号与第三方身份可互相绑定/解绑。
-- [UniLink](unilink.md) 的手机扫码登录面向 authentik OIDC 项目，与本服务并列；两者可共存于同一部署。
+- [UniLink](unilink.md) `v1.3` 支持将本服务作为身份提供方，也可通过 UniLink 扫码建立 SakuraID 会话；本服务在 `/admin/unilink` 配置扫码服务，TOTP 账号仍须完成第二因子。
 - 各项目接入本服务时，统一在管理端「应用 → 新建应用」登记回调地址（如 `https://<站点>/api/auth/oauth/sakura/callback`），`openid profile` 即可满足绝大多数场景。
 
 ## 版本记录
 
-来源为仓库 git log 的版本提交与 [README 功能清单](https://github.com/Guyao146/Sakura-Auth-Server/blob/main/README.md)；未发现独立 Release tag，不把版本提交称作正式发布版本。
+来源为仓库版本提交、tag 与 [README 功能清单](https://github.com/Guyao146/Sakura-Auth-Server/blob/main/README.md)。`v1.6.0` tag 指向 `a16840b`，CI 测试和镜像发布已成功；镜像为 `ghcr.io/guyao146/sakura-auth-server:1.6.0`。
 
 | 版本 | 要点 |
 | --- | --- |
@@ -66,5 +66,6 @@ node server.js
 | `v1.4.0` | 界面中英文切换（cookie + `/-/lang/:code`）、LICENSE 与 UA 码点截断、Logo 上传原子化 |
 | `v1.5.0` | 品牌定制：站点 Logo、主题强调色、品牌口号，管理端可视化配置并全站生效 |
 | `v1.5.1` | 注册 / 两步验证 / 找回密码 / 重置密码页统一为品牌分栏布局（与登录页同款） |
+| `v1.6.0` | 响应式 UI 与认证加固，包含 UniLink 双向扫码集成；端到端、安全和页面测试通过后发布版本化 GHCR 镜像 |
 
 > 文档基于对应项目源码整理。实现变更后，以项目仓库、版本文件和 CHANGELOG 为最终依据。
