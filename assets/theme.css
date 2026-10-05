@@ -43,7 +43,7 @@ body { font-size: 16px; line-height: 1.7; transition: background .2s ease, color
 .sidebar-nav li.active > a { position: relative; background: color-mix(in srgb, var(--accent) 10%, transparent); }
 .sidebar-nav li.active > a::before { content: ""; position: absolute; left: -12px; top: 50%; transform: translateY(-50%); width: 2px; height: 18px; border-radius: 2px; background: var(--accent); }
 .content { left: 280px; }
-.markdown-section { max-width: 1280px; margin-left: 480px; padding: 64px 32px 100px; }
+.markdown-section { max-width: 1080px; margin: 0 auto; padding: 64px 40px 100px; }
 .markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4 { color: var(--heading) !important; font-weight: 700; line-height: 1.35; }
 :root[data-wiki-theme="night"] .markdown-section h1,
 :root[data-wiki-theme="night"] .markdown-section h2,
@@ -86,11 +86,12 @@ body { font-size: 16px; line-height: 1.7; transition: background .2s ease, color
 .markdown-section td { color: var(--text-soft) !important; background: var(--page) !important; }
 .markdown-section th, .markdown-section td { padding: 10px 14px; border: 0; border-bottom: 1px solid var(--border); }
 .markdown-section tr:last-child td { border-bottom: 0; }
-.app-sub-sidebar { position: fixed; top: 110px; left: 322px; right: auto; width: 180px; max-height: calc(100vh - 150px); overflow: auto; padding-left: 18px !important; border-left: 1px solid var(--border); }
-.app-sub-sidebar::before { content: "本页目录"; display: block; margin-bottom: 10px; color: var(--text); font-size: 13px; font-weight: 700; }
-.app-sub-sidebar li { margin: 7px 0; }
-.app-sub-sidebar a { color: var(--muted) !important; font-size: 13px; }
-.app-sub-sidebar a:hover { color: var(--accent-strong) !important; }
+/* docsify 页内目录原生为侧栏子级：保持文档流，随侧栏滚动，不外挂浮动面板 */
+.app-sub-sidebar { margin: 6px 0 12px; padding-left: 14px; border-left: 1px solid var(--border); }
+.app-sub-sidebar::before { content: "本页目录"; display: block; margin: 2px 0 6px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .04em; }
+.app-sub-sidebar li { margin: 2px 0; }
+.app-sub-sidebar a { display: block; padding: 3px 6px; border-radius: var(--radius); color: var(--muted) !important; font-size: 13px; }
+.app-sub-sidebar a:hover { color: var(--accent-strong) !important; background: color-mix(in srgb, var(--accent) 8%, transparent); }
 :root[data-wiki-theme="night"] .app-sub-sidebar::before,
 :root[data-wiki-theme="night"] .app-sub-sidebar a { color: #d7d7df !important; }
 .pagination-item a { color: var(--accent) !important; }
@@ -100,8 +101,7 @@ body { font-size: 16px; line-height: 1.7; transition: background .2s ease, color
 [data-wiki-theme-toggle] { left: 84px; }
 [data-wiki-github] { left: 16px; }
 [data-wiki-theme-toggle], [data-wiki-github] { transition: color var(--motion-fast) ease, border-color var(--motion-fast) ease, transform var(--motion-fast) ease, box-shadow var(--motion-fast) ease; }
-@media (max-width: 1700px) { .app-sub-sidebar { display: none; } .markdown-section { margin-left: 0; max-width: 1100px; } }
-@media (max-width: 768px) { .content { left: 0; } .markdown-section { margin-left: 0; padding: 48px 20px 90px; } .markdown-section h1 { font-size: 1.85rem; } .sidebar-toggle { display: block; bottom: 72px; } }
+@media (max-width: 768px) { .content { left: 0; } .markdown-section { max-width: none; margin: 0; padding: 48px 20px 90px; } .markdown-section h1 { font-size: 1.85rem; } .sidebar-toggle { display: block; bottom: 72px; } }
 
 /* Static brand accents: decoration never obscures or moves the article. */
 .content {
