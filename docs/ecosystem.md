@@ -1,6 +1,6 @@
 # 项目关系
 
-> Wiki 文档版本：`v1.0.4` · 更新日期：`2026-10-05`（项目关系独立版本）
+> Wiki 文档版本：`v1.0.5` · 更新日期：`2026-10-05`（项目关系独立版本）
 
 ## 各项目分别解决什么问题
 
@@ -24,7 +24,15 @@
 
 `SakuraID（Sakura-Auth-Server）` 关注“令牌由谁签发”：它是自托管 OAuth 2.0 / OIDC 身份认证服务，只做“发令牌”这一件事，为生态各项目提供可选的统一登录入口。它不持有业务数据，也不强制任何项目接入。
 
-`Sakura-MCP-Memory-Server` 当前为 `v0.4.1`，已落地本地账号与账号安全管理台、可选 SakuraID / Authentik 浏览器登录、管理台「关于」页与镜像许可文件；`Life Dashboard` 当前为 `1.0.15`，已落地静默 SSO、续期诊断、登录页视觉重做、许可证迁移（Sakura-License v1.2）与设置页「关于我们」；`Local Model Gateway` 当前为 `v2.4.0`，提供 Windows 桌面客户端、用量导出、每上游可配置重试、模型权限与模态互转、网关本地账号认证和统一错误码；`Sakura-AiCut` 当前为 `v1.0.0`（首个 Release tag），主页看板化并补齐登录体系与开放 API；`UniLink` 当前为 `v1.2`（README 清单）及之后的 auth-server 网页化配置提交；`Sakura-Chat` 当前为 Release `v1.1.0`，支持可选第三方登录与版本化 GHCR 镜像。各项目可独立部署，组合使用时不互相耦合。
+`ZCode Buddy` 关注“本机登录态如何切换”：它管理 ZCode 客户端的多账号快照、热切换、额度看板与低额度提醒，数据只在本机，不动服务端。
+
+`产品星图（Product-web）` 关注“生态产品如何被看见”：它把各项目的版本、发布与活动经 Webhook 自动汇入同源快照，渲染成可筛选的产品页与时间线，是生态对外的产品目录。
+
+`网文写作 Skill` 关注“提示词如何约束创作”：它把中文网络文学创作拆成 讨论 → 评审 → 章纲 → 正文 → 修订 的可复用协议，以设定卡与文风参考为锚点，是纯提示词产物，无运行时依赖。
+
+`SakuraCode` 关注“编码智能体如何被组合”：它是终端编码智能体，以 Cordis 风格微内核和插件化工具集对齐 dsh 的 Everything is a Plugin 哲学，可直接装载 dsh 插件包。它仍在本地开发阶段。
+
+`Sakura-MCP-Memory-Server` 当前为 `v0.5.1`（原 `Sakura-MCP-Server` 更名），已落地本地账号与账号安全管理台、可选 SakuraID / Authentik 浏览器登录、`0.5.0` 工作区分页筛选、批量操作、回收站、版本对比与成员邀请角色管理，以及仓库更名与镜像同步；`Life Dashboard` 当前为 `1.0.15`，已落地静默 SSO、续期诊断、登录页视觉重做、许可证迁移（Sakura-License v1.2）与设置页「关于我们」；`Local Model Gateway` 当前为 `v2.4.0`，提供 Windows 桌面客户端、用量导出、每上游可配置重试、模型权限与模态互转、网关本地账号认证和统一错误码；`Sakura-AiCut` 当前为 `v1.0.0`（首个 Release tag），主页看板化并补齐登录体系与开放 API；`UniLink` 当前为 Release `v1.3`（Android versionCode 23、authentik / SakuraID 可配置提供方与双向扫码登录，采用 Sakura-License v1.2）；`Sakura-Chat` 当前为 Release `v1.1.0`，支持可选第三方登录与版本化 GHCR 镜像；DSH 三插件（`1.7.1` / `0.2.10` / `0.2.2`）与 AI 简历自动填充助手（`1.0.1`）已随发布包统一采用 Sakura-License v1.2。各项目可独立部署，组合使用时不互相耦合。
 
 ## 集成链路
 

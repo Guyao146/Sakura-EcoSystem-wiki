@@ -2,6 +2,28 @@
 
 本文件记录各项目 Wiki 页面自己的文档版本。每个项目独立维护版本号和更新日期，不等同于上游项目的 Release 版本；上游版本、迁移版本和部署 tag 仍以对应项目仓库为准。
 
+## 未收录项目补齐（2026-10-05）
+
+扫描本地全部项目与 GitHub 仓库清单后发现四个原创项目完全未进 Wiki，逐一补齐项目页、生态总览与侧栏；同时对并行会话刚完成的版本化采用与 MCP Memory Server 更名结果做了核对（不重复其工作）。
+
+| 页面 | Wiki 文档版本 | 更新日期 | 内容 |
+| --- | --- | --- | --- |
+| [ZCode Buddy](docs/zcode-buddy.md) | `v1.0.0` | 2026-10-05 | 新增项目页：ZCode 多账号热切换、额度看板与自动更新桌面工具（Electron + MIT，上游 `0.7.0`） |
+| [产品星图（Product-web）](docs/product-web.md) | `v1.0.0` | 2026-10-05 | 新增项目页：MCYLYR.CN 产品系列网站，Webhook 同步、同源快照与自动部署（私有仓库快照） |
+| [网文写作 Skill](docs/online-literature-skill.md) | `v1.0.0` | 2026-10-05 | 新增项目页：中文网络文学创作提示词 Skill，五段创作协议与两个规则档（CC BY-NC-SA 4.0） |
+| [SakuraCode](docs/sakuracode.md) | `v1.0.0` | 2026-10-05 | 新增项目页：插件化终端编码智能体，Cordis 风格微内核、18 工具、JSONL 会话与 dsh 插件装载（本地 `0.1.0`，未公开仓库） |
+| [项目关系](docs/ecosystem.md) | `v1.0.5` | 2026-10-05 | 新增四个项目的定位段落；版本快照刷新到 MCP `v0.5.1`、UniLink `v1.3` 与 DSH/简历扩展许可证采用 |
+| [生态总览](README.md) | `v1.3.0` | 2026-10-05 | 项目表新增四行（ZCode Buddy / 产品星图 / 网文写作 Skill / SakuraCode） |
+
+### 本次变更内容
+
+- **ZCode Buddy**：仓库 `Guyao146/zcode-buddy`，`0.7.0`，MIT 许可（生态中唯一明确 MIT 的项目）。热切换只重启 ZCode 会话进程不动主窗口；浏览器 OAuth 加号、历史登录态自动捕捉、`Ctrl+Alt+0~9` 快捷键、billing 接口额度看板（复刻完整客户端身份头）、「可撑天数」预测、低额度通知、加密备份与自动更新。CLI 可脱离界面使用，core 模块 50+ 单元测试。
+- **产品星图（Product-web）**：私有仓库，PHP 8.2+ 零依赖。17 个产品详情 URL、合并时间线与筛选；GitHub Release/Push Webhook（HMAC-SHA256 原始字节校验、白名单、去重、文件锁、原子写）写入同源快照；前台每 30 秒检查更新。部署以 `/public` 为运行目录，`webhook.php` 是唯一 PHP 入口；可启用与 Wiki 同款的 Git 自动部署（独立密钥）。
+- **网文写作 Skill**：仓库 `Guyao146/Specialization-of-Online-Literature-Skill`，作者 llsysklt、Skill 训练者 guyao146，CC BY-NC-SA 4.0。讨论 → 评审 → 章纲 → 正文 → 修订五段协议；同人通用档（焚诀 v6.4 / 防拟合协议 v4）与古典西幻特化档互斥；写作与修订提示词刻意隔离；附模板、数据契约与 `validate.ps1` 结构校验。
+- **SakuraCode**：本地 `D:\VSProject\SakuraCode`，`0.1.0`，无 git 仓库与公开 Release，页面如实标注「未公开仓库」。Cordis 风格零依赖微内核（五种事件模式、LIFO dispose、inject 等待）；18 工具四分类；append-only JSONL 会话可经 `deriveMessages()` 重建模型上下文；并行 subagent；`dsh-plugin-manager` 可装载 dsh 插件 tgz 包；无 Key 冒烟与自定义 ModelAdapter 注入。
+- **核对项**：确认并行会话已完成的 UniLink `v1.3`（Android versionCode 23、双向扫码、SakuraID 提供方、`ghcr.io/guyao146/unilink-auth:v1.3`、Sakura-License v1.2 采用）、DSH 三插件与简历扩展的版本化许可证采用、Sakura-MCP-Server → Sakura-MCP-Memory-Server 更名（含页面重命名与旧路径兼容）均已落地，本轮不重复修改。
+- **历史仓库**：`Bump`、`SlimefunStackingMachine`（Slimefun4 附属）、`easypicker2-client/server`、`HarvestText`、`RLTools`、`TextRecognAIGC-COPY`、`CW-ZhengFangPlugins`、`FeiShu_VideoInformation` 等仓库最后推送在 2022–2025 年，早于樱落生态范围且长期不活跃，本次不纳入项目表；如需归档可另起「历史项目」页。
+
 ## 版本化发布与许可证采用
 
 - 生态总览 Wiki v1.2.1：同步 UniLink v1.3 / Android 23、SakuraID v1.6.0、Activity Tracker v1.7.1、Windows Tool Fix v0.2.2、Better Model Thinking Control v0.2.10、简历扩展 v1.0.1。

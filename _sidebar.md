@@ -17,6 +17,10 @@
   - [Sakura AI Cut](docs/sakura-aicut.md)
   - [UniLink](docs/unilink.md)
   - [AI 简历自动填充助手](docs/resume-smart-filler-assistant.md)
+  - [ZCode Buddy](docs/zcode-buddy.md)
+  - [产品星图（Product-web）](docs/product-web.md)
+  - [网文写作 Skill](docs/online-literature-skill.md)
+  - [SakuraCode](docs/sakuracode.md)
 - **开发与安全**
   - [配置与密钥规范](docs/security.md)
   - [Sakura 许可证](docs/sakura-license.md)

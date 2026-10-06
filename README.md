@@ -1,6 +1,6 @@
 # 樱落生态Wiki · 连接云，人，家
 
-> Wiki 文档版本：`v1.2.1` · 更新日期：`2026-10-05`（生态总览独立版本）
+> Wiki 文档版本：`v1.3.0` · 更新日期：`2026-10-05`（生态总览独立版本）
 
 > 🌸 Sakura EcoSystem · Connect Cloud, People and Home.
 
@@ -24,6 +24,10 @@
 | [UniLink](docs/unilink.md) | 手机与电脑互联助手 | 通知镜像、剪贴板同步、文件互传、Authentik 扫码登录 | Wiki `v1.3.0` · 上游 `v1.3` |
 | [SakuraID（Sakura-Auth-Server）](docs/sakura-auth-server.md) | 自托管统一身份认证服务（IdP） | OAuth2/OIDC 发令牌、Passkey、应用门户、审计与品牌定制 | Wiki `v1.1.0` · 上游 `v1.6.0` |
 | [AI 简历自动填充助手](docs/resume-smart-filler-assistant.md) | Chrome/Edge 简历表单填充扩展 | 本地规则与 AI 两阶段匹配，填充后由用户检查并提交 | Wiki `v1.2.0` · 上游 `1.0.1` |
+| [ZCode Buddy](docs/zcode-buddy.md) | ZCode 多账号切换与额度管理桌面工具 | 热切换、浏览器登录加号、额度看板、可撑天数预测、自动更新 | Wiki `v1.0.0` · 上游 `0.7.0`（MIT） |
+| [产品星图（Product-web）](docs/product-web.md) | 面向 MCYLYR.CN 的生态产品系列网站 | Webhook 同步版本与发布、时间线与筛选、同源快照与自动部署 | Wiki `v1.0.0` · 快照（私有仓库） |
+| [网文写作 Skill](docs/online-literature-skill.md) | 中文网络文学创作的提示词 Skill | 讨论→评审→章纲→正文→修订协议；同人通用档与古典西幻特化档 | Wiki `v1.0.0` · 快照（CC BY-NC-SA 4.0） |
+| [SakuraCode](docs/sakuracode.md) | 对标 ZCode 风格的终端编码智能体（CLI） | Cordis 风格微内核、18 工具、JSONL 会话可重建、并行 subagent、装载 dsh 插件 | Wiki `v1.0.0` · 本地 `0.1.0`（未公开仓库） |
 
 许可证见 [Sakura-License v1.2 导读](docs/sakura-license.md) 与 [采用及授权指引](docs/sakura-license-adoption.md)。Sakura-MCP-Memory-Server、Sakura-Chat、Local-Model-Gateway、Life Dashboard 与 Sakura AI Cut 已分别在仓库根 `LICENSE` 采用 Sakura-License v1.2（正式固定正文已于 2026-10-04 发布，条文与采用的审阅稿逐字一致），并以 `NOTICE` 或 `LICENSING.md` 作出采用声明（见 [Sakura-MCP-Memory-Server](docs/sakura-mcp-memory-server.md)、[Sakura Chat](docs/sakura-chat.md)、[Local Model Gateway](docs/local-model-gateway.md)、[Life Dashboard](docs/life-dashboard.md) 与 [Sakura AI Cut](docs/sakura-aicut.md) 项目页）；正式版发布不撤销已合法取得的授权，Life Dashboard 的 `1.0.13` 及更早版本、Sakura AI Cut 的提交 `88600c5` 之前版本仍按 LGPL-2.1 授权。本 Wiki 仓库根 [LICENSE](LICENSE) 仍是 GPL-3.0，仅约束 Wiki 仓库自身，不代表各上游项目；其他项目继续按各自有效许可与声明判断。
 
